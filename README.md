@@ -27,6 +27,25 @@ Font Awesome will be maintained under the Semantic Versioning guidelines as much
 
 For more information on SemVer, please visit http://semver.org.
 
+##Directory Structure
+
+```
+assets/             internally used build tools
+commands/           internally used build tools
+config/             internally used build tools
+data/               internally used build tools
+  logs/
+modules/            internally used build tools
+runtime/            internally used build tools
+tests/              internally used build tools
+vendor/             internally used build tools
+web/                internally used build tools
+  css/              internally used build tools
+  fonts/            internally used build tools
+  img/              internally used build tools
+  js/               internally used build tools
+```
+
 ##References
 Yii2
 Twitter Bootstrap
