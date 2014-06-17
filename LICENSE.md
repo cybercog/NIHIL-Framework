@@ -1,7 +1,7 @@
 License
 =================
 
-Copyright (c) 2009-2014, The NIHIL Corporation
+Copyright (c) 2009-2014, The NIHIL Corporation.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
