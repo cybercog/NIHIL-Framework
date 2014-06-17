@@ -1,3 +1,6 @@
+License
+=================
+
 Copyright (c) 2009-2014, The NIHIL Corporation
 All rights reserved.
 
