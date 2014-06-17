@@ -14,57 +14,102 @@ AppAsset::register($this);
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
+  <head>
+    <meta charset="<?= Yii::$app->charset ?>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Phalcon Team">
+    <meta name="description" content="Your invoices">
+	<?= Html::csrfMetaTags() ?>
+		
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
+		
+	<?php $this->head() ?>
+	
+	<?php
+		if(YII_DEBUG) {
+			echo '<style>#site-wrapper { margin: 0 auto -126px;  padding: 0 0 126px 0;} #site-footer{ height: 126px; }</style>';
+		}
+	?>
+		
+  </head>
+  <body>
+	<?php $this->beginBody() ?>
+        <div id="site-wrapper">
+	
+		<header id="site-header">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						
+						<?php
+							NavBar::begin([
+								'brandLabel' => 'u<span>clemmer</span>',
+								'brandUrl' => Yii::$app->homeUrl,
+								'options' => [
+									'class' => 'navbar navbar-inverse',
+								],
+							]);
+							echo Nav::widget([
+								'options' => ['class' => 'navbar-nav navbar-left'],
+								'items' => [
+									['label' => 'About', 'url' => ['/site/about']],
+									['label' => 'Books', 'url' => ['/site/books']],
+									['label' => 'Tutorials', 'url' => ['/site/tutorials']],
+									['label' => 'Contact', 'url' => ['/site/contact']],
+								],
+							]);
+							echo Nav::widget([
+								'options' => ['class' => 'navbar-nav navbar-right'],
+								'items' => [
+									Yii::$app->user->isGuest ?
+										['label' => 'Login', 'url' => ['/site/login']] :
+										['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+											'url' => ['/site/logout'],
+											'linkOptions' => ['data-method' => 'post']],
+								],
+							]);
+							NavBar::end();
+						?>
+						
+					</div>
+				</div>
+			</div>
+		</header>
+	
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						
+						<?= Breadcrumbs::widget([
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+						<?= $content ?>
 
-<?php $this->beginBody() ?>
-    <div class="wrap">
-        <?php
-            NavBar::begin([
-                'brandLabel' => 'My Company',
-                'brandUrl' => Yii::$app->homeUrl,
-                'options' => [
-                    'class' => 'navbar-inverse navbar-fixed-top',
-                ],
-            ]);
-            echo Nav::widget([
-                'options' => ['class' => 'navbar-nav navbar-right'],
-                'items' => [
-                    ['label' => 'Home', 'url' => ['/site/index']],
-                    ['label' => 'About', 'url' => ['/site/about']],
-                    ['label' => 'Contact', 'url' => ['/site/contact']],
-                    Yii::$app->user->isGuest ?
-                        ['label' => 'Login', 'url' => ['/site/login']] :
-                        ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                            'url' => ['/site/logout'],
-                            'linkOptions' => ['data-method' => 'post']],
-                ],
-            ]);
-            NavBar::end();
-        ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+	
+	</div>
+	
+	<footer id="site-footer">
+		<div class="container">
+			<div class="row footer-info">
+				<div class="col-md-6">
+					<p class="footer-copyright">Copyright &copy; 2005-<?= date('Y') ?> <b>u<span>clemmer</span></b>. All rights reserved.</p>
+				</div>
+				<div class="col-md-6 text-right">
+					<p>Powered by <a href="https://www.nihil.co" alt="The NIHIL Corporation">NIHIL</a>.</p>
+				</div>
+			</div>
+		</div>
+	</footer>        
 
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= $content ?>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
-        </div>
-    </footer>
-
-<?php $this->endBody() ?>
-</body>
+  <?php $this->endBody() ?>
+  
+  </body>
 </html>
 <?php $this->endPage() ?>

@@ -1,11 +1,10 @@
 <?php
 
-$params = require(__DIR__ . '/params.php');
-
 $config = [
-    'id' => 'basic',
+    'id' => 'nihil-framework',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+	'modules' => require(__DIR__ . '/modules.php'),
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -35,7 +34,7 @@ $config = [
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
-    'params' => $params,
+    'params' => require(__DIR__ . '/params.php'),
 ];
 
 if (YII_ENV_DEV) {
