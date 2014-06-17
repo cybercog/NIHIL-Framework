@@ -19,7 +19,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 ##Versioning
 
-###The current version is: 1.0.0
+###The current version is: 1.0.0.
 
 Font Awesome will be maintained under the Semantic Versioning guidelines as much as possible. Releases will be numbered with the following format:
 
@@ -34,7 +34,7 @@ assets/             internally used build tools
 commands/           internally used build tools
 config/             internally used build tools
 data/               internally used build tools
-  logs/
+  logs/             internally used build tools
 modules/            internally used build tools
 runtime/            internally used build tools
 tests/              internally used build tools
