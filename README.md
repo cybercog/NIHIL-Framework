@@ -1,4 +1,4 @@
-NIHIL-Framework-4
+NIHIL-Framework
 =================
 
-The NIHIL Framework 4
+The NIHIL Framework
