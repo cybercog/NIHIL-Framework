@@ -16,12 +16,20 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mail' => [
+		'mail' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
+			// send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'matt.clemmer@shirlock.org',
+                'password' => 'NH4716iw',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -31,6 +39,20 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+		'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+			'rules' => array(
+				'about' => 'site/about',
+				'books' => 'media/books/index',
+				'tutorials' => 'cms/tutorials/index',
+				'contact' => 'site/contact',
+			
+				'login' => 'ac/users/login',
+				'logout' => 'ac/users/logout',
+				'register' => 'ac/users/register',
+            ),
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],

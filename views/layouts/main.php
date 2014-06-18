@@ -2,7 +2,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 /**
@@ -52,10 +51,10 @@ AppAsset::register($this);
 							echo Nav::widget([
 								'options' => ['class' => 'navbar-nav navbar-left'],
 								'items' => [
-									['label' => 'About', 'url' => ['/site/about']],
-									['label' => 'Books', 'url' => ['/site/books']],
-									['label' => 'Tutorials', 'url' => ['/site/tutorials']],
-									['label' => 'Contact', 'url' => ['/site/contact']],
+									['label' => 'About', 'url' => ['/about']],
+									['label' => 'Books', 'url' => ['/media/books']],
+									['label' => 'Tutorials', 'url' => ['/cms/tutorials']],
+									['label' => 'Contact', 'url' => ['/contact']],
 								],
 							]);
 							echo Nav::widget([
@@ -75,23 +74,8 @@ AppAsset::register($this);
 				</div>
 			</div>
 		</header>
-	
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
 		
-						
-						<?= Breadcrumbs::widget([
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-						<?= $content ?>
-
-			
-					</div>
-				</div>
-			</div>
-		</section>
+		<?= $content ?>
 	
 	</div>
 	
@@ -109,6 +93,23 @@ AppAsset::register($this);
 	</footer>        
 
   <?php $this->endBody() ?>
+  
+  <?php
+    if(!YII_DEBUG) {
+  ?>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-2228318-7', 'uclemmer.com');
+    ga('send', 'pageview');
+
+  </script>
+  <?php
+    }
+  ?>
   
   </body>
 </html>

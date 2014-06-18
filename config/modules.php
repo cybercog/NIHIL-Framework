@@ -16,9 +16,9 @@ return [
 	'ecom' => [
 		'class' => 'app\modules\ecom\Module',
 	],
-	//'media' => [
-	//	'class' => 'app\modules\media\Module',
-	//],
+	'media' => [
+		'class' => 'app\modules\media\Module',
+	],
 	//'social' => [
     //    'class' => 'app\modules\social\Module',
     //],
