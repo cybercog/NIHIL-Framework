@@ -53,11 +53,11 @@ text-decoration: none;
 	background-color:#ff0202;
 	color:#FFF;
 	font-weight:bold;
-	border: 1px solid #ff0202;
+	border: 1px solid #9C0000;
 }
 
 .btn-default:hover {
-	border: 1px solid #00ff00;
+	border: 1px solid #00DA00;
 	background-color:#00ff00;
 	color:#222;
 }

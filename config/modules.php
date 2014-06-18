@@ -4,9 +4,9 @@ return [
     'ac' => [
 		'class' => 'app\modules\ac\Module',
 	],
-	//'api' => [
-	//	'class' => 'app\modules\api\Module',
-	//],
+	'api' => [
+		'class' => 'app\modules\api\Module',
+	],
 	'cms' => [
 		'class' => 'app\modules\cms\Module',
 	],
