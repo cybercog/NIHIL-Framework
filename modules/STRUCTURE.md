@@ -33,7 +33,7 @@
 ##ECOM
 
 ##MEDIA
-'''*Do I treat images, books, and videos differently than files or are they simply types of files?'''
+```*Do I treat images, books, and videos differently than files or are they simply types of files?```
 ###IMAGES
 ###VIDEOS
 ###BOOKS
