@@ -40,6 +40,6 @@
 ###FILES
 
 ##SUPPORT
-	###CHAT
-	###FORUMS
-	###TICKETS
+###CHAT
+###FORUMS
+###TICKETS
