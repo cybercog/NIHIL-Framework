@@ -6,6 +6,19 @@ $config = [
     'bootstrap' => ['log'],
 	'modules' => require(__DIR__ . '/modules.php'),
     'components' => [
+		'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+			'defaultRoles' => ['user', 'guest'],
+			'itemTable' => 'ac_auth_items',
+			'itemChildTable' => 'ac_item_children',
+			'assignmentTable' => 'ac_auth_assignments',
+			'ruleTable' => 'ac_auth_rules',
+        ],
+		'user' => [
+			'class' => 'app\modules\ac\models\User',
+			//'identityClass' => 'app\modules\ac\models\User',
+			'enableAutoLogin' => true,
+		],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
@@ -44,14 +57,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
 			'rules' => array(
-				'about' => 'site/about',
-				'books' => 'media/books/index',
-				'tutorials' => 'cms/tutorials/index',
-				'contact' => 'site/contact',
-			
-				'login' => 'ac/users/login',
-				'logout' => 'ac/users/logout',
-				'register' => 'ac/users/register',
+
             ),
         ],
         'db' => require(__DIR__ . '/db.php'),

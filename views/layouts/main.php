@@ -51,10 +51,10 @@ AppAsset::register($this);
 							echo Nav::widget([
 								'options' => ['class' => 'navbar-nav navbar-left'],
 								'items' => [
-									['label' => 'About', 'url' => ['/about']],
+									['label' => 'About', 'url' => ['/site/about']],
 									['label' => 'Books', 'url' => ['/media/books']],
 									['label' => 'Tutorials', 'url' => ['/cms/tutorials']],
-									['label' => 'Contact', 'url' => ['/contact']],
+									['label' => 'Contact', 'url' => ['/site/contact']],
 								],
 							]);
 							echo Nav::widget([

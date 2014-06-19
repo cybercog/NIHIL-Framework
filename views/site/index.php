@@ -2,7 +2,7 @@
 /**
  * @var yii\web\View $this
  */
-$this->title = 'NIHIL Framework';
+$this->title = 'uclemmer';
 ?>
 
 		<section id="site-jumbotron">
