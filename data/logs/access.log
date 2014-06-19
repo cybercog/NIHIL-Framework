@@ -872,3 +872,13 @@
 127.0.0.1 - - [18/Jun/2014:09:22:32 -0400] "GET /assets/f5c0d42a/jquery.js HTTP/1.1" 304 -
 127.0.0.1 - - [18/Jun/2014:09:22:32 -0400] "GET /css/font-awesome/font-awesome.min.css HTTP/1.1" 304 -
 127.0.0.1 - - [18/Jun/2014:09:22:32 -0400] "GET /debug/default/toolbar?tag=53a1929875b94 HTTP/1.1" 200 19217
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /assets/95890aaa/css/bootstrap.css HTTP/1.1" 304 -
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /css/default.css HTTP/1.1" 304 -
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /assets/63543282/yii.js HTTP/1.1" 304 -
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /assets/95890aaa/js/bootstrap.js HTTP/1.1" 304 -
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET / HTTP/1.1" 200 13188
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /assets/f5c0d42a/jquery.js HTTP/1.1" 304 -
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /favicon.ico HTTP/1.1" 200 318
+127.0.0.1 - - [19/Jun/2014:08:04:01 -0400] "GET /debug/default/toolbar?tag=53a2d1b13c4b2 HTTP/1.1" 200 19219
+127.0.0.1 - - [19/Jun/2014:08:04:36 -0400] "GET /media/books HTTP/1.1" 404 11004
+127.0.0.1 - - [19/Jun/2014:08:04:36 -0400] "GET /debug/default/toolbar?tag=53a2d1d4b9562 HTTP/1.1" 200 19263
