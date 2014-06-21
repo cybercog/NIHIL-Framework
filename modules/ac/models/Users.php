@@ -46,7 +46,11 @@ class Users extends ActiveRecord implements IdentityInterface
             [['credit'], 'number'],
             [['login_attempts'], 'integer'],
             [['details'], 'string'],
-            [['username', 'nickname'], 'string', 'max' => 100],
+			['username', 'filter', 'filter' => 'trim'],
+			['email', 'email'],
+            ['email', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This email address has already been taken.'],
+			['username', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This username has already been taken.'],
+            [['username', 'nickname'], 'string', 'min' => 2, 'max' => 100],
             [['email'], 'string', 'max' => 150],
             [['password', 'auth_key'], 'string', 'max' => 128],
             [['last_login_ip'], 'string', 'max' => 16]
@@ -69,7 +73,7 @@ class Users extends ActiveRecord implements IdentityInterface
             'auth_key' => 'Auth Key',
             'date_created' => 'Date Created',
             'date_last_login' => 'Date Last Login',
-            'last_login_ip' => 'Last Login Ip',
+            'last_login_ip' => 'Last Login IP',
             'login_attempts' => 'Login Attempts',
             'details' => 'Details',
         ];
