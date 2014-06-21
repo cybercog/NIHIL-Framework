@@ -2,7 +2,7 @@
 /**
  * @var yii\web\View $this
  */
-$this->title = 'uclemmer';
+$this->title = 'uclemmer | Home';
 ?>
 
 		<section id="site-jumbotron">

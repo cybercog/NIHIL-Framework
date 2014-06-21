@@ -27,6 +27,8 @@ html, body {
 
 
 
+.required:before { content:"*"; color: #ff0202;}
+
 a {
 	color:#ff0202;
 }

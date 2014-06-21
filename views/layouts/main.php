@@ -61,9 +61,9 @@ AppAsset::register($this);
 								'options' => ['class' => 'navbar-nav navbar-right'],
 								'items' => [
 									Yii::$app->user->isGuest ?
-										['label' => 'Login', 'url' => ['/site/login']] :
+										['label' => 'Login', 'url' => ['/ac/users/login']] :
 										['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-											'url' => ['/site/logout'],
+											'url' => ['/ac/users/logout'],
 											'linkOptions' => ['data-method' => 'post']],
 								],
 							]);
