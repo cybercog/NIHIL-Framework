@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = 'Login';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-md-5">
 
 						<div class="ac-users-login">
 

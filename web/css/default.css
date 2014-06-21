@@ -27,7 +27,7 @@ html, body {
 
 
 
-.required:before { content:"*"; color: #ff0202;}
+.required:before { content:"* "; color: #ff0202;}
 
 a {
 	color:#ff0202;
@@ -39,9 +39,11 @@ a:hover {
 
 
 
+.btn {
+	border-radius:0;
+}
 
 .btn-default {
-	border-radius:0;
 	font-weight:bold;
 	color:#ff0202;
 }

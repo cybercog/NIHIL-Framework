@@ -6,6 +6,7 @@ use Yii;
 use app\modules\ac\models\Users;
 use app\modules\ac\models\search\UsersSearch;
 use app\modules\ac\models\forms\LoginForm;
+use app\modules\ac\models\forms\RegisterForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -158,7 +159,19 @@ class UsersController extends Controller
             return $this->redirect('/ac/users',302);
         }
 		
-        return $this->render('register');
+		$model = new RegisterForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->register()) {
+                if (Yii::$app->getUser()->login($user)) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('register', [
+            'model' => $model,
+        ]);
+
     }
 	
 	/**

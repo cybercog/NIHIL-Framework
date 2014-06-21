@@ -1,24 +1,23 @@
 <?php
 namespace app\modules\ac\models\forms;
 
-use Yii;
-use yii\base\Model;
 use app\modules\ac\models\Users;
+use yii\base\Model;
+use Yii;
 
 /**
- * Login form
+ * Register form
  */
 class RegisterForm extends Model
 {
     public $username;
+    public $email;
     public $password;
 	public $confirm;
-	public $email;
 	public $nickname;
-	public $dob;
-    
-
-    private $_user = false;
+	public $dob_month;
+	public $dob_day;
+	public $dob_year;
 
     /**
      * @inheritdoc
@@ -26,51 +25,44 @@ class RegisterForm extends Model
     public function rules()
     {
         return [
-            [['username', 'password', 'email', 'confirm', 'nickname', 'dob'], 'required'],
-            ['password', 'validatePassword'],
-			['email', 'email'],
+            ['username', 'filter', 'filter' => 'trim'],
+            ['username', 'required'],
+            ['username', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This username has already been taken.'],
+            ['username', 'string', 'min' => 2, 'max' => 255],
+
+            ['email', 'filter', 'filter' => 'trim'],
+            ['email', 'required'],
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This email address has already been taken.'],
+
+            ['password', 'required'],
+            ['password', 'string', 'min' => 6],
+			
+			[['confirm', 'nickname', 'dob_year', 'dob_month', 'dob_day'], 'required'],
+			['nickname', 'filter', 'filter' => 'trim'],
         ];
     }
 
     /**
-     * Validates the password.
-     * This method serves as the inline validation for password.
-     */
-    public function validatePassword()
-    {
-        if (!$this->hasErrors()) {
-            $user = $this->getUser();
-            if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError('password', 'Incorrect username or password.');
-            }
-        }
-    }
-
-    /**
-     * Logs in a user using the provided username and password.
+     * Signs user up.
      *
-     * @return boolean whether the user is logged in successfully
+     * @return User|null the saved model or null if saving fails
      */
     public function register()
     {
         if ($this->validate()) {
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-
-    /**
-     * Finds user by [[username]]
-     *
-     * @return User|null
-     */
-    public function getUser()
-    {
-        if ($this->_user === false) {
-            $this->_user = Users::findByUsername($this->username);
+            $user = new User();
+            $user->username = $this->username;
+            $user->email = $this->email;
+			$user->nickname = $this->nickname;
+			$user->credits = 0.00;
+			$user->birthday = $this->dob_year . '-' . $this->dob_month . '-' . $this->dob_day;
+            $user->setPassword($this->password);
+            $user->generateAuthKey();
+            $user->save();
+            return $user;
         }
 
-        return $this->_user;
+        return null;
     }
 }

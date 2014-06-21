@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
@@ -31,20 +32,31 @@ $this->params['breadcrumbs'][] = 'Register';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-5">
 
 						<div class="ac-users-register">
 
-							<h1><?= $this->context->action->uniqueId ?></h1>
-							<p>
-								This is the view content for action "<?= $this->context->action->id ?>".
-								The action belongs to the controller "<?= get_class($this->context) ?>"
-								in the "<?= $this->context->module->id ?>" module.
-							</p>
-							<p>
-								You may customize this page by editing the following file:<br>
-								<code><?= __FILE__ ?></code>
-							</p>
+							<h1>AC Users Register</h1>
+							
+							<?php $form = ActiveForm::begin(); ?>
+
+							<?= $form->field($model, 'username')->textInput(['maxlength' => 100]) ?>
+
+							<?= $form->field($model, 'password')->passwordInput(['maxlength' => 128]) ?>
+							
+							<?= $form->field($model, 'confirm')->passwordInput(['maxlength' => 128]) ?>
+							
+							<?= $form->field($model, 'email')->textInput(['maxlength' => 150]) ?>
+							
+							<?= $form->field($model, 'nickname')->textInput(['maxlength' => 100]) ?>
+							
+							<?= $form->field($model, 'dob_year')->textInput(['maxlength' => 100]) ?>
+
+							<div class="form-group">
+								<?= Html::submitButton('Register', ['class' => 'btn btn-primary']) ?>
+							</div>
+
+							<?php ActiveForm::end(); ?>
 
 						</div>
 
