@@ -27,18 +27,12 @@ class AuthKeysController extends Controller
     }
 
     /**
-     * Lists all AuthKeys models.
+     * Index Action.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AuthKeysSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -101,6 +95,21 @@ class AuthKeysController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all AuthKeys models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+        $searchModel = new AuthKeysSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

@@ -1,21 +1,45 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\ac\models\AuthKeys */
 
-$this->title = 'Update Auth Keys: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Auth Keys', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'uclemmer | AC Auth Keys Update';
+$this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
+$this->params['breadcrumbs'][] = ['label' => 'Auth Keys', 'url' => '/ac/auth-keys'];
+$this->params['breadcrumbs'][] = 'Update ' . $model->id;
 ?>
-<div class="auth-keys-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+						<div class="ac-authkeys-update">
+							<h1>AC Auth Keys Update</h1>
 
-</div>
+							<?= $this->render('_form', [
+								'model' => $model,
+							]) ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>

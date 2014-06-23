@@ -1,40 +1,48 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ac\models\search\AuthKeysSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Auth Keys';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | AC Auth Keys';
+$this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
+$this->params['breadcrumbs'][] = 'Auth Keys';
 ?>
-<div class="auth-keys-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Auth Keys', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="ac-authkeys-index">
+							<h1><?= $this->context->action->uniqueId ?></h1>
+							<p>
+								This is the view content for action "<?= $this->context->action->id ?>".
+								The action belongs to the controller "<?= get_class($this->context) ?>"
+								in the "<?= $this->context->module->id ?>" module.
+							</p>
+							<p>
+								You may customize this page by editing the following file:<br>
+								<code><?= __FILE__ ?></code>
+							</p>
+						</div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'user_id',
-            'type',
-            'key',
-            'date_created',
-            // 'date_expires',
-            // 'date_used',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-</div>
+					</div>
+				</div>
+			</div>
+		</section>

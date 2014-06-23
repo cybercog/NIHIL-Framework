@@ -1,16 +1,17 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\AuthKeys */
+/* @var $searchModel app\modules\ac\models\search\AuthKeysSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Auth Keys View ' . $model->id;
+$this->title = 'uclemmer | AC Auth Keys List';
 $this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
 $this->params['breadcrumbs'][] = ['label' => 'Auth Keys', 'url' => '/ac/auth-keys'];
-$this->params['breadcrumbs'][] = 'View ' . $model->id;
+$this->params['breadcrumbs'][] = 'List';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -32,34 +33,31 @@ $this->params['breadcrumbs'][] = 'View ' . $model->id;
 				<div class="row">
 					<div class="col-md-12">
 
-						<div class="ac-authkeys-view">
-
-							<h1><?= Html::encode($this->title) ?></h1>
+						<div class="ac-authkeys-list">
+							<h1>AC Auth Keys List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 							<p>
-								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
-									'class' => 'btn btn-danger',
-									'data' => [
-										'confirm' => 'Are you sure you want to delete this item?',
-										'method' => 'post',
-									],
-								]) ?>
+								<?= Html::a('Create Auth Keys', ['create'], ['class' => 'btn btn-success']) ?>
 							</p>
 
-							<?= DetailView::widget([
-								'model' => $model,
-								'attributes' => [
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
+
 									'id',
 									'user_id',
 									'type',
 									'key',
 									'date_created',
-									'date_expires',
-									'date_used',
-								],
-							]) ?>
+									// 'date_expires',
+									// 'date_used',
 
+									['class' => 'yii\grid\ActionColumn'],
+								],
+							]); ?>
 						</div>
 
 					</div>
