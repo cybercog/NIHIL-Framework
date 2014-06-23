@@ -1,16 +1,17 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\PasswordChanges */
+/* @var $searchModel app\modules\ac\models\search\PasswordChangesSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Password Changes View';
+$this->title = 'uclemmer | AC Password Changes List';
 $this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
 $this->params['breadcrumbs'][] = ['label' => 'Password Changes', 'url' => '/ac/password-changes'];
-$this->params['breadcrumbs'][] = 'View ' . $model->id;
+$this->params['breadcrumbs'][] = 'List';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -32,32 +33,31 @@ $this->params['breadcrumbs'][] = 'View ' . $model->id;
 				<div class="row">
 					<div class="col-md-12">
 
-						<div class="ac-passwordchanges-view">
-							<h1>AC Password Changes View</h1>
+						<div class="ac-passwordchanges-list">
+							<h1>AC Password Changes List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 							<p>
-								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
-									'class' => 'btn btn-danger',
-									'data' => [
-										'confirm' => 'Are you sure you want to delete this item?',
-										'method' => 'post',
-									],
-								]) ?>
+								<?= Html::a('Create Password Changes', ['create'], ['class' => 'btn btn-success']) ?>
 							</p>
 
-							<?= DetailView::widget([
-								'model' => $model,
-								'attributes' => [
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
+
 									'id',
 									'user_id',
 									'hash',
 									'date_created',
 									'date_expires',
-									'ip_address',
-									'user_agent',
+									// 'ip_address',
+									// 'user_agent',
+
+									['class' => 'yii\grid\ActionColumn'],
 								],
-							]) ?>
+							]); ?>
 						</div>
 
 					</div>

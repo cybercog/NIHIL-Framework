@@ -27,18 +27,12 @@ class PasswordChangesController extends Controller
     }
 
     /**
-     * Lists all PasswordChanges models.
+     * Index Action.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PasswordChangesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -101,6 +95,21 @@ class PasswordChangesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all PasswordChanges models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+        $searchModel = new PasswordChangesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
