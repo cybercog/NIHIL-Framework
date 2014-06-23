@@ -50,7 +50,23 @@ $this->params['breadcrumbs'][] = 'Register';
 							
 							<?= $form->field($model, 'nickname')->textInput(['maxlength' => 100]) ?>
 							
-							<?= $form->field($model, 'dob_year')->textInput(['maxlength' => 100]) ?>
+							<div class="row">
+							<div class="col-sm-4">
+							
+							<?= $form->field($model, 'dob_month')->dropDownList($model->monthsDropdown(), ['prompt'=>''] ); ?>
+							
+							</div>
+							<div class="col-sm-4">
+							
+							<?= $form->field($model, 'dob_day')->dropDownList($model->daysDropdown(), ['prompt'=>''] ); ?>
+							
+							</div>
+							<div class="col-sm-4">
+							
+							<?= $form->field($model, 'dob_year')->dropDownList($model->yearsDropdown(), ['prompt'=>''] ); ?>
+							
+							</div>
+							</div>
 
 							<div class="form-group">
 								<?= Html::submitButton('Register', ['class' => 'btn btn-primary']) ?>

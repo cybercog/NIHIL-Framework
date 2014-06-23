@@ -26,7 +26,7 @@ use yii\web\IdentityInterface;
  * @property string $details
  */
 class Users extends ActiveRecord implements IdentityInterface
-{
+{	
     /**
      * @inheritdoc
      */
@@ -41,7 +41,7 @@ class Users extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'email', 'password', 'nickname', 'birthday', 'credit', 'auth_key', 'date_created'], 'required'],
+            [['username', 'email', 'password', 'nickname', 'birthday', 'credit', 'auth_key'], 'required'],
             [['birthday', 'date_created', 'date_last_login'], 'safe'],
             [['credit'], 'number'],
             [['login_attempts'], 'integer'],
