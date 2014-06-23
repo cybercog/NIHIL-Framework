@@ -8,23 +8,19 @@ $config = [
     'components' => [
 		'authManager' => [
             'class' => 'yii\rbac\DbManager',
-			'defaultRoles' => ['user', 'guest'],
+			'defaultRoles' => ['guest'],
 			'itemTable' => 'ac_auth_items',
 			'itemChildTable' => 'ac_item_children',
 			'assignmentTable' => 'ac_auth_assignments',
 			'ruleTable' => 'ac_auth_rules',
         ],
 		'user' => [
-			'class' => 'app\modules\ac\models\User',
-			//'identityClass' => 'app\modules\ac\models\User',
+			'class' => 'yii\web\User',
+			'identityClass' => 'app\modules\ac\models\Users',
 			'enableAutoLogin' => true,
 		],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

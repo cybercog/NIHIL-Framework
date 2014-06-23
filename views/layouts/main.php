@@ -57,16 +57,30 @@ AppAsset::register($this);
 									['label' => 'Contact', 'url' => ['/site/contact']],
 								],
 							]);
-							echo Nav::widget([
-								'options' => ['class' => 'navbar-nav navbar-right'],
-								'items' => [
-									Yii::$app->user->isGuest ?
-										['label' => 'Login', 'url' => ['/ac/users/login']] :
-										['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-											'url' => ['/ac/users/logout'],
-											'linkOptions' => ['data-method' => 'post']],
-								],
-							]);
+							
+							if(Yii::$app->user->isGuest) {
+								echo '<ul class="nav navbar-nav navbar-right">
+								  <li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>
+								  <li><a href="/ac/users/login">Login</a></li>
+								</ul>';
+							}else{
+								echo '<ul class="nav navbar-nav navbar-right">
+								  <li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>
+								  <li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="#" alt="user" /> '.Yii::$app->user->identity->username.' <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+									  <li><a href="/ac/users"><i class="fa fa-user"></i> Portal</a></li>
+									  <li><a href="/ac/users/settings"><i class="fa fa-gear"></i> Settings</a></li>
+									  <li><a href="/ac/users/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+									</ul>
+								  </li>
+								</ul>';
+							}
+							
+						  
+							
+							
+							
 							NavBar::end();
 						?>
 						
