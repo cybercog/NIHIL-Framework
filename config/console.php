@@ -11,6 +11,19 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+		'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+			'defaultRoles' => ['guest'],
+			'itemTable' => 'ac_auth_items',
+			'itemChildTable' => 'ac_item_children',
+			'assignmentTable' => 'ac_auth_assignments',
+			'ruleTable' => 'ac_auth_rules',
+        ],
+		'user' => [
+			'class' => 'yii\web\User',
+			'identityClass' => 'app\modules\ac\models\Users',
+			'enableAutoLogin' => true,
+		],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
