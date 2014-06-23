@@ -1,21 +1,46 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\ac\models\EmailChanges */
 
-$this->title = 'Create Email Changes';
-$this->params['breadcrumbs'][] = ['label' => 'Email Changes', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | AC Email Changes Create';
+$this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
+$this->params['breadcrumbs'][] = ['label' => 'Email Changes', 'url' => '/ac/email-changes'];
+$this->params['breadcrumbs'][] = 'Create';
 ?>
-<div class="email-changes-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+						<div class="ac-emailchanges-create">
+							<h1>AC Email Changes Create</h1>
 
-</div>
+							<?= $this->render('_form', [
+								'model' => $model,
+							]) ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
