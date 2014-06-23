@@ -1,16 +1,17 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\SessionLogs */
+/* @var $searchModel app\modules\ac\models\search\SessionLogsSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Session Logs View';
+$this->title = 'uclemmer | AC Session Logs List';
 $this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
 $this->params['breadcrumbs'][] = ['label' => 'Session Logs', 'url' => '/ac/session-logs'];
-$this->params['breadcrumbs'][] = 'View ' . $model->id;
+$this->params['breadcrumbs'][] = 'List';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -32,32 +33,33 @@ $this->params['breadcrumbs'][] = 'View ' . $model->id;
 				<div class="row">
 					<div class="col-md-12">
 
-						<div class="ac-sessionlogs-view">
-							<h1>AC Session Logs View</h1>
+						<div class="ac-sessionlogs-list">
+							<h1>AC Session Logs List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 							<p>
-								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
-									'class' => 'btn btn-danger',
-									'data' => [
-										'confirm' => 'Are you sure you want to delete this item?',
-										'method' => 'post',
-									],
-								]) ?>
+								<?= Html::a('Create Session Logs', ['create'], ['class' => 'btn btn-success']) ?>
 							</p>
 
-							<?= DetailView::widget([
-								'model' => $model,
-								'attributes' => [
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
+
 									'id',
 									'user_id',
 									'timestamp',
 									'label',
 									'description:ntext',
-									'ip_address',
-									'user_agent:ntext',
+									// 'ip_address',
+									// 'user_agent:ntext',
+
+									['class' => 'yii\grid\ActionColumn'],
 								],
-							]) ?>
+							]); ?>
+
+						</div>
 						</div>
 
 					</div>
