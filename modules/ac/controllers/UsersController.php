@@ -9,6 +9,7 @@ use app\modules\ac\models\forms\LoginForm;
 use app\modules\ac\models\forms\RegisterForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -34,6 +35,10 @@ class UsersController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('indexUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('index');
     }
 
@@ -44,6 +49,10 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('viewUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -56,6 +65,10 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('createUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = new Users();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -75,6 +88,10 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('updateUser', ['user' => Users::findOne($id)])) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -94,6 +111,10 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('deleteUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -105,6 +126,10 @@ class UsersController extends Controller
      */
     public function actionList()
     {
+		if (!\Yii::$app->user->can('listUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

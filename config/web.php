@@ -10,7 +10,7 @@ $config = [
             'class' => 'yii\rbac\DbManager',
 			'defaultRoles' => ['guest'],
 			'itemTable' => 'ac_auth_items',
-			'itemChildTable' => 'ac_item_children',
+			'itemChildTable' => 'ac_auth_item_children',
 			'assignmentTable' => 'ac_auth_assignments',
 			'ruleTable' => 'ac_auth_rules',
         ],
