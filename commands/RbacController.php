@@ -65,6 +65,8 @@ class RbacController extends Controller
 		// add the rule
 		//$rule = new \app\modules\ac\rbac\rule\UserRule;
 		//$auth->add($rule);
+		//$rule = new \app\modules\ac\rbac\rule\UnverifiedUserRule;
+		//$auth->add($rule);
 
 		// add the "updateOwnPost" permission and associate the rule with it.
 		//$updateOwnUser = $auth->createPermission('updateOwnUser');

@@ -7,6 +7,9 @@ use app\modules\ac\models\Users;
 use app\modules\ac\models\search\UsersSearch;
 use app\modules\ac\models\forms\LoginForm;
 use app\modules\ac\models\forms\RegisterForm;
+use app\modules\ac\models\forms\ResetForm;
+use app\modules\ac\models\forms\ChangePasswordForm;
+use app\modules\ac\models\forms\VerificationForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
@@ -117,7 +120,7 @@ class UsersController extends Controller
 	
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['list']);
     }
 	
 	/**
@@ -203,9 +206,68 @@ class UsersController extends Controller
      * Verify action.
      * @return mixed
      */
-    public function actionVerify()
+    public function actionVerify($code=NULL)
     {
-        return $this->render('verify');
+		$model = new VerificationForm();
+	
+		if($code AND !Yii::$app->request->post()){
+			//
+			$model->code = $code;
+			if ($user = $model->verify()) {
+				return $this->redirect('/ac/users/login',302);
+            }else{
+				return $this->redirect('/ac/users/verify',302);
+			}
+		}
+	
+		if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->verify()) {
+				return $this->redirect('/ac/users/login',302);
+            }
+        }
+
+        return $this->render('verify', [
+            'model' => $model,
+        ]);
+		
+    }
+	
+	/**
+     * Verify action.
+     * @return mixed
+     */
+    public function actionReset()
+    {
+		$model = new ResetForm();
+		if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->resetPassword()) {
+				return $this->goHome();
+            }
+        }
+
+        return $this->render('reset', [
+            'model' => $model,
+        ]);
+
+    }
+	
+	/**
+     * Verify action.
+     * @return mixed
+     */
+    public function actionChangePassword()
+    {
+		$model = new ChangePasswordForm();
+		if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->changePassword()) {
+                return $this->goHome();
+            }
+        }
+
+        return $this->render('change-password', [
+            'model' => $model,
+        ]);
+		
     }
 
     /**

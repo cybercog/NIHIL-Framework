@@ -9,10 +9,10 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users Login';
+$this->title = 'uclemmer | AC Users Change Password';
 $this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 $this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
-$this->params['breadcrumbs'][] = 'Login';
+$this->params['breadcrumbs'][] = 'Change Password';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -34,33 +34,23 @@ $this->params['breadcrumbs'][] = 'Login';
 				<div class="row">
 					<div class="col-md-5">
 
-						<div class="ac-users-login">
+						<div class="ac-users-changepassword">
 
-							<h1>AC Users Login</h1>
+							<h1>AC Users Change Password</h1>
 							
 							<?php $form = ActiveForm::begin(); ?>
 
-							<?= $form->field($model, 'username')->textInput(['maxlength' => 100]) ?>
-
-							<?= $form->field($model, 'password')->passwordInput(['maxlength' => 128]) ?>
+							<?= $form->field($model, 'password')->passwordInput(['maxlength' => 100]) ?>
 							
-							<?= $form->field($model, 'rememberMe')->checkbox() ?>
+							<?= $form->field($model, 'confirm')->passwordInput(['maxlength' => 100]) ?>
 
 							<div class="form-group">
-								<?= Html::submitButton('Login', ['class' => 'btn btn-primary']) ?>
+								<?= Html::submitButton('Change Password', ['class' => 'btn btn-primary']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
 
 						</div>
-
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-5">
-
-						<a href="/ac/users/register">Register</a> | 
-						<a href="/ac/users/reset">Reset Account</a>
 
 					</div>
 				</div>

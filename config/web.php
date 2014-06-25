@@ -30,15 +30,18 @@ $config = [
 			// send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',
-                'username' => 'matt.clemmer@shirlock.org',
-                'password' => 'NH4716iw',
+                'host' => 'charger.websitewelcome.com',
+                'username' => 'no-reply@nihil.co',
+                'password' => 'Bayl0r!',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
+			'messageConfig' => [
+				'from' => 'no-reply@nihil.co',
+			],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -53,7 +56,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
 			'rules' => array(
-
+				'ac/users/verify/<code>' => 'ac/users/verify',
             ),
         ],
         'db' => require(__DIR__ . '/db.php'),

@@ -2,8 +2,12 @@
 namespace app\modules\ac\models\forms;
 
 use app\modules\ac\models\Users;
+use app\modules\ac\models\AuthKeys;
+use app\modules\ac\models\EmailChanges;
+use app\modules\ac\models\PasswordChanges;
 use yii\base\Model;
 use Yii;
+use yii\helpers\Security;
 
 /**
  * Register form
@@ -78,10 +82,55 @@ class RegisterForm extends Model
 			$user->birthday = $this->dob_year . '-' . $this->dob_month . '-' . $this->dob_day;
             $user->setPassword($this->password);
             $user->generateAuthKey();
-            $user->save();
-            return $user;
+            
+			if($user->save(false)){
+			
+				$auth = Yii::$app->authManager;
+				$urole = $auth->getRole('user');
+				$auth->assign($urole, $user->id);
+				
+				// calculate expireTime (converting strtotime) and create userkey object
+				$authkey = new AuthKeys;
+				$authkey->user_id = $user->id;
+				$authkey->type = 1;
+				$authkey->key = Security::generatePasswordHash($user->username . time());
+				$authkey->date_created = date("Y-m-d H:i:s");
+				$authkey->date_expires = date("Y-m-d H:i:s", time() + 259200);
+				$authkey->save();
+				
+				//
+				$passwordChange = new PasswordChanges;
+				$passwordChange->user_id = $user->id;
+				$passwordChange->hash = $user->password;
+				$passwordChange->date_expires = date("Y-m-d H:i:s", time() + 2592000);
+				$passwordChange->ip_address = Yii::$app->request->getUserIP();
+				$passwordChange->user_agent = Yii::$app->request->getUserAgent();
+				$passwordChange->save();
+				
+				//
+				$emailChange = new EmailChanges;
+				$emailChange->user_id = $user->id;
+				$emailChange->email = $user->email;
+				$emailChange->ip_address = Yii::$app->request->getUserIP();
+				$emailChange->user_agent = Yii::$app->request->getUserAgent();
+				$emailChange->save();
+				
+				$data = array('user' => $user, 'authkey' => $authkey);
+			
+				$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/html/register', $data, true);
+				$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/text/register', $data, true);
+				
+				Yii::$app->mail->compose()
+					->setTo($this->email)
+					->setSubject('Welcome to The NIHIL Framework')
+					->setTextBody($textBody)
+					->setHtmlBody($htmlBody)
+					->send();
+					 
+				return $user;
+			}
         }
-        return null;
+        return FALSE;
     }
 	
 	public function monthsDropdown()

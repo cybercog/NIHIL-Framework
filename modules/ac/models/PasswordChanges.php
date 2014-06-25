@@ -31,12 +31,11 @@ class PasswordChanges extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'hash', 'date_created', 'date_expires', 'ip_address', 'user_agent'], 'required'],
+            [['user_id', 'hash', 'date_expires', 'ip_address', 'user_agent'], 'required'],
             [['user_id'], 'integer'],
             [['date_created', 'date_expires'], 'safe'],
             [['hash', 'user_agent'], 'string', 'max' => 128],
             [['ip_address'], 'string', 'max' => 100],
-            [['user_id'], 'unique']
         ];
     }
 
@@ -55,4 +54,15 @@ class PasswordChanges extends \yii\db\ActiveRecord
             'user_agent' => 'User Agent',
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+			if ($this->isNewRecord) {
+				$this->date_created = date("Y-m-d H:i:s");
+			}
+			return true;
+		}
+		return false;
+	}
 }

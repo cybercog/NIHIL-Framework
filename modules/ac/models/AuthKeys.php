@@ -53,4 +53,25 @@ class AuthKeys extends \yii\db\ActiveRecord
             'date_used' => 'Date Used',
         ];
     }
+	
+	/**
+     * Finds authkey by code
+     *
+     * @param  string      $username
+     * @return static|null
+     */
+    public static function findByCode($code)
+    {
+        $authkey = static::findOne(['key' => $code, 'date_used' => NULL]);
+		if($authkey) {
+			$ctime = strtotime($authkey->date_created);
+			$etime = strtotime($authkey->date_expires);
+			$ntime = time();
+			if($ctime <= $ntime AND $etime >= $ntime) {
+				return $authkey;
+			}
+		}
+		
+		return FALSE;
+    }
 }

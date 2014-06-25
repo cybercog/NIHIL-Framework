@@ -30,12 +30,12 @@ class EmailChanges extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'email', 'date_created', 'ip_address', 'user_agent'], 'required'],
+            [['user_id', 'email', 'ip_address', 'user_agent'], 'required'],
             [['user_id'], 'integer'],
             [['date_created'], 'safe'],
             [['email', 'user_agent'], 'string', 'max' => 128],
             [['ip_address'], 'string', 'max' => 100],
-            [['user_id'], 'unique']
+            ['email', 'email'],
         ];
     }
 
@@ -53,4 +53,15 @@ class EmailChanges extends \yii\db\ActiveRecord
             'user_agent' => 'User Agent',
         ];
     }
+	
+	public function beforeSave($insert)
+	{
+		if (parent::beforeSave($insert)) {
+			if ($this->isNewRecord) {
+				$this->date_created = date("Y-m-d H:i:s");
+			}
+			return true;
+		}
+		return false;
+	}
 }
