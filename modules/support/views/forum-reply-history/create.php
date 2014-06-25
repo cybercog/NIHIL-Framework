@@ -1,21 +1,49 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\support\models\ForumReplyHistory */
 
-$this->title = 'Create Forum Reply History';
-$this->params['breadcrumbs'][] = ['label' => 'Forum Reply Histories', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Support Forum Reply Histories Create';
+$this->params['breadcrumbs'][] = ['label' => 'Support', 'url' => '/support'];
+$this->params['breadcrumbs'][] = ['label' => 'Forum Reply Histories', 'url' => '/ac/forum-reply-histories'];
+$this->params['breadcrumbs'][] = 'Create';
 ?>
-<div class="forum-reply-history-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+						<div class="support-forumreplyhistories-create">
+							<h1>Support Forum Reply Histories Create</h1>
 
-</div>
+							<?= $this->render('_form', [
+								'model' => $model,
+							]) ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
