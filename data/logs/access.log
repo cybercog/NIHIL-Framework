@@ -1003,3 +1003,11 @@
 127.0.0.1 - - [25/Jun/2014:15:01:23 -0400] "GET / HTTP/1.1" 200 13732
 127.0.0.1 - - [25/Jun/2014:15:01:27 -0400] "GET /ac/users/logout HTTP/1.1" 200 11726
 127.0.0.1 - - [25/Jun/2014:15:01:27 -0400] "GET /debug/default/toolbar?tag=53ab1c8767891 HTTP/1.1" 200 19491
+127.0.0.1 - - [25/Jun/2014:19:05:57 -0400] "GET /support HTTP/1.1" 200 11705
+127.0.0.1 - - [25/Jun/2014:19:05:58 -0400] "GET /debug/default/toolbar?tag=53ab55d5d2efb HTTP/1.1" 200 19238
+127.0.0.1 - - [25/Jun/2014:19:06:10 -0400] "GET /support/forum-post HTTP/1.1" 200 11744
+127.0.0.1 - - [25/Jun/2014:19:06:10 -0400] "GET /debug/default/toolbar?tag=53ab55e2cd62c HTTP/1.1" 200 19240
+127.0.0.1 - - [25/Jun/2014:19:06:21 -0400] "GET /support/forum-post/list HTTP/1.1" 404 11607
+127.0.0.1 - - [25/Jun/2014:19:06:21 -0400] "GET /debug/default/toolbar?tag=53ab55ed336f1 HTTP/1.1" 200 19263
+127.0.0.1 - - [25/Jun/2014:19:06:24 -0400] "GET /support/forum-posts/list HTTP/1.1" 404 11620
+127.0.0.1 - - [25/Jun/2014:19:06:25 -0400] "GET /debug/default/toolbar?tag=53ab55f0f36f8 HTTP/1.1" 200 19263
