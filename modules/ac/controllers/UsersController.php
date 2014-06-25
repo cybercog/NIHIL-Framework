@@ -39,7 +39,7 @@ class UsersController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('indexUser')) {
+		if (!\Yii::$app->user->can('acUsersIndex')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
@@ -53,7 +53,7 @@ class UsersController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('viewUser')) {
+		if (!\Yii::$app->user->can('acUsersView')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
@@ -69,7 +69,7 @@ class UsersController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('createUser')) {
+		if (!\Yii::$app->user->can('acUsersCreate')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
@@ -92,7 +92,7 @@ class UsersController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('updateUser', ['user' => Users::findOne($id)])) {
+		if (!\Yii::$app->user->can('acUsersUpdate', ['user' => Users::findOne($id)])) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
@@ -115,7 +115,7 @@ class UsersController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('deleteUser')) {
+		if (!\Yii::$app->user->can('acUsersDelete')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
@@ -130,7 +130,7 @@ class UsersController extends Controller
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('listUser')) {
+		if (!\Yii::$app->user->can('acUsersList')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
@@ -299,7 +299,7 @@ class UsersController extends Controller
      */
     public function actionSettings()
     {
-		if (!\Yii::$app->user->can('settingsUser')) {
+		if (!\Yii::$app->user->can('acUsersSettings')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
