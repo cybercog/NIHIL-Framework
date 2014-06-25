@@ -37,7 +37,7 @@ class VerificationForm extends Model
 
 			// Use the auth key
 			// Update the user roles
-			$authkey = AuthKeys::findByCode($this->code);
+			$authkey = AuthKeys::findByCode($this->code, 1);
 			if(!$authkey) {
 				$this->addError('code', 'Code is bad.');
 				return FALSE;

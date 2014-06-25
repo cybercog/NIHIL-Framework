@@ -4,6 +4,7 @@ namespace app\modules\ac\controllers;
 
 use Yii;
 use app\modules\ac\models\Users;
+use app\modules\ac\models\AuthKeys;
 use app\modules\ac\models\search\UsersSearch;
 use app\modules\ac\models\forms\LoginForm;
 use app\modules\ac\models\forms\RegisterForm;
@@ -238,7 +239,12 @@ class UsersController extends Controller
      */
     public function actionReset()
     {
+		if(!\Yii::$app->user->isGuest) {
+			return $this->redirect('/ac/users',302);
+		}
+	
 		$model = new ResetForm();
+		
 		if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->resetPassword()) {
 				return $this->goHome();
@@ -255,19 +261,51 @@ class UsersController extends Controller
      * Verify action.
      * @return mixed
      */
-    public function actionChangePassword()
+    public function actionChangePassword($code = NULL)
     {
 		$model = new ChangePasswordForm();
+		
+		if(\Yii::$app->user->isGuest AND !$authkey = AuthKeys::findByCode($code, 4)) {
+			return $this->redirect('/ac/users/reset',302);
+		}
+		
 		if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->changePassword()) {
-                return $this->goHome();
-            }
+			if(!\Yii::$app->user->isGuest) {
+				
+				if($user = $model->changeOwnPassword()) {
+					Yii::$app->user->logout();
+					return $this->redirect('/ac/users/login',302);
+				}
+				
+			}else{
+			
+				if ($user = $model->changePassword($authkey)) {
+					return $this->redirect('/ac/users/login',302);
+				}
+				
+			}	
+            
         }
 
         return $this->render('change-password', [
             'model' => $model,
         ]);
 		
+    }
+	
+	/**
+     * Settings action.
+     * @return mixed
+     */
+    public function actionSettings()
+    {
+		if (!\Yii::$app->user->can('settingsUser')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        return $this->render('settings', [
+            'user' => Yii::$app->user->identity,
+        ]);
     }
 
     /**

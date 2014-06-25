@@ -5,6 +5,7 @@ use Yii;
 use yii\base\Model;
 use app\modules\ac\models\Users;
 use app\modules\ac\models\AuthKeys;
+use yii\helpers\Security;
 
 /**
  * Login form
@@ -42,6 +43,32 @@ class ResetForm extends Model
 
 			// Use the auth key
 			// Update the user roles
+			// calculate expireTime (converting strtotime) and create userkey object
+			$user = Users::findByEmail($this->email);
+			
+			$authkey = new AuthKeys;
+			$authkey->user_id = $user->id;
+			$authkey->type = 4;
+			$authkey->key = Security::generatePasswordHash($user->username . time());
+			$authkey->date_created = date("Y-m-d H:i:s");
+			$authkey->date_expires = date("Y-m-d H:i:s", time() + 259200);
+			
+			if(!$authkey->save()){
+				return FALSE;
+			}
+			
+			$data = array('user' => $user, 'authkey' => $authkey);
+			
+			$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/html/reset', $data, true);
+			$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/text/reset', $data, true);
+			
+			Yii::$app->mail->compose()
+				->setTo($this->email)
+				->setSubject('Account Reset')
+				->setTextBody($textBody)
+				->setHtmlBody($htmlBody)
+				->send();
+					
 			return TRUE;
             
         } else {

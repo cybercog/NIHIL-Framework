@@ -57,6 +57,7 @@ $config = [
             'showScriptName' => false,
 			'rules' => array(
 				'ac/users/verify/<code>' => 'ac/users/verify',
+				'ac/users/change-password/<code>' => 'ac/users/change-password',
             ),
         ],
         'db' => require(__DIR__ . '/db.php'),
