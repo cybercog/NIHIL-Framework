@@ -40,7 +40,7 @@ $config = [
                 'encryption' => 'ssl',
             ],
 			'messageConfig' => [
-				'from' => 'no-reply@nihil.co',
+				'from' => ['no-reply@nihil.co' => 'The NIHIL Corporation'],
 			],
         ],
         'log' => [
