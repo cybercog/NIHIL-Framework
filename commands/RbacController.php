@@ -35,8 +35,8 @@ class RbacController extends Controller
         //$viewUser->description = 'View user.';
         //$auth->add($viewUser);
 		
-		//$sadmin = $auth->getRole('super-administrator');
-		//$admin = $auth->getRole('administrator');
+		$sadmin = $auth->getRole('super-administrator');
+		$admin = $auth->getRole('administrator');
 		//$mod = $auth->getRole('moderator');
 		//$user = $auth->getRole('user');
 		//$guest = $auth->getRole('guest');
@@ -96,5 +96,116 @@ class RbacController extends Controller
         //$auth->assign($admin, 1);
 		//$auth->assign($admin, 2);
 		//$auth->assign($admin, 3);
+		
+		
+		
+		
+		//
+		$acAuthKeysIndex = $auth->createPermission('acAuthKeysIndex');
+        $acAuthKeysIndex->description = 'AC AuthKeys Index.';
+        $auth->add($acAuthKeysIndex);
+		
+		$acAuthKeysView = $auth->createPermission('acAuthKeysView');
+        $acAuthKeysView->description = 'AC AuthKeys View.';
+        $auth->add($acAuthKeysView);
+		
+		$acAuthKeysUpdate = $auth->createPermission('acAuthKeysUpdate');
+        $acAuthKeysUpdate->description = 'AC AuthKeys Update.';
+        $auth->add($acAuthKeysUpdate);
+		
+		$acAuthKeysDelete = $auth->createPermission('acAuthKeysDelete');
+        $acAuthKeysDelete->description = 'AC AuthKeys Delete.';
+        $auth->add($acAuthKeysDelete);
+		
+		$acAuthKeysList = $auth->createPermission('acAuthKeysList');
+        $acAuthKeysList->description = 'AC AuthKeys List.';
+        $auth->add($acAuthKeysList);
+		
+		//
+		$acPasswordChangesIndex = $auth->createPermission('acPasswordChangesIndex');
+        $acPasswordChangesIndex->description = 'AC PasswordChanges Index.';
+        $auth->add($acPasswordChangesIndex);
+		
+		$acPasswordChangesView = $auth->createPermission('acPasswordChangesView');
+        $acPasswordChangesView->description = 'AC PasswordChanges View.';
+        $auth->add($acPasswordChangesView);
+		
+		$acPasswordChangesUpdate = $auth->createPermission('acPasswordChangesUpdate');
+        $acPasswordChangesUpdate->description = 'AC PasswordChanges Update.';
+        $auth->add($acPasswordChangesUpdate);
+		
+		$acPasswordChangesDelete = $auth->createPermission('acPasswordChangesDelete');
+        $acPasswordChangesDelete->description = 'AC PasswordChanges Delete.';
+        $auth->add($acPasswordChangesDelete);
+		
+		$acPasswordChangesList = $auth->createPermission('acPasswordChangesList');
+        $acPasswordChangesList->description = 'AC PasswordChanges List.';
+        $auth->add($acPasswordChangesList);
+		
+		// //
+		// $acEmailChangesIndex = $auth->createPermission('acEmailChangesIndex');
+        // $acEmailChangesIndex->description = 'AC EmailChanges Index.';
+        // $auth->add($acEmailChangesIndex);
+		
+		// $acEmailChangesView = $auth->createPermission('acEmailChangesView');
+        // $acEmailChangesView->description = 'AC EmailChanges View.';
+        // $auth->add($acEmailChangesView);
+		
+		// $acEmailChangesUpdate = $auth->createPermission('acEmailChangesUpdate');
+        // $acEmailChangesUpdate->description = 'AC EmailChanges Update.';
+        // $auth->add($acEmailChangesUpdate);
+		
+		// $acEmailChangesDelete = $auth->createPermission('acEmailChangesDelete');
+        // $acEmailChangesDelete->description = 'AC EmailChanges Delete.';
+        // $auth->add($acEmailChangesDelete);
+		
+		// $acEmailChangesList = $auth->createPermission('acEmailChangesList');
+        // $acEmailChangesList->description = 'AC EmailChanges List.';
+        // $auth->add($acEmailChangesList);
+		
+		// //
+		// $acSessionLogsIndex = $auth->createPermission('acSessionLogsIndex');
+        // $acSessionLogsIndex->description = 'AC SessionLogs Index.';
+        // $auth->add($acSessionLogsIndex);
+		
+		// $acSessionLogsView = $auth->createPermission('acSessionLogsView');
+        // $acSessionLogsView->description = 'AC SessionLogs View.';
+        // $auth->add($acSessionLogsView);
+		
+		// $acSessionLogsUpdate = $auth->createPermission('acSessionLogsUpdate');
+        // $acSessionLogsUpdate->description = 'AC SessionLogs Update.';
+        // $auth->add($acSessionLogsUpdate);
+		
+		// $acSessionLogsDelete = $auth->createPermission('acSessionLogsDelete');
+        // $acSessionLogsDelete->description = 'AC SessionLogs Delete.';
+        // $auth->add($acSessionLogsDelete);
+		
+		// $acSessionLogsList = $auth->createPermission('acSessionLogsList');
+        // $acSessionLogsList->description = 'AC SessionLogs List.';
+        // $auth->add($acSessionLogsList);
+		
+		// $auth->addChild($admin, $acAuthKeysIndex);
+		// $auth->addChild($admin, $acAuthKeysView);
+		// $auth->addChild($admin, $acAuthKeysUpdate);
+		// $auth->addChild($admin, $acAuthKeysList);
+		// $auth->addChild($sadmin, $acAuthKeysDelete);
+		
+		// $auth->addChild($admin, $acPasswordChangesIndex);
+		// $auth->addChild($admin, $acPasswordChangesView);
+		// $auth->addChild($admin, $acPasswordChangesUpdate);
+		// $auth->addChild($admin, $acPasswordChangesList);
+		// $auth->addChild($sadmin, $acPasswordChangesDelete);
+		
+		// $auth->addChild($admin, $acEmailChangesIndex);
+		// $auth->addChild($admin, $acEmailChangesView);
+		// $auth->addChild($admin, $acEmailChangesUpdate);
+		// $auth->addChild($admin, $acEmailChangesList);
+		// $auth->addChild($sadmin, $acEmailChangesDelete);
+		
+		// $auth->addChild($admin, $acSessionLogsIndex);
+		// $auth->addChild($admin, $acSessionLogsView);
+		// $auth->addChild($admin, $acSessionLogsUpdate);
+		// $auth->addChild($admin, $acSessionLogsList);
+		// $auth->addChild($sadmin, $acSessionLogsDelete);
     }
 }
