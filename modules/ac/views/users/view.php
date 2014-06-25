@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = 'View ' . $model->username;
 					<div class="col-md-12">
 		
 						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
 							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 						]) ?>
 			
