@@ -993,3 +993,13 @@
 127.0.0.1 - - [25/Jun/2014:14:12:25 -0400] "GET /support HTTP/1.1" 200 11639
 127.0.0.1 - - [25/Jun/2014:14:12:25 -0400] "GET /debug/default/toolbar?tag=53ab11093f616 HTTP/1.1" 200 19497
 127.0.0.1 - - [25/Jun/2014:14:12:25 -0400] "GET /support HTTP/1.1" 200 11639
+127.0.0.1 - - [25/Jun/2014:15:00:46 -0400] "GET /ac/users/logout HTTP/1.1" 200 11726
+127.0.0.1 - - [25/Jun/2014:15:00:46 -0400] "GET /debug/default/toolbar?tag=53ab1c5e63e8a HTTP/1.1" 200 19491
+127.0.0.1 - - [25/Jun/2014:15:00:51 -0400] "GET /ac/users/register HTTP/1.1" 200 23032
+127.0.0.1 - - [25/Jun/2014:15:00:51 -0400] "GET /debug/default/toolbar?tag=53ab1c63586c1 HTTP/1.1" 200 19234
+127.0.0.1 - - [25/Jun/2014:15:01:19 -0400] "POST /ac/users/register HTTP/1.1" 302 -
+127.0.0.1 - - [25/Jun/2014:15:01:23 -0400] "GET / HTTP/1.1" 200 13732
+127.0.0.1 - - [25/Jun/2014:15:01:23 -0400] "GET /debug/default/toolbar?tag=53ab1c835f19d HTTP/1.1" 200 19478
+127.0.0.1 - - [25/Jun/2014:15:01:23 -0400] "GET / HTTP/1.1" 200 13732
+127.0.0.1 - - [25/Jun/2014:15:01:27 -0400] "GET /ac/users/logout HTTP/1.1" 200 11726
+127.0.0.1 - - [25/Jun/2014:15:01:27 -0400] "GET /debug/default/toolbar?tag=53ab1c8767891 HTTP/1.1" 200 19491
