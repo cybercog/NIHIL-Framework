@@ -1200,3 +1200,13 @@
 127.0.0.1 - - [26/Jun/2014:13:55:18 -0400] "GET /debug/default/toolbar?tag=53ac5e85f04ae HTTP/1.1" 200 19492
 127.0.0.1 - - [26/Jun/2014:13:56:17 -0400] "GET /cms/content HTTP/1.1" 200 12211
 127.0.0.1 - - [26/Jun/2014:13:56:17 -0400] "GET /debug/default/toolbar?tag=53ac5ec116a6c HTTP/1.1" 200 19491
+127.0.0.1 - - [26/Jun/2014:16:24:32 -0400] "GET /cms/posts HTTP/1.1" 500 92769
+127.0.0.1 - - [26/Jun/2014:16:24:33 -0400] "GET /debug/default/toolbar?tag=53ac8180ea3d0 HTTP/1.1" 200 19307
+127.0.0.1 - - [26/Jun/2014:16:24:49 -0400] "GET /cms/posts HTTP/1.1" 200 12182
+127.0.0.1 - - [26/Jun/2014:16:24:49 -0400] "GET /assets/95890aaa/js/bootstrap.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:16:24:49 -0400] "GET /assets/f5c0d42a/jquery.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:16:24:49 -0400] "GET /debug/default/toolbar?tag=53ac819195221 HTTP/1.1" 200 19489
+127.0.0.1 - - [26/Jun/2014:16:25:00 -0400] "GET /cms/post-histories HTTP/1.1" 200 12187
+127.0.0.1 - - [26/Jun/2014:16:25:01 -0400] "GET /debug/default/toolbar?tag=53ac819d0872a HTTP/1.1" 200 19497
+127.0.0.1 - - [26/Jun/2014:16:25:05 -0400] "GET /cms/post-votes HTTP/1.1" 200 12161
+127.0.0.1 - - [26/Jun/2014:16:25:06 -0400] "GET /debug/default/toolbar?tag=53ac81a1e3274 HTTP/1.1" 200 19493
