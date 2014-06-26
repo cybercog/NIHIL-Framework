@@ -18,7 +18,7 @@ class PostHistorySearch extends PostHistory
     public function rules()
     {
         return [
-            [['id', 'post_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
+            [['id', 'post_id', 'author', 'votes_up', 'votes_down'], 'integer'],
             [['name', 'slug', 'date_created', 'content'], 'safe'],
         ];
     }
@@ -51,7 +51,6 @@ class PostHistorySearch extends PostHistory
         $query->andFilterWhere([
             'id' => $this->id,
             'post_id' => $this->post_id,
-            'type' => $this->type,
             'author' => $this->author,
             'date_created' => $this->date_created,
             'votes_up' => $this->votes_up,

@@ -9,7 +9,6 @@ use Yii;
  *
  * @property integer $id
  * @property integer $post_id
- * @property integer $type
  * @property integer $author
  * @property string $name
  * @property string $slug
@@ -34,8 +33,8 @@ class PostHistory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['post_id', 'type', 'author', 'name', 'slug', 'date_created', 'content', 'votes_up', 'votes_down'], 'required'],
-            [['post_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
+            [['post_id', 'author', 'name', 'slug', 'date_created', 'content', 'votes_up', 'votes_down'], 'required'],
+            [['post_id', 'author', 'votes_up', 'votes_down'], 'integer'],
             [['date_created'], 'safe'],
             [['content'], 'string'],
             [['name', 'slug'], 'string', 'max' => 128]
@@ -50,7 +49,6 @@ class PostHistory extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'post_id' => 'Post ID',
-            'type' => 'Type',
             'author' => 'Author',
             'name' => 'Name',
             'slug' => 'Slug',
