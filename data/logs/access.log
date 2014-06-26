@@ -1291,3 +1291,13 @@
 127.0.0.1 - - [26/Jun/2014:17:31:48 -0400] "GET /debug/default/toolbar?tag=53ac9144bc62c HTTP/1.1" 200 19482
 127.0.0.1 - - [26/Jun/2014:17:31:51 -0400] "POST /gii/crud HTTP/1.1" 200 21855
 127.0.0.1 - - [26/Jun/2014:17:31:51 -0400] "GET /debug/default/toolbar?tag=53ac914715a72 HTTP/1.1" 200 19482
+127.0.0.1 - - [26/Jun/2014:17:48:01 -0400] "GET /cms HTTP/1.1" 200 11680
+127.0.0.1 - - [26/Jun/2014:17:48:01 -0400] "GET /debug/default/toolbar?tag=53ac9511114f9 HTTP/1.1" 200 19234
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /cms HTTP/1.1" 200 11681
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /assets/95890aaa/css/bootstrap.css HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /css/default.css HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /css/font-awesome/font-awesome.min.css HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /assets/95890aaa/js/bootstrap.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /assets/f5c0d42a/jquery.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /assets/390a8d4a/yii.js HTTP/1.1" 304 -
+127.0.0.1 - - [26/Jun/2014:17:48:12 -0400] "GET /debug/default/toolbar?tag=53ac951c33481 HTTP/1.1" 200 19234
