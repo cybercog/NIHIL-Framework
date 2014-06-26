@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = 'List';
 									// 'slug',
 									'reporter',
 									'assignee',
-									'date_reported',
+									//'date_reported',
 									// 'date_assigned',
 									// 'date_edited',
 									// 'date_estimated',
