@@ -8,7 +8,6 @@ use Yii;
  * This is the model class for table "cms_posts".
  *
  * @property integer $id
- * @property integer $type
  * @property integer $author
  * @property string $name
  * @property string $slug
@@ -37,8 +36,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['type', 'author', 'name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'votes_up', 'votes_down', 'views', 'date_lastview'], 'required'],
-            [['type', 'author', 'views', 'votes_up', 'votes_down'], 'integer'],
+            [['author', 'name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'votes_up', 'votes_down', 'views', 'date_lastview'], 'required'],
+            [['author', 'views', 'votes_up', 'votes_down'], 'integer'],
             [['date_created', 'date_updated', 'date_published', 'date_lastview'], 'safe'],
             [['content'], 'string'],
             [['name', 'slug'], 'string', 'max' => 150],
@@ -53,7 +52,6 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'type' => 'Type',
             'author' => 'Author',
             'name' => 'Name',
             'slug' => 'Slug',

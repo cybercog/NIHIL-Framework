@@ -18,7 +18,7 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'type', 'author', 'views', 'votes_up', 'votes_down'], 'integer'],
+            [['id', 'author', 'views', 'votes_up', 'votes_down'], 'integer'],
             [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
         ];
     }
@@ -50,7 +50,6 @@ class PostSearch extends Post
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'type' => $this->type,
             'author' => $this->author,
             'date_created' => $this->date_created,
             'date_updated' => $this->date_updated,
