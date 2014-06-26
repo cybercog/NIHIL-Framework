@@ -32,13 +32,7 @@ class CommentHistoriesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CommentHistorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -101,6 +95,21 @@ class CommentHistoriesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all CommentHistory models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+        $searchModel = new CommentHistorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

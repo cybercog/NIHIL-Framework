@@ -32,13 +32,7 @@ class CommentVotesController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new CommentVoteSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -101,6 +95,21 @@ class CommentVotesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all CommentVote models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+        $searchModel = new CommentVoteSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

@@ -32,13 +32,7 @@ class TagsController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TagSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
@@ -101,6 +95,21 @@ class TagsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all Tag models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+        $searchModel = new TagSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
