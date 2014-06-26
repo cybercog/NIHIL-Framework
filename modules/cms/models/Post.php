@@ -5,7 +5,7 @@ namespace app\modules\cms\models;
 use Yii;
 
 /**
- * This is the model class for table "cms_content".
+ * This is the model class for table "cms_posts".
  *
  * @property integer $id
  * @property integer $type
@@ -19,14 +19,14 @@ use Yii;
  * @property integer $views
  * @property string $date_lastview
  */
-class Content extends \yii\db\ActiveRecord
+class Post extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cms_content';
+        return 'cms_posts';
     }
 
     /**

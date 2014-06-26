@@ -5,12 +5,12 @@ namespace app\modules\cms\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\cms\models\Content;
+use app\modules\cms\models\PostVote;
 
 /**
- * ContentSearch represents the model behind the search form about `app\modules\cms\models\Content`.
+ * PostVoteSearch represents the model behind the search form about `app\modules\cms\models\PostVote`.
  */
-class ContentSearch extends Content
+class PostVoteSearch extends PostVote
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ContentSearch extends Content
     public function rules()
     {
         return [
-            [['id', 'type', 'author', 'views'], 'integer'],
-            [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
+            [['id', 'post_id', 'user_id'], 'integer'],
+            [['timestamp', 'vote'], 'safe'],
         ];
     }
 
@@ -50,18 +50,12 @@ class ContentSearch extends Content
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'type' => $this->type,
-            'author' => $this->author,
-            'date_created' => $this->date_created,
-            'date_updated' => $this->date_updated,
-            'date_published' => $this->date_published,
-            'views' => $this->views,
-            'date_lastview' => $this->date_lastview,
+            'post_id' => $this->post_id,
+            'user_id' => $this->user_id,
+            'timestamp' => $this->timestamp,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'slug', $this->slug])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'vote', $this->vote]);
 
         return $dataProvider;
     }

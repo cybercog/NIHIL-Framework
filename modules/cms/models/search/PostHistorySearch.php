@@ -5,12 +5,12 @@ namespace app\modules\cms\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\cms\models\ContentType;
+use app\modules\cms\models\PostHistory;
 
 /**
- * ContentTypeSearch represents the model behind the search form about `app\modules\cms\models\ContentType`.
+ * PostHistorySearch represents the model behind the search form about `app\modules\cms\models\PostHistory`.
  */
-class ContentTypeSearch extends ContentType
+class PostHistorySearch extends PostHistory
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ContentTypeSearch extends ContentType
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['id', 'post_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
+            [['name', 'slug', 'date_created', 'content'], 'safe'],
         ];
     }
 
@@ -50,10 +50,17 @@ class ContentTypeSearch extends ContentType
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'post_id' => $this->post_id,
+            'type' => $this->type,
+            'author' => $this->author,
+            'date_created' => $this->date_created,
+            'votes_up' => $this->votes_up,
+            'votes_down' => $this->votes_down,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

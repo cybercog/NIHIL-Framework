@@ -3,16 +3,16 @@
 namespace app\modules\cms\controllers;
 
 use Yii;
-use app\modules\cms\models\ContentVote;
-use app\modules\cms\models\search\ContentVoteSearch;
+use app\modules\cms\models\Post;
+use app\modules\cms\models\search\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContentVotesController implements the CRUD actions for ContentVote model.
+ * PostsController implements the CRUD actions for Post model.
  */
-class ContentVotesController extends Controller
+class PostsController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Lists all ContentVote models.
+     * Lists all Content models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContentVoteSearch();
+        $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Displays a single ContentVote model.
+     * Displays a single Post model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Creates a new ContentVote model.
+     * Creates a new Post model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContentVote();
+        $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Updates an existing ContentVote model.
+     * Updates an existing Post model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Deletes an existing ContentVote model.
+     * Deletes an existing Post model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ContentVotesController extends Controller
     }
 
     /**
-     * Finds the ContentVote model based on its primary key value.
+     * Finds the Post model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContentVote the loaded model
+     * @return Post the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContentVote::findOne($id)) !== null) {
+        if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

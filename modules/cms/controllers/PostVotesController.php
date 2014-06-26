@@ -3,16 +3,16 @@
 namespace app\modules\cms\controllers;
 
 use Yii;
-use app\modules\cms\models\ContentHistory;
-use app\modules\cms\models\search\ContentHistorySearch;
+use app\modules\cms\models\PostVote;
+use app\modules\cms\models\search\PostVoteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContentHistoriesController implements the CRUD actions for ContentHistory model.
+ * ContentVotesController implements the CRUD actions for ContentVote model.
  */
-class ContentHistoriesController extends Controller
+class PostVotesController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Lists all ContentHistory models.
+     * Lists all PostVote models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContentHistorySearch();
+        $searchModel = new PostVoteSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Displays a single ContentHistory model.
+     * Displays a single PostVote model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Creates a new ContentHistory model.
+     * Creates a new PostVote model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContentHistory();
+        $model = new PostVote();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Updates an existing ContentHistory model.
+     * Updates an existing PostVote model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Deletes an existing ContentHistory model.
+     * Deletes an existing PostVote model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ContentHistoriesController extends Controller
     }
 
     /**
-     * Finds the ContentHistory model based on its primary key value.
+     * Finds the PostVote model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContentHistory the loaded model
+     * @return PostVote the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContentHistory::findOne($id)) !== null) {
+        if (($model = PostVote::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -9,7 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property integer $parent
- * @property integer $content_id
+ * @property integer $post_id
  * @property integer $user_id
  * @property string $content
  * @property string $date_created
@@ -34,8 +34,8 @@ class Comment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['parent', 'content_id', 'user_id', 'votes_up', 'votes_down'], 'integer'],
-            [['content_id', 'user_id', 'content', 'votes_up', 'votes_down'], 'required'],
+            [['parent', 'post_id', 'user_id', 'votes_up', 'votes_down'], 'integer'],
+            [['post_id', 'user_id', 'content', 'votes_up', 'votes_down'], 'required'],
             [['content'], 'string'],
             [['date_created', 'date_modified', 'date_edited'], 'safe']
         ];
@@ -49,7 +49,7 @@ class Comment extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'parent' => 'Parent',
-            'content_id' => 'Content ID',
+            'post_id' => 'Post ID',
             'user_id' => 'User ID',
             'content' => 'Content',
             'date_created' => 'Date Created',

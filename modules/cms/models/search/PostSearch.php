@@ -5,12 +5,12 @@ namespace app\modules\cms\models\search;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\cms\models\ContentHistory;
+use app\modules\cms\models\Post;
 
 /**
- * ContentHistorySearch represents the model behind the search form about `app\modules\cms\models\ContentHistory`.
+ * PostSearch represents the model behind the search form about `app\modules\cms\models\Post`.
  */
-class ContentHistorySearch extends ContentHistory
+class PostSearch extends Post
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ContentHistorySearch extends ContentHistory
     public function rules()
     {
         return [
-            [['id', 'content_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
-            [['name', 'slug', 'date_created', 'content'], 'safe'],
+            [['id', 'type', 'author', 'views'], 'integer'],
+            [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
         ];
     }
 
@@ -50,12 +50,13 @@ class ContentHistorySearch extends ContentHistory
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'content_id' => $this->content_id,
             'type' => $this->type,
             'author' => $this->author,
             'date_created' => $this->date_created,
-            'votes_up' => $this->votes_up,
-            'votes_down' => $this->votes_down,
+            'date_updated' => $this->date_updated,
+            'date_published' => $this->date_published,
+            'views' => $this->views,
+            'date_lastview' => $this->date_lastview,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

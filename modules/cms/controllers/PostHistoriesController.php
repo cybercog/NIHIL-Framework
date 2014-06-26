@@ -3,16 +3,16 @@
 namespace app\modules\cms\controllers;
 
 use Yii;
-use app\modules\cms\models\ContentType;
-use app\modules\cms\models\search\ContentTypeSearch;
+use app\modules\cms\models\PostHistory;
+use app\modules\cms\models\search\PostHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContentTypesController implements the CRUD actions for ContentType model.
+ * PostHistoriesController implements the CRUD actions for PostHistory model.
  */
-class ContentTypesController extends Controller
+class PostHistoriesController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Lists all ContentType models.
+     * Lists all PostHistory models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContentTypeSearch();
+        $searchModel = new PostHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Displays a single ContentType model.
+     * Displays a single PostHistory model.
      * @param integer $id
      * @return mixed
      */
@@ -54,13 +54,13 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Creates a new ContentType model.
+     * Creates a new PostHistory model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContentType();
+        $model = new PostHistory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -72,7 +72,7 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Updates an existing ContentType model.
+     * Updates an existing PostHistory model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -91,7 +91,7 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Deletes an existing ContentType model.
+     * Deletes an existing PostHistory model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ContentTypesController extends Controller
     }
 
     /**
-     * Finds the ContentType model based on its primary key value.
+     * Finds the PosttHistory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return ContentType the loaded model
+     * @return PostHistory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContentType::findOne($id)) !== null) {
+        if (($model = PostHistory::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

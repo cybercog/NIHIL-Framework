@@ -5,10 +5,10 @@ namespace app\modules\cms\models;
 use Yii;
 
 /**
- * This is the model class for table "cms_content_histories".
+ * This is the model class for table "cms_post_histories".
  *
  * @property integer $id
- * @property integer $content_id
+ * @property integer $post_id
  * @property integer $type
  * @property integer $author
  * @property string $name
@@ -18,14 +18,14 @@ use Yii;
  * @property integer $votes_up
  * @property integer $votes_down
  */
-class ContentHistory extends \yii\db\ActiveRecord
+class PostHistory extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cms_content_histories';
+        return 'cms_post_histories';
     }
 
     /**
@@ -34,8 +34,8 @@ class ContentHistory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content_id', 'type', 'author', 'name', 'slug', 'date_created', 'content', 'votes_up', 'votes_down'], 'required'],
-            [['content_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
+            [['post_id', 'type', 'author', 'name', 'slug', 'date_created', 'content', 'votes_up', 'votes_down'], 'required'],
+            [['post_id', 'type', 'author', 'votes_up', 'votes_down'], 'integer'],
             [['date_created'], 'safe'],
             [['content'], 'string'],
             [['name', 'slug'], 'string', 'max' => 128]
@@ -49,7 +49,7 @@ class ContentHistory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'content_id' => 'Content ID',
+            'post_id' => 'Post ID',
             'type' => 'Type',
             'author' => 'Author',
             'name' => 'Name',

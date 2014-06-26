@@ -5,22 +5,22 @@ namespace app\modules\cms\models;
 use Yii;
 
 /**
- * This is the model class for table "cms_content_votes".
+ * This is the model class for table "cms_post_votes".
  *
  * @property integer $id
- * @property integer $content_id
+ * @property integer $post_id
  * @property integer $user_id
  * @property string $timestamp
  * @property string $vote
  */
-class ContentVote extends \yii\db\ActiveRecord
+class PostVote extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'cms_content_votes';
+        return 'cms_post_votes';
     }
 
     /**
@@ -29,8 +29,8 @@ class ContentVote extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['content_id', 'user_id', 'timestamp', 'vote'], 'required'],
-            [['content_id', 'user_id'], 'integer'],
+            [['post_id', 'user_id', 'timestamp', 'vote'], 'required'],
+            [['post_id', 'user_id'], 'integer'],
             [['timestamp'], 'safe'],
             [['vote'], 'string', 'max' => 128]
         ];
@@ -43,7 +43,7 @@ class ContentVote extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'content_id' => 'Content ID',
+            'post_id' => 'Post ID',
             'user_id' => 'User ID',
             'timestamp' => 'Timestamp',
             'vote' => 'Vote',
