@@ -51,16 +51,16 @@ $this->params['breadcrumbs'][] = 'List';
 								'columns' => [
 									['class' => 'yii\grid\SerialColumn'],
 
-									'id',
-									'author',
+									//'id',
 									'name',
-									'slug',
-									'date_created',
+									'author',
+									//'slug',
+									//'date_created',
 									// 'date_updated',
-									// 'date_published',
+									'date_published',
 									// 'content:ntext',
-									// 'views',
-									// 'date_lastview',
+									'views',
+									'date_lastview',
 
 									['class' => 'yii\grid\ActionColumn'],
 								],
