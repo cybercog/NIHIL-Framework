@@ -2,37 +2,67 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\cms\models\search\ContentVoteSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Content Votes';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | CMS Post Votes List';
+$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
+$this->params['breadcrumbs'][] = ['label' => 'Post Votes', 'url' => '/cms/post-votes'];
+$this->params['breadcrumbs'][] = 'List';
 ?>
-<div class="content-vote-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Content Vote', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="cms-postvotes-list">
+							<h1>CMS Post Votes List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+							<p>
+								<?= Html::a('Create Content Vote', ['create'], ['class' => 'btn btn-success']) ?>
+							</p>
 
-            'id',
-            'content_id',
-            'user_id',
-            'timestamp',
-            'vote',
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+									'id',
+									'content_id',
+									'user_id',
+									'timestamp',
+									'vote',
 
-</div>
+									['class' => 'yii\grid\ActionColumn'],
+								],
+							]); ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
