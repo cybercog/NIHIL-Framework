@@ -18,7 +18,7 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'type', 'author', 'views'], 'integer'],
+            [['id', 'type', 'author', 'views', 'votes_up', 'votes_down'], 'integer'],
             [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
         ];
     }
@@ -55,7 +55,9 @@ class PostSearch extends Post
             'date_created' => $this->date_created,
             'date_updated' => $this->date_updated,
             'date_published' => $this->date_published,
-            'views' => $this->views,
+            'votes_up' => $this->votes_up,
+			'votes_down' => $this->votes_down,
+			'views' => $this->views,
             'date_lastview' => $this->date_lastview,
         ]);
 
