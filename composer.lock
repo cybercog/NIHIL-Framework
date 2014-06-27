@@ -166,25 +166,22 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "dev-master",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "1de2f68bdcecd9a1e19548fe9152ead1b5e1bad4"
+                "reference": "a365d8689c3f3cee7f1acf86b61270ecca8e106d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/1de2f68bdcecd9a1e19548fe9152ead1b5e1bad4",
-                "reference": "1de2f68bdcecd9a1e19548fe9152ead1b5e1bad4",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/a365d8689c3f3cee7f1acf86b61270ecca8e106d",
+                "reference": "a365d8689c3f3cee7f1acf86b61270ecca8e106d",
                 "shasum": ""
-            },
-            "replace": {
-                "twitter/bootstrap": "self.version"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.0.x-dev"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -201,19 +198,13 @@
                     "email": "markdotto@gmail.com"
                 }
             ],
-            "description": "The most popular front-end framework for developing responsive, mobile first projects on the web.",
+            "description": "Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.",
             "homepage": "http://getbootstrap.com",
             "keywords": [
-                "JS",
-                "css",
-                "framework",
-                "front-end",
-                "less",
-                "mobile-first",
-                "responsive",
-                "web"
+                "bootstrap",
+                "css"
             ],
-            "time": "2014-06-26 09:49:35"
+            "time": "2014-02-13 17:24:59"
         },
         {
             "name": "yiisoft/jquery",
@@ -270,12 +261,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "7a4ae958ea0ab1655cb18be9ec45f07b1a8b5336"
+                "reference": "2e8b22c4cb90467114b7942cbbaa1a44ed17f5d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/7a4ae958ea0ab1655cb18be9ec45f07b1a8b5336",
-                "reference": "7a4ae958ea0ab1655cb18be9ec45f07b1a8b5336",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/2e8b22c4cb90467114b7942cbbaa1a44ed17f5d2",
+                "reference": "2e8b22c4cb90467114b7942cbbaa1a44ed17f5d2",
                 "shasum": ""
             },
             "require": {
@@ -343,7 +334,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2014-06-26 20:08:18"
+            "time": "2014-06-27 15:07:12"
         },
         {
             "name": "yiisoft/yii2-bootstrap",
