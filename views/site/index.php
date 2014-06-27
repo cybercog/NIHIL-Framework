@@ -56,7 +56,7 @@ $this->title = 'uclemmer | Home';
 
 											<p><?php echo $project->description; ?></p>
 
-											<p><a class="btn btn-default read-more" href="/cms/projects/view/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
+											<p><a class="btn btn-default read-more" href="/tutorials/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
 										</div>
 									<?php } ?>
 								</div>

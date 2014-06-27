@@ -62,7 +62,7 @@ $config = [
 				'tutorials' => 'cms/projects',
 				'tutorials/<slug>' => 'cms/projects/view',
 				'blog' => 'cms/posts',
-				'blog/view/<slug>' => 'cms/posts/view',
+				'blog/<slug>' => 'cms/posts/view',
             ),
         ],
         'db' => require(__DIR__ . '/db.php'),

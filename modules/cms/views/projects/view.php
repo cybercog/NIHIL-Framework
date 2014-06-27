@@ -7,10 +7,10 @@ use yii\widgets\Breadcrumbs;
 /* @var $this yii\web\View */
 /* @var $model app\modules\cms\models\Project */
 
-$this->title = 'uclemmer | CMS Projects View';
+$this->title = 'uclemmer | Tutorials | ' . $project->title;
 $this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => '/cms/projects'];
-$this->params['breadcrumbs'][] = 'View';
+$this->params['breadcrumbs'][] = ['label' => 'Tutorials', 'url' => '/tutorials'];
+$this->params['breadcrumbs'][] = $project->title;
 ?>
 
 		<section id="site-breadcrumbs">
