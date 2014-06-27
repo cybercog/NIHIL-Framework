@@ -19,8 +19,9 @@ $this->title = 'uclemmer | Home';
 						</div>
 			
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4" style="padding-top:68px;">
 					
+					<?php if(!YII_DEBUG) { ?>
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- uclemmer MedRec -->
 						<ins class="adsbygoogle"
@@ -30,6 +31,9 @@ $this->title = 'uclemmer | Home';
 						<script>
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/300x250&text=Ad" alt="Ad" />
+					<?php } ?>
 					
 					</div>
 				</div>

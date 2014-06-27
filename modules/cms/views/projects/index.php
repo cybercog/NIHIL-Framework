@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 					</div>
 					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
 					
+					<?php if(!YII_DEBUG) { ?>
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- uclemmer Tall -->
 						<ins class="adsbygoogle"
@@ -56,6 +57,9 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 						<script>
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/160x600&text=Ad" alt="Ad" />
+					<?php } ?>
 					
 					</div>
 				</div>

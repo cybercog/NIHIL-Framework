@@ -85,6 +85,7 @@ $this->params['breadcrumbs'][] = 'View';
 						<div class="row">
 							<div class="col-md-12">
 							
+							<?php if(!YII_DEBUG) { ?>
 								<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 								<!-- uclemmer Wide -->
 								<ins class="adsbygoogle"
@@ -94,6 +95,9 @@ $this->params['breadcrumbs'][] = 'View';
 								<script>
 								(adsbygoogle = window.adsbygoogle || []).push({});
 								</script>
+							<?php }else{ ?>
+								<img src="http://placehold.it/728x90&text=Ad" alt="Ad" />
+							<?php } ?>
 							
 							</div>
 						</div>
@@ -101,6 +105,7 @@ $this->params['breadcrumbs'][] = 'View';
 					</div>
 					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
 					
+					<?php if(!YII_DEBUG) { ?>
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 						<!-- uclemmer Tall -->
 						<ins class="adsbygoogle"
@@ -110,6 +115,9 @@ $this->params['breadcrumbs'][] = 'View';
 						<script>
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/160x600&text=Ad" alt="Ad" />
+					<?php } ?>
 					
 					</div>
 				</div>
