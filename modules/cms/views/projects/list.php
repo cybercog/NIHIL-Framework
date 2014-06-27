@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = 'List';
 									['class' => 'yii\grid\SerialColumn'],
 
 									//'id',
-									'parent',
+									//'parent',
 									'author_id',
 									'title',
 									//'slug',
@@ -61,8 +61,8 @@ $this->params['breadcrumbs'][] = 'List';
 									// 'date_created',
 									// 'date_updated',
 									'date_published',
-									//'votes_up',
-									//'votes_down',
+									'votes_up',
+									'votes_down',
 									'views',
 									'date_lastview',
 
