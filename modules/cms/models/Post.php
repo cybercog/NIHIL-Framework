@@ -65,4 +65,16 @@ class Post extends \yii\db\ActiveRecord
             'date_lastview' => 'Date Last View',
         ];
     }
+	
+	/**
+     * Finds recent posts
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findRecentPosts($limit=5)
+    {
+		$sql = 'SELECT * FROM cms_posts WHERE `date_published` IS NOT NULL ORDER BY `date_published` DESC LIMIT ' . $limit;
+		return static::findBySql($sql)->all();
+    }
 }
