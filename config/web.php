@@ -58,6 +58,11 @@ $config = [
 			'rules' => array(
 				'ac/users/verify/<code>' => 'ac/users/verify',
 				'ac/users/change-password/<code>' => 'ac/users/change-password',
+				'cms/projects/view/<slug>' => 'cms/projects/view',
+				'tutorials' => 'cms/projects',
+				'tutorials/<slug>' => 'cms/projects/view',
+				'blog' => 'cms/posts',
+				'blog/view/<slug>' => 'cms/posts/view',
             ),
         ],
         'db' => require(__DIR__ . '/db.php'),

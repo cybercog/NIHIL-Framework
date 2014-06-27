@@ -53,7 +53,7 @@ AppAsset::register($this);
 								'items' => [
 									['label' => 'About', 'url' => ['/site/about']],
 									['label' => 'Blog', 'url' => ['/blog']],
-									['label' => 'Tutorials', 'url' => ['/cms/tutorials']],
+									['label' => 'Tutorials', 'url' => ['/tutorials']],
 									['label' => 'Contact', 'url' => ['/site/contact']],
 								],
 							]);

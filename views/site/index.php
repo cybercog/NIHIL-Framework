@@ -33,36 +33,15 @@ $this->title = 'uclemmer | Home';
 						<div class="site-index">
 
 								<div class="row">
-									<div class="col-lg-4">
-										<h2>Tutorial 1</h2>
+									<?php foreach($projects as $project) { ?>
+										<div class="col-lg-4">
+											<h2><?php echo $project->title; ?></h2>
 
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-											dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-											ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-											fugiat nulla pariatur.</p>
+											<p><?php echo $project->description; ?></p>
 
-										<p><a class="btn btn-default read-more" href="/cms/tutorials/1">Read More &raquo;</a></p>
-									</div>
-									<div class="col-lg-4">
-										<h2>Tutorial 2</h2>
-
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-											dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-											ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-											fugiat nulla pariatur.</p>
-
-										<p><a class="btn btn-default read-more" href="/cms/tutorials/2">Read More &raquo;</a></p>
-									</div>
-									<div class="col-lg-4">
-										<h2>Tutorial 3</h2>
-
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-											dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-											ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-											fugiat nulla pariatur.</p>
-
-										<p><a class="btn btn-default read-more" href="/cms/tutorials/3">Read More &raquo;</a></p>
-									</div>
+											<p><a class="btn btn-default read-more" href="/cms/projects/view/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
+										</div>
+									<?php } ?>
 								</div>
 
 						</div>
