@@ -8,7 +8,7 @@ $this->title = 'uclemmer | Home';
 		<section id="site-jumbotron">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-8">
 		
 						<div class="jumbotron">
 							<h1>Order and Chaos</h1>
@@ -18,6 +18,19 @@ $this->title = 'uclemmer | Home';
 							<p><a class="btn btn-lg btn-default" href="/media/books">Check out some good reads</a></p>
 						</div>
 			
+					</div>
+					<div class="col-md-4">
+					
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer MedRec -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:300px;height:250px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="3716231707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					
 					</div>
 				</div>
 			</div>
