@@ -46,6 +46,18 @@ class PostsController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single Post model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Post model.

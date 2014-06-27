@@ -46,6 +46,18 @@ class PagesController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single Page model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Page model.
