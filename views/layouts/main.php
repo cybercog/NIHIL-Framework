@@ -52,7 +52,7 @@ AppAsset::register($this);
 								'options' => ['class' => 'navbar-nav navbar-left'],
 								'items' => [
 									['label' => 'About', 'url' => ['/site/about']],
-									['label' => 'Books', 'url' => ['/media/books']],
+									['label' => 'Blog', 'url' => ['/blog']],
 									['label' => 'Tutorials', 'url' => ['/cms/tutorials']],
 									['label' => 'Contact', 'url' => ['/site/contact']],
 								],
