@@ -34,44 +34,86 @@ $this->params['breadcrumbs'][] = 'View';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
+					
+						<div class="row">
+							<div class="col-md-12">
 
-						<div class="cms-projects-view">
-							<h1>CMS Tags View</h1>
-							
-							<p>
-								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
-									'class' => 'btn btn-danger',
-									'data' => [
-										'confirm' => 'Are you sure you want to delete this item?',
-										'method' => 'post',
-									],
-								]) ?>
-							</p>
+								<div class="cms-projects-view">
+									<h1><?php echo $project->title; ?></h1>
+									
+									<?php foreach($project->findProjectIntroduction($project->id) as $intro) { ?>
+									
+										<?php echo $intro->content; ?>
+									
+									<?php } ?>
+								</div>
 
-							<?= DetailView::widget([
-								'model' => $model,
-								'attributes' => [
-									'id',
-									'parent',
-									'author_id',
-									'title',
-									'slug',
-									'image',
-									'description:ntext',
-									'date_created',
-									'date_updated',
-									'date_published',
-									'votes_up',
-									'votes_down',
-									'views',
-									'date_lastview',
-								],
-							]) ?>
+							</div>
 						</div>
-
+						
+						<?php if($steps = $project->findProjectSteps($project->id)) { ?>
+						<div class="row">
+							<div class="col-md-12">
+								
+								<ol>
+								
+								<?php foreach($steps as $step) { ?>
+									
+									<li><?php echo $step->content; ?></li>
+									
+								<?php } ?>
+								
+								</ol>
+							
+							</div>
+						</div>
+						<?php } ?>
+						
+						<div class="row">
+							<div class="col-md-12">
+							
+								<?php foreach($project->findProjectConclusion($project->id) as $conclusion) { ?>
+									
+									<?php echo $conclusion->content; ?>
+									
+								<?php } ?>
+							
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+							
+								<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+								<!-- uclemmer Wide -->
+								<ins class="adsbygoogle"
+									 style="display:inline-block;width:728px;height:90px"
+									 data-ad-client="ca-pub-5089214589271094"
+									 data-ad-slot="2160603302"></ins>
+								<script>
+								(adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
+							
+							</div>
+						</div>
+					
+					</div>
+					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
+					
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer Tall -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:160px;height:600px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="9079937707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					
 					</div>
 				</div>
+				
+				
 			</div>
 		</section>

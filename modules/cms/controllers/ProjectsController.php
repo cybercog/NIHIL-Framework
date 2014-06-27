@@ -32,7 +32,9 @@ class ProjectsController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+			'projects' => Project::findRecentProjects(),
+		]);
     }
 
     /**
@@ -40,9 +42,21 @@ class ProjectsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
+            'project' => Project::findBySlug($slug),
+        ]);
+    }
+	
+	/**
+     * Displays a single Project model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -127,4 +141,5 @@ class ProjectsController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

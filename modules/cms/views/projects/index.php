@@ -5,9 +5,8 @@ use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 
-$this->title = 'uclemmer | CMS Projects';
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
-$this->params['breadcrumbs'][] = 'Projects';
+$this->title = 'uclemmer | Tutorials';
+$this->params['breadcrumbs'][] = 'Tutorials';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -31,21 +30,33 @@ $this->params['breadcrumbs'][] = 'Projects';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
 
 						<div class="cms-projects-index">
-							<h1><?= $this->context->action->uniqueId ?></h1>
-							<p>
-								This is the view content for action "<?= $this->context->action->id ?>".
-								The action belongs to the controller "<?= get_class($this->context) ?>"
-								in the "<?= $this->context->module->id ?>" module.
-							</p>
-							<p>
-								You may customize this page by editing the following file:<br>
-								<code><?= __FILE__ ?></code>
-							</p>
+							<h1>Tutorials</h1>
+							
+							<?php foreach($projects as $project) { ?>
+							
+								<h2><?php echo $project->title; ?></h2>
+								
+								<?php echo $project->description; ?>
+								
+							<?php } ?>
 						</div>
 
+					</div>
+					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
+					
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer Tall -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:160px;height:600px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="9079937707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					
 					</div>
 				</div>
 			</div>

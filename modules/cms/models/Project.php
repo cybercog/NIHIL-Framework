@@ -3,6 +3,7 @@
 namespace app\modules\cms\models;
 
 use Yii;
+use app\modules\cms\models\ProjectStep;
 
 /**
  * This is the model class for table "cms_projects".
@@ -69,5 +70,61 @@ class Project extends \yii\db\ActiveRecord
             'views' => 'Views',
             'date_lastview' => 'Date Lastview',
         ];
+    }
+	
+	/**
+     * Finds recent projects
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findRecentProjects($limit=5)
+    {
+		$sql = 'SELECT * FROM cms_projects WHERE `date_published` IS NOT NULL ORDER BY `date_published` DESC LIMIT ' . $limit;
+		return static::findBySql($sql)->all();
+    }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findBySlug($slug)
+    {
+		return static::findOne(['slug' => $slug]);
+    }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findProjectIntroduction($project_id)
+    {
+		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 1])->orderBy('order ASC')->all();
+    }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findProjectSteps($project_id)
+    {
+		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 2])->orderBy('order ASC')->all();
+    }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findProjectConclusion($project_id)
+    {
+		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 3])->orderBy('order ASC')->all();
     }
 }
