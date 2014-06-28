@@ -178,6 +178,7 @@ color: #00ff00;
 
 #site-breadcrumbs {
 	background-color: #f5f5f5;
+	border-bottom:1px solid #aaa;
 }
 
 #site-breadcrumbs .breadcrumb{
@@ -186,7 +187,10 @@ color: #00ff00;
 
 #site-jumbotron {
 	background-color: #eee;
+	border-bottom:1px solid #aaa;
 }
+
+
 
 
 
