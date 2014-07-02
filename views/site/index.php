@@ -15,7 +15,7 @@ $this->title = 'uclemmer | Home';
 
 							<p class="lead">"Deep in the human unconscious is a pervasive need for a logical universe that makes sense. But the real universe is always one step beyond logic." ― Frank Herbert, Dune</p>
 
-							<p><a class="btn btn-lg btn-default" href="/media/books">Check out some good reads</a></p>
+							<p><a class="btn btn-lg btn-default" href="/blog">Check out my blog</a></p>
 						</div>
 			
 					</div>
