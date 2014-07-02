@@ -8,7 +8,6 @@ use yii\widgets\Breadcrumbs;
 /* @var $model app\modules\cms\models\Project */
 
 $this->title = 'uclemmer | Tutorials | ' . $project->title;
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
 $this->params['breadcrumbs'][] = ['label' => 'Tutorials', 'url' => '/tutorials'];
 $this->params['breadcrumbs'][] = $project->title;
 ?>
