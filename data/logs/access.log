@@ -2391,3 +2391,12 @@
 127.0.0.1 - - [02/Jul/2014:12:04:15 -0400] "GET /debug/default/toolbar?tag=53b42d7f3f47e HTTP/1.1" 200 19489
 127.0.0.1 - - [02/Jul/2014:12:04:17 -0400] "GET / HTTP/1.1" 200 13470
 127.0.0.1 - - [02/Jul/2014:12:04:17 -0400] "GET /debug/default/toolbar?tag=53b42d819c7bb HTTP/1.1" 200 19476
+127.0.0.1 - - [02/Jul/2014:12:06:20 -0400] "GET / HTTP/1.1" 200 13470
+127.0.0.1 - - [02/Jul/2014:12:06:20 -0400] "GET /debug/default/toolbar?tag=53b42dfc81f81 HTTP/1.1" 200 19476
+127.0.0.1 - - [02/Jul/2014:12:06:20 -0400] "GET /css/fonts/fontawesome/fontawesome-webfont.woff?v=4.0.0 HTTP/1.1" 404 12009
+127.0.0.1 - - [02/Jul/2014:12:06:20 -0400] "GET /css/fonts/fontawesome/fontawesome-webfont.ttf?v=4.0.0 HTTP/1.1" 404 12008
+127.0.0.1 - - [02/Jul/2014:12:06:21 -0400] "GET /css/fonts/fontawesome/fontawesome-webfont.svg?v=4.0.0 HTTP/1.1" 404 12008
+127.0.0.1 - - [02/Jul/2014:12:06:23 -0400] "GET /site/about HTTP/1.1" 200 11822
+127.0.0.1 - - [02/Jul/2014:12:06:24 -0400] "GET /debug/default/toolbar?tag=53b42e000235a HTTP/1.1" 200 19219
+127.0.0.1 - - [02/Jul/2014:12:06:24 -0400] "GET / HTTP/1.1" 200 13470
+127.0.0.1 - - [02/Jul/2014:12:06:24 -0400] "GET /debug/default/toolbar?tag=53b42e00b6764 HTTP/1.1" 200 19478
