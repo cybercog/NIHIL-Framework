@@ -5,7 +5,6 @@ namespace app\modules\ac\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\db\ActiveRecord;
-use yii\helpers\Security;
 use yii\web\IdentityInterface;
 
 /**
@@ -83,7 +82,7 @@ class Users extends ActiveRecord implements IdentityInterface
 	{
 		if (parent::beforeSave($insert)) {
 			if ($this->isNewRecord) {
-				$this->auth_key = Security::generateRandomKey();
+				$this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
 				$this->date_created = date("Y-m-d H:i:s");
 			}
 			return true;
@@ -168,7 +167,7 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public function validatePassword($password)
     {
-        return Security::validatePassword($password, $this->password);
+        return Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
     /**
@@ -178,7 +177,7 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public function setPassword($password)
     {
-        $this->password = Security::generatePasswordHash($password);
+        $this->password = Yii::$app->getSecurity()->generatePasswordHash($password);
     }
 
     /**
@@ -186,7 +185,7 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Security::generateRandomKey();
+        $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
     }
 	
 }

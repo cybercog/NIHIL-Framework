@@ -7,7 +7,6 @@ use app\modules\ac\models\EmailChanges;
 use app\modules\ac\models\PasswordChanges;
 use yii\base\Model;
 use Yii;
-use yii\helpers\Security;
 
 /**
  * Register form
@@ -93,7 +92,7 @@ class RegisterForm extends Model
 				$authkey = new AuthKeys;
 				$authkey->user_id = $user->id;
 				$authkey->type = 1;
-				$authkey->key = Security::generatePasswordHash($user->username . time());
+				$authkey->key = Yii::$app->getSecurity()->generatePasswordHash($user->username . time());
 				$authkey->date_created = date("Y-m-d H:i:s");
 				$authkey->date_expires = date("Y-m-d H:i:s", time() + 259200);
 				$authkey->save();

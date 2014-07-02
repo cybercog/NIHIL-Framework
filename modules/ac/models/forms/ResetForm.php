@@ -5,7 +5,6 @@ use Yii;
 use yii\base\Model;
 use app\modules\ac\models\Users;
 use app\modules\ac\models\AuthKeys;
-use yii\helpers\Security;
 
 /**
  * Login form
@@ -49,7 +48,7 @@ class ResetForm extends Model
 			$authkey = new AuthKeys;
 			$authkey->user_id = $user->id;
 			$authkey->type = 4;
-			$authkey->key = Security::generatePasswordHash($user->username . time());
+			$authkey->key = Yii::$app->getSecurity()->generatePasswordHash($user->username . time());
 			$authkey->date_created = date("Y-m-d H:i:s");
 			$authkey->date_expires = date("Y-m-d H:i:s", time() + 259200);
 			

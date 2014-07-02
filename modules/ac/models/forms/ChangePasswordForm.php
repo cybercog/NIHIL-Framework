@@ -6,7 +6,6 @@ use yii\base\Model;
 use app\modules\ac\models\Users;
 use app\modules\ac\models\AuthKeys;
 use app\modules\ac\models\PasswordChanges;
-use yii\helpers\Security;
 
 /**
  * Login form
@@ -50,7 +49,7 @@ class ChangePasswordForm extends Model
 			
 			// Check new password against previous
 			foreach($passwords as $password) {
-				if(Security::validatePassword($this->password, $password->hash)) {
+				if(Yii::$app->getSecurity()->validatePassword($this->password, $password->hash)) {
 					$this->addError('password', 'Cannot use a previous password.');
 					return FALSE;
 				}
@@ -113,7 +112,7 @@ class ChangePasswordForm extends Model
 			
 			// Check new password against previous
 			foreach($passwords as $password) {
-				if(Security::validatePassword($this->password, $password->hash)) {
+				if(Yii::$app->getSecurity()->validatePassword($this->password, $password->hash)) {
 					$this->addError('password', 'Cannot use a previous password.');
 					return FALSE;
 				}
