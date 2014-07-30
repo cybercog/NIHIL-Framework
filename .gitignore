@@ -27,4 +27,4 @@ phpunit.phar
 /phpunit.xml
 
 # Logs are not needed
-/data/logs/access.log
+/data/logs
