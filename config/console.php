@@ -11,6 +11,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'app\commands',
     'components' => [
+		'request' => [
+			'enableCookieValidation' => true,
+			'enableCsrfValidation' => true,
+			'cookieValidationKey' => 'QoPhkzY3yrJem4dW2qPaKRQbSG8P1ztwTgCalef4oEndQg2ouyFXWBUVnN7LnF07',
+		],
 		'authManager' => [
             'class' => 'yii\rbac\DbManager',
 			'defaultRoles' => ['guest'],
