@@ -107,7 +107,7 @@ AppAsset::register($this);
 					<p class="footer-copyright">Copyright &copy; 2005-<?= date('Y') ?> <b>u<span>clemmer</span></b>. All rights reserved.</p>
 				</div>
 				<div class="col-md-6 text-right">
-					<p>Powered by <a href="https://www.nihil.co" alt="The NIHIL Corporation">NIHIL</a>.</p>
+					<p>Powered by <a href="http://www.nihil.co" alt="The NIHIL Corporation" target="_blank">NIHIL</a>.</p>
 				</div>
 			</div>
 		</div>
