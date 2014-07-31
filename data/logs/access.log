@@ -2500,3 +2500,17 @@
 127.0.0.1 - - [31/Jul/2014:08:33:19 -0400] "GET /debug/default/toolbar?tag=53da378ee1621 HTTP/1.1" 200 19219
 127.0.0.1 - - [31/Jul/2014:08:33:20 -0400] "GET / HTTP/1.1" 200 13470
 127.0.0.1 - - [31/Jul/2014:08:33:20 -0400] "GET /debug/default/toolbar?tag=53da379051767 HTTP/1.1" 200 19478
+127.0.0.1 - - [31/Jul/2014:08:37:06 -0400] "GET /tutorials HTTP/1.1" 200 12685
+127.0.0.1 - - [31/Jul/2014:08:37:06 -0400] "GET /debug/default/toolbar?tag=53da38729be52 HTTP/1.1" 200 19492
+127.0.0.1 - - [31/Jul/2014:08:37:07 -0400] "GET / HTTP/1.1" 200 13470
+127.0.0.1 - - [31/Jul/2014:08:37:08 -0400] "GET /debug/default/toolbar?tag=53da3873e2bbd HTTP/1.1" 200 19476
+127.0.0.1 - - [31/Jul/2014:08:46:49 -0400] "GET /site/contact HTTP/1.1" 200 16661
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /assets/26f5b797/yii.captcha.js HTTP/1.1" 200 2182
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /assets/26f5b797/yii.activeForm.js HTTP/1.1" 200 18286
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /assets/26f5b797/yii.validation.js HTTP/1.1" 200 10616
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /site/captcha?v=53da3aba1c8a3 HTTP/1.1" 200 2691
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /debug/default/toolbar?tag=53da3aba09407 HTTP/1.1" 200 19221
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /tutorials HTTP/1.1" 200 12685
+127.0.0.1 - - [31/Jul/2014:08:46:50 -0400] "GET /debug/default/toolbar?tag=53da3abad58c4 HTTP/1.1" 200 19492
+127.0.0.1 - - [31/Jul/2014:08:46:51 -0400] "GET / HTTP/1.1" 200 13470
+127.0.0.1 - - [31/Jul/2014:08:46:51 -0400] "GET /debug/default/toolbar?tag=53da3abbc11ce HTTP/1.1" 200 19476

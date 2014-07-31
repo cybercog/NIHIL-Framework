@@ -29,3 +29,6 @@ phpunit.phar
 # logs
 /data/logs
 
+# Config Files
+/config/db.php
+/config/params.php
