@@ -26,5 +26,3 @@ phpunit.phar
 # local phpunit config
 /phpunit.xml
 
-# Logs are not needed
-/data/logs
