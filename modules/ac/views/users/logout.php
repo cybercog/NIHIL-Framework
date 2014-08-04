@@ -8,9 +8,9 @@ use yii\widgets\Breadcrumbs;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users Logout';
-$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
-$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
+$this->title = 'uclemmer | Logout';
+//$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
+//$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Logout';
 ?>
 
@@ -39,16 +39,8 @@ $this->params['breadcrumbs'][] = 'Logout';
 
 						<div class="ac-users-logout">
 
-							<h1><?= $this->context->action->uniqueId ?></h1>
-							<p>
-								This is the view content for action "<?= $this->context->action->id ?>".
-								The action belongs to the controller "<?= get_class($this->context) ?>"
-								in the "<?= $this->context->module->id ?>" module.
-							</p>
-							<p>
-								You may customize this page by editing the following file:<br>
-								<code><?= __FILE__ ?></code>
-							</p>
+							<h1>Logout</h1>
+							<p>You have successfully been logged out.  Click <a href="/login">here</a> to log back in.</p>
 
 						</div>
 

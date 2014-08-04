@@ -10,8 +10,8 @@ use yii\widgets\ActiveForm;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'uclemmer | AC Users Reset';
-$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
-$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
+//$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
+//$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Reset';
 ?>
 
@@ -40,14 +40,14 @@ $this->params['breadcrumbs'][] = 'Reset';
 
 						<div class="ac-users-reset">
 						
-							<h1>AC Users Reset</h1>
+							<h1>Reset Account</h1>
 
 							<?php $form = ActiveForm::begin(); ?>
 
 							<?= $form->field($model, 'email')->textInput(['maxlength' => 150]) ?>
 
 							<div class="form-group">
-								<?= Html::submitButton('Reset Account', ['class' => 'btn btn-primary']) ?>
+								<?= Html::submitButton('Reset Account', ['class' => 'btn btn-default']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
@@ -59,8 +59,8 @@ $this->params['breadcrumbs'][] = 'Reset';
 				<div class="row">
 					<div class="col-md-5">
 
-						<a href="/ac/users/login">Login</a> | 
-						<a href="/ac/users/register">Register</a>
+						<a href="/login">Login</a> | 
+						<a href="/register">Register</a>
 
 					</div>
 				</div>

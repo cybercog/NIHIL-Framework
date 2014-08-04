@@ -9,9 +9,9 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users Register';
-$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
-$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
+$this->title = 'uclemmer | Register';
+//$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
+//$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Register';
 ?>
 
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = 'Register';
 
 						<div class="ac-users-register">
 
-							<h1>AC Users Register</h1>
+							<h1>Register</h1>
 							
 							<?php $form = ActiveForm::begin(); ?>
 
@@ -73,12 +73,20 @@ $this->params['breadcrumbs'][] = 'Register';
 							</div>
 
 							<div class="form-group">
-								<?= Html::submitButton('Register', ['class' => 'btn btn-primary']) ?>
+								<?= Html::submitButton('Register', ['class' => 'btn btn-default']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
 
 						</div>
+
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5">
+
+						<a href="/login">Login</a> | 
+						<a href="/reset">Reset Account</a>
 
 					</div>
 				</div>
