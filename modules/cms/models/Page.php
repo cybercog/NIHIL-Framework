@@ -61,4 +61,27 @@ class Page extends \yii\db\ActiveRecord
             'date_lastview' => 'Date Lastview',
         ];
     }
+	
+	/**
+     * Finds recent pages
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findRecentPages($limit=5)
+    {
+		$sql = 'SELECT * FROM cms_pages WHERE `date_published` IS NOT NULL ORDER BY `date_published` DESC LIMIT ' . $limit;
+		return static::findBySql($sql)->all();
+    }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findBySlug($slug)
+    {
+		return static::findOne(['slug' => $slug]);
+    }
 }

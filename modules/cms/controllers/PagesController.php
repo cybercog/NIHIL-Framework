@@ -32,7 +32,9 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->render('index', [
+			'pages' => Page::findRecentPages(),
+		]);
     }
 
     /**
@@ -40,10 +42,10 @@ class PagesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'page' => Page::findBySlug($slug),
         ]);
     }
 	
