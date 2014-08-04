@@ -19,6 +19,10 @@ $this->params['breadcrumbs'][] = $this->title;
 					<div class="col-md-12">
 		
 						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
 							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 						]) ?>
 			
@@ -30,8 +34,8 @@ $this->params['breadcrumbs'][] = $this->title;
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
-
+					<div class="col-md-9">
+					
 						<div class="site-contact">
 							<h1><?= Html::encode($this->title) ?></h1>
 
@@ -59,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
 							</p>
 
 							<div class="row">
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 										<?= $form->field($model, 'name') ?>
 										<?= $form->field($model, 'email') ?>
@@ -77,8 +81,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
 							<?php endif; ?>
 						</div>
-						
+					
+					</div>
+					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
+					
+					<?php if(!YII_DEBUG) { ?>
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer Tall -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:160px;height:600px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="9079937707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/160x600&text=Ad" alt="Ad" />
+					<?php } ?>
+					
 					</div>
 				</div>
+				
+				
 			</div>
 		</section>
