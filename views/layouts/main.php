@@ -16,8 +16,7 @@ AppAsset::register($this);
   <head>
     <meta charset="<?= Yii::$app->charset ?>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Phalcon Team">
-    <meta name="description" content="Your invoices">
+	<?= $this->registerMetaTag(['author' => 'Uriah M. Clemmer IV']); ?>
 	<?= Html::csrfMetaTags() ?>
 		
     <title><?= Html::encode($this->title) ?></title>
@@ -58,27 +57,27 @@ AppAsset::register($this);
 							echo Nav::widget([
 								'options' => ['class' => 'navbar-nav navbar-left'],
 								'items' => [
-									['label' => 'About', 'url' => ['/site/about']],
-									['label' => 'Blog', 'url' => ['/blog']],
+									['label' => 'About', 'url' => ['/pages/about']],
+									//['label' => 'Blog', 'url' => ['/blog']],
 									['label' => 'Tutorials', 'url' => ['/tutorials']],
-									['label' => 'Contact', 'url' => ['/site/contact']],
+									['label' => 'Contact', 'url' => ['/contact']],
 								],
 							]);
 							
 							if(Yii::$app->user->isGuest) {
 								echo '<ul class="nav navbar-nav navbar-right">
-								  <li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>
-								  <li><a href="/ac/users/login">Login</a></li>
+								  <!--<li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>-->
+								  <li><a href="/login">Login</a></li>
 								</ul>';
 							}else{
 								echo '<ul class="nav navbar-nav navbar-right">
-								  <li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>
+								  <!--<li><a href="/ac/support/chat"><i class="fa fa-comment"></i></a></li>-->
 								  <li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="#" alt="user" /> '.Yii::$app->user->identity->username.' <b class="caret"></b></a>
 									<ul class="dropdown-menu">
 									  <li><a href="/ac/users"><i class="fa fa-user"></i> Portal</a></li>
 									  <li><a href="/ac/users/settings"><i class="fa fa-gear"></i> Settings</a></li>
-									  <li><a href="/ac/users/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+									  <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 									</ul>
 								  </li>
 								</ul>';
