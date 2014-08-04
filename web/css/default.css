@@ -48,6 +48,10 @@ a:hover {
 	color:#ff0202;
 }
 
+.btn-readmore {
+	margin-top:20px;
+}
+
 .btn-default:hover, .btn:focus {
 color: #00ff00;
 text-decoration: none;

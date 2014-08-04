@@ -47,9 +47,25 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 							
 							<?php foreach($projects as $project) { ?>
 							
-								<h2><?php echo $project->title; ?></h2>
+								<div class="row">
+									<div class="col-sm-8">
+										<h2><?php echo $project->title; ?></h2>
 								
-								<?php echo $project->description; ?>
+										<?php echo $project->description; ?>
+										
+										<div class="clearfix">
+											<a class="btn btn-default btn-readmore pull-right" href="http://www.nihilframework.local/tutorials/<?php echo $project->slug; ?>">Read More</a>
+										</div>
+										
+									</div>
+									<div class="col-sm-4">
+										<?php if($project->image) { ?>
+											<img class="img-responsive" src="<?php echo $project->image; ?>" alt="<?php echo $project->title; ?>" />
+										<?php }else{ ?>
+											<img class="img-responsive" src="http://placehold.it/600x600&text=Image%20Unavailable" alt="Image Unavailable" />
+										<?php } ?>
+									</div>
+								</div>
 								
 							<?php } ?>
 						</div>
