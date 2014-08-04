@@ -5,8 +5,20 @@ use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 
-$this->title = 'uclemmer | CMS Pages';
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
+$this->title = 'uclemmer | Pages';
+
+$this->registerMetaTag(['description' => 'Pages offer structure to uclemmer.com.']);
+$this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation']);
+
+$this->registerMetaTag(['og:title' => 'uclemmer.com | Pages']);
+$this->registerMetaTag(['og:image' => 'http://www.uclemmer.com/favicon/600x600.png']);
+$this->registerMetaTag(['og:url' => 'http://www.uclemmer.com/pages']);
+$this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
+$this->registerMetaTag(['og:type' => 'website']);
+$this->registerMetaTag(['og:description' => 'Pages offer structure to uclemmer.com']);
+
+
+//$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
 $this->params['breadcrumbs'][] = 'Pages';
 ?>
 
@@ -31,21 +43,37 @@ $this->params['breadcrumbs'][] = 'Pages';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
 
-						<div class="cms-pages-index">
-							<h1><?= $this->context->action->uniqueId ?></h1>
-							<p>
-								This is the view content for action "<?= $this->context->action->id ?>".
-								The action belongs to the controller "<?= get_class($this->context) ?>"
-								in the "<?= $this->context->module->id ?>" module.
-							</p>
-							<p>
-								You may customize this page by editing the following file:<br>
-								<code><?= __FILE__ ?></code>
-							</p>
+						<div class="cms-projects-index">
+							<h1>Pages</h1>
+							
+							<?php foreach($pages as $page) { ?>
+							
+								<h2><?php echo $page->name; ?></h2>
+								
+								<?php echo $page->description; ?>
+								
+							<?php } ?>
 						</div>
 
+					</div>
+					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
+					
+					<?php if(!YII_DEBUG) { ?>
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer Tall -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:160px;height:600px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="9079937707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/160x600&text=Ad" alt="Ad" />
+					<?php } ?>
+					
 					</div>
 				</div>
 			</div>

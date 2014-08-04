@@ -6,10 +6,19 @@ use yii\widgets\Breadcrumbs;
 /* @var $this yii\web\View */
 /* @var $model app\modules\cms\models\Page */
 
-$this->title = 'uclemmer | CMS Pages View';
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => '/cms/pages'];
-$this->params['breadcrumbs'][] = 'View';
+$this->title = 'uclemmer | ' . $page->name;
+$this->registerMetaTag(['description' => $page->description]);
+$this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation']); // Update keywords from tags
+
+$this->registerMetaTag(['og:title' => 'uclemmer.com | ' . $page->name]);
+$this->registerMetaTag(['og:image' => 'http://www.uclemmer.com/favicon/600x600.png']);
+$this->registerMetaTag(['og:url' => 'http://www.uclemmer.com/tutorials/' . $page->slug]);
+$this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
+$this->registerMetaTag(['og:type' => 'article']);
+$this->registerMetaTag(['og:description' => $page->description]);
+
+$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => '/pages'];
+$this->params['breadcrumbs'][] = $page->name;
 ?>
 
 		<section id="site-breadcrumbs">
@@ -33,16 +42,46 @@ $this->params['breadcrumbs'][] = 'View';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
+					
+						<div class="row">
+							<div class="col-md-12">
 
-						<div class="cms-pages-view">
-							<h1>CMS Pages View</h1>
+								<div class="cms-projects-view">
+									<h1><?php echo $page->name; ?></h1>
+								</div>
 
-							
-							
+							</div>
 						</div>
+						
+						<div class="row">
+							<div class="col-md-12">
+									
+								<?php echo $page->content; ?>
 
+							</div>
+						</div>
+					
+					</div>
+					<div class="col-md-3" style="padding-top:15px;padding-bottom:10px;">
+					
+					<?php if(!YII_DEBUG) { ?>
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+						<!-- uclemmer Tall -->
+						<ins class="adsbygoogle"
+							 style="display:inline-block;width:160px;height:600px"
+							 data-ad-client="ca-pub-5089214589271094"
+							 data-ad-slot="9079937707"></ins>
+						<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					<?php }else{ ?>
+						<img src="http://placehold.it/160x600&text=Ad" alt="Ad" />
+					<?php } ?>
+					
 					</div>
 				</div>
+				
+				
 			</div>
 		</section>

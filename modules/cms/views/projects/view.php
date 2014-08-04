@@ -8,6 +8,16 @@ use yii\widgets\Breadcrumbs;
 /* @var $model app\modules\cms\models\Project */
 
 $this->title = 'uclemmer | Tutorials | ' . $project->title;
+$this->registerMetaTag(['description' => $project->description]);
+$this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation, tutorials, php, xampp, volvo 240, yii2']); // Update keywords from tags
+
+$this->registerMetaTag(['og:title' => 'uclemmer.com | Tutorials | ' . $project->title]);
+$this->registerMetaTag(['og:image' => 'http://www.uclemmer.com/favicon/600x600.png']);
+$this->registerMetaTag(['og:url' => 'http://www.uclemmer.com/tutorials/' . $project->slug]);
+$this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
+$this->registerMetaTag(['og:type' => 'article']);
+$this->registerMetaTag(['og:description' => $project->description]);
+
 $this->params['breadcrumbs'][] = ['label' => 'Tutorials', 'url' => '/tutorials'];
 $this->params['breadcrumbs'][] = $project->title;
 ?>
