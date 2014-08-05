@@ -39,13 +39,13 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'charger.websitewelcome.com',
-                'username' => 'no-reply@nihil.co',
+                'username' => 'no-reply@uclemmer.com',
                 'password' => 'Bayl0r!',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
 			'messageConfig' => [
-				'from' => ['no-reply@nihil.co' => 'The NIHIL Corporation'],
+				'from' => ['no-reply@uclemmer.com' => 'uclemmer'],
 			],
         ],
         'log' => [
