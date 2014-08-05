@@ -28,7 +28,7 @@ $this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrica
 						</div>
 			
 					</div>
-					<div class="col-md-4" style="padding-top:68px;">
+					<div class="col-md-4" id="ad-jumbotron">
 					
 					<?php if(!YII_DEBUG) { ?>
 						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -60,12 +60,23 @@ $this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrica
 
 								<div class="row">
 									<?php foreach($projects as $project) { ?>
-										<div class="col-lg-4">
-											<h2><?php echo $project->title; ?></h2>
+										<div class="col-sm-4 clearfix">
+										
+											<!--<div class="row">
+												<div class="col-xs-12">
+													<img class="img-responsive" src="<?php echo $project->image; ?>" alt="<?php echo $project->title; ?>" />
+												</div>
+											</div>-->
+											<div class="row">
+												<div class="col-xs-12">
+													<h2><?php echo $project->title; ?></h2>
 
-											<p><?php echo $project->description; ?></p>
+													<p><?php echo $project->description; ?></p>
 
-											<p><a class="btn btn-default read-more" href="/tutorials/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
+													<p><a class="btn btn-default read-more" href="/tutorials/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
+												</div>
+											</div>
+											
 										</div>
 									<?php } ?>
 								</div>

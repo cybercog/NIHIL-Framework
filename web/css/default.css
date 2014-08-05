@@ -48,10 +48,6 @@ a:hover {
 	color:#ff0202;
 }
 
-.btn-readmore {
-	margin-top:20px;
-}
-
 .btn-default:hover, .btn:focus {
 color: #00ff00;
 text-decoration: none;
@@ -73,6 +69,7 @@ text-decoration: none;
 .btn.read-more {
 	float:right;
 	margin-bottom:1em;
+	margin-top:20px;
 }
 
 .btn-aclinks {
@@ -208,6 +205,10 @@ color: #00ff00;
 	border-bottom:1px solid #aaa;
 }
 
+#ad-jumbotron {
+	padding-top:68px;
+}
+
 
 
 
@@ -297,4 +298,42 @@ color: #00ff00;
 
 #site-footer .footer-info b:hover span {
 	color:#00ff00;
+}
+
+
+
+
+
+
+
+@media (max-width: 767px) {
+
+	#site-footer p{
+		text-align:center;
+	}
+	
+	#site-jumbotron {
+		text-align:center;
+	}
+	
+	#ad-jumbotron {
+		padding-top:0;
+		padding-bottom:70px;
+	}
+	
+	#site-header .navbar-inverse .navbar-nav > li > a {
+		border-left:5px solid #222;
+	}
+	
+	#site-header .navbar-inverse .navbar-nav > li > a:hover {
+		border-left:5px solid #00ff00;
+		margin-bottom:0px;
+		border-bottom:0;
+	}
+
+	#site-header .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus {
+		border-left:5px solid #00ff00;
+		margin-bottom:0px;
+		border-bottom:0;
+	}
 }
