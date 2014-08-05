@@ -63,8 +63,10 @@ $this->params['breadcrumbs'][] = 'Login';
 				<div class="row">
 					<div class="col-md-5">
 
-						<a href="/register">Register</a> | 
-						<a href="/reset">Reset Account</a>
+						<div class="btn-aclinks">
+							<a href="/register">Register</a> | 
+							<a href="/reset">Reset Account</a>
+						</div>
 
 					</div>
 				</div>
