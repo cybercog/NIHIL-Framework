@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 										<?php echo $project->description; ?>
 										
 										<div class="clearfix">
-											<a class="btn btn-default btn-readmore" href="http://www.nihilframework.local/tutorials/<?php echo $project->slug; ?>">Read More</a>
+											<a class="btn btn-default btn-readmore pull-right" href="http://www.nihilframework.local/tutorials/<?php echo $project->slug; ?>">Read More</a>
 										</div>
 										
 									</div>

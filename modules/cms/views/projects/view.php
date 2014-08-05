@@ -94,21 +94,19 @@ $this->params['breadcrumbs'][] = $project->title;
 						<div class="row">
 							<div class="col-md-12">
 							
-								<div class="ad-bottompost">
-								<?php if(!YII_DEBUG) { ?>
-									<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-									<!-- uclemmer Wide -->
-									<ins class="adsbygoogle"
-										 style="display:inline-block;width:728px;height:90px"
-										 data-ad-client="ca-pub-5089214589271094"
-										 data-ad-slot="2160603302"></ins>
-									<script>
-									(adsbygoogle = window.adsbygoogle || []).push({});
-									</script>
-								<?php }else{ ?>
-									<img src="http://placehold.it/728x90&text=Ad" alt="Ad" />
-								<?php } ?>
-								</div>
+							<?php if(!YII_DEBUG) { ?>
+								<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+								<!-- uclemmer Wide -->
+								<ins class="adsbygoogle"
+									 style="display:inline-block;width:728px;height:90px"
+									 data-ad-client="ca-pub-5089214589271094"
+									 data-ad-slot="2160603302"></ins>
+								<script>
+								(adsbygoogle = window.adsbygoogle || []).push({});
+								</script>
+							<?php }else{ ?>
+								<img src="http://placehold.it/728x90&text=Ad" alt="Ad" />
+							<?php } ?>
 							
 							</div>
 						</div>
