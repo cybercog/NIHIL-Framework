@@ -44,7 +44,7 @@ AppAsset::register($this);
 		<header id="site-header">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-sm-12">
 						
 						<?php
 							NavBar::begin([
@@ -102,10 +102,10 @@ AppAsset::register($this);
 	<footer id="site-footer">
 		<div class="container">
 			<div class="row footer-info">
-				<div class="col-md-6">
+				<div class="col-sm-7 col-md-6">
 					<p class="footer-copyright">Copyright &copy; 2005-<?= date('Y') ?> <b>u<span>clemmer</span></b>. All rights reserved.</p>
 				</div>
-				<div class="col-md-6 text-right">
+				<div class="col-sm-5 col-md-6 text-right">
 					<p>Powered by <a href="http://www.nihil.co" alt="The NIHIL Corporation" target="_blank">NIHIL</a>.</p>
 				</div>
 			</div>

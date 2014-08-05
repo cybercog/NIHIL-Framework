@@ -66,10 +66,10 @@ $this->params['breadcrumbs'][] = $project->title;
 				</div>
 			
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-sm-9">
 					
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-sm-12">
 
 								<div class="cms-projects-view">
 									<h1><?php echo $project->title; ?></h1>
@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $project->title;
 						
 						<?php if($steps = $project->findProjectSteps($project->id)) { ?>
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-sm-12">
 								
 								<ol>
 								
@@ -103,7 +103,7 @@ $this->params['breadcrumbs'][] = $project->title;
 						<?php } ?>
 						
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-sm-12">
 							
 								<?php foreach($project->findProjectConclusion($project->id) as $conclusion) { ?>
 									
@@ -115,23 +115,7 @@ $this->params['breadcrumbs'][] = $project->title;
 						</div>
 						
 						<div class="row">
-							<div class="col-md-12">
-							
-								<div class="hidden-xs" style="margin-bottom:10px;">
-								<?php if(!YII_DEBUG) { ?>
-									<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-									<!-- uclemmer Wide -->
-									<ins class="adsbygoogle"
-										 style="display:inline-block;width:728px;height:90px"
-										 data-ad-client="ca-pub-5089214589271094"
-										 data-ad-slot="2160603302"></ins>
-									<script>
-									(adsbygoogle = window.adsbygoogle || []).push({});
-									</script>
-								<?php }else{ ?>
-									<img src="http://placehold.it/728x90&text=Ad" alt="Ad" />
-								<?php } ?>
-								</div>
+							<div class="col-sm-12">
 								
 								<div class="visible-xs-block text-center">
 								<?php if(!YII_DEBUG) { ?>

@@ -63,10 +63,10 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 				</div>
 			
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-sm-9">
 						
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-sm-12">
 							
 								<h1>Tutorials</h1>
 							
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = 'Tutorials';
 						</div>
 						
 						<div class="row">
-							<div class="col-md-12">
+							<div class="col-sm-12">
 								
 								<div class="visible-xs-block text-center">
 								<?php if(!YII_DEBUG) { ?>

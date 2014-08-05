@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $page->name;
 				</div>
 				
 				<div class="row">
-					<div class="col-md-9">
+					<div class="col-sm-9">
 					
 						<div class="row">
 							<div class="col-md-12">
