@@ -7,6 +7,7 @@ use app\modules\cms\models\Project;
 use app\modules\cms\models\search\ProjectSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -32,6 +33,8 @@ class ProjectsController extends Controller
      */
     public function actionIndex()
     {
+		// Add access control
+	
         return $this->render('index', [
 			'projects' => Project::findRecentProjects(),
 		]);
@@ -44,6 +47,8 @@ class ProjectsController extends Controller
      */
     public function actionView($slug)
     {
+		// Add access control
+		
         return $this->render('view', [
             'project' => Project::findBySlug($slug),
         ]);
@@ -56,6 +61,9 @@ class ProjectsController extends Controller
      */
     public function actionDetails($id)
     {
+		if (!\Yii::$app->user->can('cmsProjectsDetails')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
         return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
@@ -68,6 +76,10 @@ class ProjectsController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('cmsProjectsCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = new Project();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -87,6 +99,10 @@ class ProjectsController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('cmsProjectsUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -106,6 +122,10 @@ class ProjectsController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('cmsProjectsDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -117,6 +137,10 @@ class ProjectsController extends Controller
      */
     public function actionList()
     {
+		if (!\Yii::$app->user->can('cmsProjectsList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

@@ -7,6 +7,7 @@ use app\modules\cms\models\PageHistory;
 use app\modules\cms\models\search\PageHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -32,6 +33,10 @@ class PageHistoriesController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         return $this->render('index');
     }
 
@@ -42,6 +47,10 @@ class PageHistoriesController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -54,6 +63,10 @@ class PageHistoriesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = new PageHistory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +86,10 @@ class PageHistoriesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,6 +109,10 @@ class PageHistoriesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -103,6 +124,10 @@ class PageHistoriesController extends Controller
      */
     public function actionList()
     {
+		if (!\Yii::$app->user->can('cmsPageHistoriesList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $searchModel = new PageHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

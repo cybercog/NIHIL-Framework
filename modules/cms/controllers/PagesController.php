@@ -7,6 +7,7 @@ use app\modules\cms\models\Page;
 use app\modules\cms\models\search\PageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -32,6 +33,8 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
+		// Add access control
+		
         return $this->render('index', [
 			'pages' => Page::findRecentPages(),
 		]);
@@ -44,6 +47,8 @@ class PagesController extends Controller
      */
     public function actionView($slug)
     {
+		// Add access control
+		
         return $this->render('view', [
             'page' => Page::findBySlug($slug),
         ]);
@@ -56,6 +61,10 @@ class PagesController extends Controller
      */
     public function actionDetails($id)
     {
+		if (!\Yii::$app->user->can('cmsPagesDetails')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
@@ -68,6 +77,10 @@ class PagesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('cmsPagesCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -87,6 +100,10 @@ class PagesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('cmsPagesUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -106,6 +123,10 @@ class PagesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('cmsPagesDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -117,6 +138,10 @@ class PagesController extends Controller
      */
     public function actionList()
     {
+		if (!\Yii::$app->user->can('cmsPagesList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
         $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
