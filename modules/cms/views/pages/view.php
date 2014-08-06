@@ -17,7 +17,7 @@ $this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
 $this->registerMetaTag(['og:type' => 'article']);
 $this->registerMetaTag(['og:description' => $page->description]);
 
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => '/pages'];
+//$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => '/pages'];
 $this->params['breadcrumbs'][] = $page->name;
 ?>
 
