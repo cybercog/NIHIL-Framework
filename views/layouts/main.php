@@ -54,11 +54,12 @@ AppAsset::register($this);
 									'class' => 'navbar navbar-inverse',
 								],
 							]);
+							
 							echo Nav::widget([
 								'options' => ['class' => 'navbar-nav navbar-left'],
 								'items' => [
 									['label' => 'About', 'url' => ['/pages/about']],
-									//['label' => 'Blog', 'url' => ['/blog']],
+									['label' => 'Blog', 'url' => ['/blog']],
 									['label' => 'Tutorials', 'url' => ['/tutorials']],
 									['label' => 'Contact', 'url' => ['/contact']],
 								],
@@ -82,10 +83,6 @@ AppAsset::register($this);
 								  </li>
 								</ul>';
 							}
-							
-						  
-							
-							
 							
 							NavBar::end();
 						?>
@@ -123,7 +120,7 @@ AppAsset::register($this);
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-2228318-7', 'uclemmer.com');
+    ga('create', 'UA-2228318-7', 'auto');
     ga('send', 'pageview');
 
   </script>
