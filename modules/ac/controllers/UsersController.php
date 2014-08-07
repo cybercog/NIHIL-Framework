@@ -152,6 +152,10 @@ class UsersController extends Controller
 		if (!\Yii::$app->user->isGuest) {
             return $this->redirect('/ac/users',302);
         }
+		
+		if (!\Yii::$app->user->can('acUsersLogin')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -188,6 +192,10 @@ class UsersController extends Controller
             return $this->redirect('/ac/users',302);
         }
 		
+		if (!\Yii::$app->user->can('acUsersRegister')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
 		$model = new RegisterForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->register()) {
@@ -209,6 +217,10 @@ class UsersController extends Controller
      */
     public function actionVerify($code=NULL)
     {
+		if (!\Yii::$app->user->can('acUsersVerify')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
 		$model = new VerificationForm();
 	
 		if($code AND !Yii::$app->request->post()){
@@ -242,6 +254,10 @@ class UsersController extends Controller
 		if(!\Yii::$app->user->isGuest) {
 			return $this->redirect('/ac/users',302);
 		}
+		
+		if (!\Yii::$app->user->can('acUsersReset')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 	
 		$model = new ResetForm();
 		
@@ -267,6 +283,10 @@ class UsersController extends Controller
 		
 		if(\Yii::$app->user->isGuest AND !$authkey = AuthKeys::findByCode($code, 4)) {
 			return $this->redirect('/ac/users/reset',302);
+		}
+		
+		if (!\Yii::$app->user->can('acUsersChangePassword')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
 		if ($model->load(Yii::$app->request->post())) {
