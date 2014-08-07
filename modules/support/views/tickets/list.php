@@ -4,6 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 
+use \app\modules\support\models\TicketType;
+use \app\modules\support\models\TicketPriority;
+use \app\modules\support\models\TicketStatus;
+use \app\modules\support\models\TicketResolution;
+use \app\modules\ac\models\Users;
+
+$type = new TicketType;
+$priority = new TicketPriority;
+$status = new TicketStatus;
+$resolution = new TicketResolution;
+$user = new Users;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\support\models\search\TicketSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -54,13 +66,53 @@ $this->params['breadcrumbs'][] = 'List';
 									//'id',
 									//'ref_code',
 									//'parent',
-									'type',
-									'status',
-									'priority',
+									[
+										'attribute' => 'type',
+										'label' => 'Type',
+										'filter' => $type::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($type) {
+											$typeDropdown = $type::dropdown();
+											return $typeDropdown[$model->type];
+										},
+									],
+									[
+										'attribute' => 'status',
+										'label' => 'Status',
+										'filter' => $status::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($status) {
+											$statusDropdown = $status::dropdown();
+											return $statusDropdown[$model->status];
+										},
+									],
+									[
+										'attribute' => 'priority',
+										'label' => 'Priority',
+										'filter' => $priority::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($priority) {
+											$priorityDropdown = $priority::dropdown();
+											return $priorityDropdown[$model->priority];
+										},
+									],
 									'name',
 									// 'slug',
-									'reporter',
-									'assignee',
+									[
+										'attribute' => 'reporter',
+										'label' => 'Reporter',
+										'filter' => $user::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($user) {
+											$reporterDropdown = $user::dropdown();
+											return $reporterDropdown[$model->reporter];
+										},
+									],
+									[
+										'attribute' => 'assignee',
+										'label' => 'Assignee',
+										'filter' => $user::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($user) {
+											$assigneeDropdown = $user::dropdown();
+											return $assigneeDropdown[$model->assignee];
+										},
+									],
 									//'date_reported',
 									// 'date_assigned',
 									// 'date_edited',
@@ -68,7 +120,15 @@ $this->params['breadcrumbs'][] = 'List';
 									// 'date_resolved',
 									// 'time_estimated',
 									// 'time_actual',
-									'resolution',
+									[
+										'attribute' => 'resolution',
+										'label' => 'Resolution',
+										'filter' => $resolution::dropdown(),
+										'value' => function($model, $index, $dataColumn) use ($resolution) {
+											$resolutionDropdown = $resolution::dropdown();
+											return $resolutionDropdown[$model->resolution];
+										},
+									],
 									// 'message:ntext',
 									// 'details:ntext',
 
