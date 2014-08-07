@@ -188,4 +188,25 @@ class Users extends ActiveRecord implements IdentityInterface
         $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
     }
 	
+	/**
+     * Get list of users for creating dropdowns
+     *
+     * @return array
+     */
+    public static function dropdown() {
+
+        // get data if needed
+        static $dropdown;
+        if ($dropdown === null) {
+
+            // get all records from database and generate
+            $models = static::find()->all();
+            foreach ($models as $model) {
+                $dropdown[$model->id] = $model->username;
+            }
+        }
+
+        return $dropdown;
+    }
+	
 }
