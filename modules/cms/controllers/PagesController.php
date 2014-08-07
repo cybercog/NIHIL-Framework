@@ -33,7 +33,9 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsPagesIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 		
         return $this->render('index', [
 			'pages' => Page::findRecentPages(),
@@ -47,7 +49,9 @@ class PagesController extends Controller
      */
     public function actionView($slug)
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsPagesView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 		
         return $this->render('view', [
             'page' => Page::findBySlug($slug),

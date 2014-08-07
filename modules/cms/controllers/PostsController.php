@@ -33,7 +33,9 @@ class PostsController extends Controller
      */
     public function actionIndex()
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsPostsIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 		
         return $this->render('index', [
 			'posts' => Post::findRecentPosts(5),
@@ -47,7 +49,9 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsPostsView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 		
         return $this->render('view', [
             'model' => $this->findModel($id),

@@ -33,7 +33,9 @@ class ProjectsController extends Controller
      */
     public function actionIndex()
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsProjectsIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 	
         return $this->render('index', [
 			'projects' => Project::findRecentProjects(),
@@ -47,7 +49,9 @@ class ProjectsController extends Controller
      */
     public function actionView($slug)
     {
-		// Add access control
+		if (!\Yii::$app->user->can('cmsProjectsView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
 		
         return $this->render('view', [
             'project' => Project::findBySlug($slug),
@@ -64,6 +68,7 @@ class ProjectsController extends Controller
 		if (!\Yii::$app->user->can('cmsProjectsDetails')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
+		
         return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
