@@ -37,13 +37,7 @@ class ProductsController extends Controller
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
-        $searchModel = new ProductSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index');
     }
 
     /**
