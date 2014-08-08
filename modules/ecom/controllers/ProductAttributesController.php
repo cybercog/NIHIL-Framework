@@ -52,6 +52,18 @@ class ProductAttributesController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single ProductAttribute model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new ProductAttribute model.
@@ -101,6 +113,25 @@ class ProductAttributesController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all Product Attributes models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+		if (!\Yii::$app->user->can('ecomProductAttributesList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        $searchModel = new ProductAttributeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

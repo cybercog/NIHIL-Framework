@@ -52,6 +52,18 @@ class OrdersController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single Order model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Order model.
@@ -101,6 +113,25 @@ class OrdersController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all Orders models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+		if (!\Yii::$app->user->can('ecomOrdersList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        $searchModel = new OrderSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

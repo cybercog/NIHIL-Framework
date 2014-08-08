@@ -52,6 +52,18 @@ class InvoiceItemsController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single InvoiceItem model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new InvoiceItem model.
@@ -101,6 +113,25 @@ class InvoiceItemsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all Invoice Items models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+		if (!\Yii::$app->user->can('ecomInvoiceItemsList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        $searchModel = new InvoiceItemSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**

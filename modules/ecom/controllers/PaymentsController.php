@@ -52,6 +52,18 @@ class PaymentsController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays a single Payment model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
      * Creates a new Payment model.
@@ -101,6 +113,25 @@ class PaymentsController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+	
+	/**
+     * Lists all Payments models.
+     * @return mixed
+     */
+    public function actionList()
+    {
+		if (!\Yii::$app->user->can('ecomPaymentsList')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        $searchModel = new PaymentSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('list', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
