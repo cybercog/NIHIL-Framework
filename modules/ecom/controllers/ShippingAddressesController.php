@@ -7,6 +7,7 @@ use app\modules\ecom\models\ShippingAddress;
 use app\modules\ecom\models\search\ShippingAddressSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -31,7 +32,11 @@ class ShippingAddressesController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    
+		if (!\Yii::$app->user->can('ecomShippingAddressesIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $searchModel = new ShippingAddressSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +53,10 @@ class ShippingAddressesController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('ecomShippingAddressesView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +69,10 @@ class ShippingAddressesController extends Controller
      */
     public function actionDetails($id)
     {
+		if (!\Yii::$app->user->can('ecomShippingAddressesDetails')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -72,6 +85,10 @@ class ShippingAddressesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('ecomShippingAddressesCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = new ShippingAddress();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,6 +108,10 @@ class ShippingAddressesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('ecomShippingAddressesUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -110,6 +131,10 @@ class ShippingAddressesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('ecomShippingAddressesDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

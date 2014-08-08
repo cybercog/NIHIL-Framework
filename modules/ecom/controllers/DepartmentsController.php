@@ -7,6 +7,7 @@ use app\modules\ecom\models\Department;
 use app\modules\ecom\models\search\DepartmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -32,6 +33,10 @@ class DepartmentsController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $searchModel = new DepartmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +53,10 @@ class DepartmentsController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +69,10 @@ class DepartmentsController extends Controller
      */
     public function actionDetails($id)
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsDetails')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -72,6 +85,10 @@ class DepartmentsController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = new Department();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,6 +108,10 @@ class DepartmentsController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -110,6 +131,10 @@ class DepartmentsController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('ecomDepartmentsDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

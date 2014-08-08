@@ -7,6 +7,7 @@ use app\modules\ecom\models\ProductAttribute;
 use app\modules\ecom\models\search\ProductAttributeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -32,6 +33,10 @@ class ProductAttributesController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesIndex')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $searchModel = new ProductAttributeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -48,6 +53,10 @@ class ProductAttributesController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesView')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -60,6 +69,10 @@ class ProductAttributesController extends Controller
      */
     public function actionDetails($id)
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesDetails')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -72,6 +85,10 @@ class ProductAttributesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesCreate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = new ProductAttribute();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -91,6 +108,10 @@ class ProductAttributesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesUpdate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -110,6 +131,10 @@ class ProductAttributesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('ecomProductAttributesDelete')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
