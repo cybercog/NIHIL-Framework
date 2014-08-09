@@ -1,10 +1,10 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
-/**
- * @var yii\web\View $this
- */
+/* @var $this yii\web\View */
+
 $this->title = 'uclemmer | Ecom';
 $this->params['breadcrumbs'][] = 'Ecom';
 ?>

@@ -1,45 +1,73 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ecom\models\search\AuthnetTransactionSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Authnet Transactions';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Authnet Transactions List';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = ['label' => 'Authnet Transactions', 'url' => '/ecom/authnet-transactions'];
+$this->params['breadcrumbs'][] = 'List';
 ?>
-<div class="authnet-transaction-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Authnet Transaction', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="ecom-authnettransactions-list">
+							<h1>Ecom Authnet Transactions List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+							<p>
+								<?= Html::a('Create Authnet Transaction', ['create'], ['class' => 'btn btn-success']) ?>
+							</p>
 
-            'id',
-            'ip_address',
-            'timestamp',
-            'response_code',
-            'response_text',
-            // 'authorization_type:ntext',
-            // 'result',
-            // 'transaction_id',
-            // 'data_sent:ntext',
-            // 'data_received:ntext',
-            // 'session_id',
-            // 'details:ntext',
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+									'id',
+									'ip_address',
+									'timestamp',
+									'response_code',
+									'response_text',
+									// 'authorization_type:ntext',
+									// 'result',
+									// 'transaction_id',
+									// 'data_sent:ntext',
+									// 'data_received:ntext',
+									// 'session_id',
+									// 'details:ntext',
 
-</div>
+									['class' => 'yii\grid\ActionColumn'],
+								],
+							]); ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>

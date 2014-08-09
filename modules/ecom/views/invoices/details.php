@@ -1,51 +1,79 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ecom\models\Invoice */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Invoices', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Invoices Details';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = ['label' => 'Invoices', 'url' => '/ecom/invoices'];
+$this->params['breadcrumbs'][] = 'Details';
 ?>
-<div class="invoice-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+						<div class="ecom-invoices-details">
+							<h1>Ecom Invoices Details</h1>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'invoice_number:ntext',
-            'invoice_status_id',
-            'customer_id',
-            'shipping_id',
-            'payment_id',
-            'date_created',
-            'date_due',
-            'date_paid',
-            'subtotal',
-            'shipping',
-            'credit',
-            'tax',
-            'tax_rate',
-            'total',
-            'token',
-            'details:ntext',
-        ],
-    ]) ?>
+							<p>
+								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
+									'class' => 'btn btn-danger',
+									'data' => [
+										'confirm' => 'Are you sure you want to delete this item?',
+										'method' => 'post',
+									],
+								]) ?>
+							</p>
 
-</div>
+							<?= DetailView::widget([
+								'model' => $model,
+								'attributes' => [
+									'id',
+									'invoice_number:ntext',
+									'invoice_status_id',
+									'customer_id',
+									'shipping_id',
+									'payment_id',
+									'date_created',
+									'date_due',
+									'date_paid',
+									'subtotal',
+									'shipping',
+									'credit',
+									'tax',
+									'tax_rate',
+									'total',
+									'token',
+									'details:ntext',
+								],
+							]) ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>

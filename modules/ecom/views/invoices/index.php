@@ -1,50 +1,52 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ecom\models\search\InvoiceSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Invoices';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Invoices';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = 'Invoices';
 ?>
-<div class="invoice-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Invoice', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="ecom-invoices-index">
+							<h1><?= $this->context->action->uniqueId ?></h1>
+							<p>
+								This is the view content for action "<?= $this->context->action->id ?>".
+								The action belongs to the controller "<?= get_class($this->context) ?>"
+								in the "<?= $this->context->module->id ?>" module.
+							</p>
+							<p>
+								You may customize this page by editing the following file:<br>
+								<code><?= __FILE__ ?></code>
+							</p>
+						</div>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'invoice_number:ntext',
-            'invoice_status_id',
-            'customer_id',
-            'shipping_id',
-            // 'payment_id',
-            // 'date_created',
-            // 'date_due',
-            // 'date_paid',
-            // 'subtotal',
-            // 'shipping',
-            // 'credit',
-            // 'tax',
-            // 'tax_rate',
-            // 'total',
-            // 'token',
-            // 'details:ntext',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-</div>
+					</div>
+				</div>
+			</div>
+		</section>

@@ -1,44 +1,72 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ecom\models\search\ProductSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Products';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Products List';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => '/ecom/products'];
+$this->params['breadcrumbs'][] = 'List';
 ?>
-<div class="product-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="ecom-products-list">
+							<h1>Ecom Products List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+							<p>
+								<?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+							</p>
 
-            'id',
-            'visible',
-            'sku:ntext',
-            'manufacturer_id',
-            'name',
-            // 'image',
-            // 'cost',
-            // 'price',
-            // 'description:ntext',
-            // 'details:ntext',
-            // 'sold',
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+									'id',
+									'visible',
+									'sku:ntext',
+									'manufacturer_id',
+									'name',
+									// 'image',
+									// 'cost',
+									// 'price',
+									// 'description:ntext',
+									// 'details:ntext',
+									// 'sold',
 
-</div>
+									['class' => 'yii\grid\ActionColumn'],
+								],
+							]); ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>

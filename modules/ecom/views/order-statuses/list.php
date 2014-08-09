@@ -1,38 +1,66 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ecom\models\search\OrderStatusSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order Statuses';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Order Statuses List';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = ['label' => 'Order Statuses', 'url' => '/ecom/order-statuses'];
+$this->params['breadcrumbs'][] = 'List';
 ?>
-<div class="order-status-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <p>
-        <?= Html::a('Create Order Status', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+						<div class="ecom-orderstatuses-list">
+							<h1>Ecom Order Statuses List</h1>
+							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+							<p>
+								<?= Html::a('Create Order Status', ['create'], ['class' => 'btn btn-success']) ?>
+							</p>
 
-            'id',
-            'name',
-            'description:ntext',
-            'color',
-            'order',
+							<?= GridView::widget([
+								'dataProvider' => $dataProvider,
+								'filterModel' => $searchModel,
+								'columns' => [
+									['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+									'id',
+									'name',
+									'description:ntext',
+									'color',
+									'order',
 
-</div>
+									['class' => 'yii\grid\ActionColumn'],
+								],
+							]); ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>

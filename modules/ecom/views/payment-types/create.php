@@ -1,21 +1,48 @@
 <?php
 
 use yii\helpers\Html;
-
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ecom\models\PaymentType */
 
-$this->title = 'Create Payment Type';
-$this->params['breadcrumbs'][] = ['label' => 'Payment Types', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'uclemmer | Ecom Payment Types Create';
+$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
+$this->params['breadcrumbs'][] = ['label' => 'Payment Types', 'url' => '/ecom/payment-types'];
+$this->params['breadcrumbs'][] = 'Create';
 ?>
-<div class="payment-type-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+		<section id="site-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+		
+						<?= Breadcrumbs::widget([
+							'homeLink' => [
+								'label' => 'Home',
+								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
+							],
+							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+						]) ?>
+			
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<section id="site-content">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+						<div class="ecom-paymenttypes-create">
+							<h1>Ecom Payment Types Create</h1>
 
-</div>
+							<?= $this->render('_form', [
+								'model' => $model,
+							]) ?>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
