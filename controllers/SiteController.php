@@ -50,8 +50,8 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index', [
-			'projects' => Project::findRecentProjects(3),
+        return $this->render('taraloka', [
+			//'projects' => Project::findRecentProjects(3),
 		]);
     }
 
