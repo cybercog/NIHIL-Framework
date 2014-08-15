@@ -5,6 +5,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
 	'modules' => require(__DIR__ . '/modules.php'),
+	'layout' => 'taraloka',
     'components' => [
 		'request' => [
 			'enableCookieValidation' => true,
@@ -73,6 +74,9 @@ $config = [
 				'logout' => 'ac/users/logout',
 				'register' => 'ac/users/register',
 				'reset' => 'ac/users/reset',
+				'shop' => 'ecom/products/index',
+				'donate' => 'ecom/payments/donate',
+				'products/<slug>' => 'ecom/products/view',
 				'pages' => 'cms/pages/index',
 				'pages/<slug>' => 'cms/pages/view',
             ),
