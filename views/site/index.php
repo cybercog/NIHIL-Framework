@@ -13,7 +13,7 @@ $this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
 $this->registerMetaTag(['og:type' => 'website']);
 $this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrical Engineer by training, an application/network consultant by trade, and mechanic/blogger/gardener/reader by necessity.  This site is all about Uriah, his work, and his hobbies.']);
 ?>
-
+		
 		<section id="site-jumbotron">
 			<div class="container">
 				<div class="row">
