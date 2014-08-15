@@ -81,4 +81,15 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EcomOrderItems::className(), ['product_id' => 'id']);
     }
+	
+	/**
+     * Finds by slug
+     *
+     * @param  int      $limit
+     * @return static|null
+     */
+    public static function findBySlug($slug)
+    {
+		return static::findOne(['slug' => $slug]);
+    }
 }
