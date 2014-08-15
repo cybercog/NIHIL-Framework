@@ -39,6 +39,19 @@ class PaymentsController extends Controller
 	
         return $this->render('index');
     }
+	
+	/**
+     * Donate.
+     * @return mixed
+     */
+    public function actionDonate()
+    {
+		if (!\Yii::$app->user->can('ecomPaymentsDonate')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        return $this->render('donate');
+    }
 
     /**
      * Displays a single Payment model.
