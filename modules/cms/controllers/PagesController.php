@@ -53,8 +53,14 @@ class PagesController extends Controller
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
+		$page = Page::findBySlug($slug);
+		
+		if (!$page) {
+			throw new NotFoundHttpException('Page not found.');
+		}
+		
         return $this->render('view', [
-            'page' => Page::findBySlug($slug),
+            'page' => $page,
         ]);
     }
 	
