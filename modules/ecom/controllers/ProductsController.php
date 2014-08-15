@@ -37,7 +37,12 @@ class ProductsController extends Controller
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
-        return $this->render('index');
+        return $this->render('index', [
+			'products' => Product::find()
+								->where(['visible' => 1])
+								->orderBy('name')
+								->all(),
+		]);
     }
 
     /**
@@ -45,14 +50,20 @@ class ProductsController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($slug)
     {
 		if (!\Yii::$app->user->can('ecomProductsView')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
-	
+		
+		$product = Product::findBySlug($slug);
+		
+		if (!$product) {
+			throw new NotFoundHttpException('Product not found.');
+		}
+		
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'product' => $product,
         ]);
     }
 	
