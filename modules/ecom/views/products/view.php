@@ -6,10 +6,9 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 
-$this->title = 'uclemmer | Ecom Products View';
-$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
-$this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => '/ecom/products'];
-$this->params['breadcrumbs'][] = 'View';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Shop | ' . $product->name;
+$this->params['breadcrumbs'][] = ['label' => 'Shop', 'url' => '/shop'];
+$this->params['breadcrumbs'][] = $product->name;
 ?>
 
 		<section id="site-breadcrumbs">
@@ -36,11 +35,11 @@ $this->params['breadcrumbs'][] = 'View';
 					<div class="col-md-12">
 
 						<div class="ecom-products-view">
-							<h1>Ecom Products View</h1>
+							<h1><?php echo $product->name; ?></h1>
 
 							<p>
-								<?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $model->id], [
+								<?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
+								<?= Html::a('Delete', ['delete', 'id' => $product->id], [
 									'class' => 'btn btn-danger',
 									'data' => [
 										'confirm' => 'Are you sure you want to delete this item?',
@@ -50,7 +49,7 @@ $this->params['breadcrumbs'][] = 'View';
 							</p>
 
 							<?= DetailView::widget([
-								'model' => $model,
+								'model' => $product,
 								'attributes' => [
 									'id',
 									'visible',
