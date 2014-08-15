@@ -2,13 +2,13 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use app\assets\AppAsset;
+use app\assets\UclemmerAsset;
 
 /**
  * @var \yii\web\View $this
  * @var string $content
  */
-AppAsset::register($this);
+UclemmerAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
