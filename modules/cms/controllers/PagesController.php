@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
+use app\modules\cms\models\PageView;
+
 /**
  * PagesController implements the CRUD actions for Page model.
  */
@@ -58,6 +60,9 @@ class PagesController extends Controller
 		if (!$page) {
 			throw new NotFoundHttpException('Page not found.');
 		}
+		
+		$pageview = new PageView;
+		$pageview->logPageView($page);
 		
         return $this->render('view', [
             'page' => $page,

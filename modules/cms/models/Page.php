@@ -84,4 +84,13 @@ class Page extends \yii\db\ActiveRecord
     {
 		return static::findOne(['slug' => $slug]);
     }
+	
+	public function updateViews()
+	{
+		$views = $this->views;
+		$this->views = $views + 1;
+		$this->date_lastview = date("Y-m-d H:i:s");
+		
+		$this->save();
+	}
 }
