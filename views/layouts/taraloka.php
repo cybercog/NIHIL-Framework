@@ -187,7 +187,7 @@ TaralokaAsset::register($this);
 					<div class="col-sm-3">
 						
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-xs-6">
 								<a href="#" data-toggle="modal" data-target="#footerPic1"><img src="<?php echo Yii::$app->homeUrl; ?>img/girl-1.png" class="img-responsive" alt="Girl 1" /></a>
 								<!-- Modal -->
 								<div class="modal fade" id="footerPic1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -200,7 +200,7 @@ TaralokaAsset::register($this);
 								  </div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-xs-6">
 								<a href="#" data-toggle="modal" data-target="#footerPic2"><img src="<?php echo Yii::$app->homeUrl; ?>img/girl-2.png" class="img-responsive" alt="Girl 2" /></a>
 								<!-- Modal -->
 								<div class="modal fade" id="footerPic2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -215,7 +215,7 @@ TaralokaAsset::register($this);
 							</div>
 						</div>
 						<div class="row" style="margin-top:20px;">
-							<div class="col-sm-6">
+							<div class="col-xs-6">
 								<a href="#" data-toggle="modal" data-target="#footerPic3"><img src="<?php echo Yii::$app->homeUrl; ?>img/girl-3.png" class="img-responsive" alt="Girl 3" /></a>
 								<!-- Modal -->
 								<div class="modal fade" id="footerPic3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -228,7 +228,7 @@ TaralokaAsset::register($this);
 								  </div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-xs-6">
 								<a href="#" data-toggle="modal" data-target="#footerPic4"><img src="<?php echo Yii::$app->homeUrl; ?>img/girl-4.png" class="img-responsive" alt="Girl 4" /></a>
 								<!-- Modal -->
 								<div class="modal fade" id="footerPic4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -262,11 +262,11 @@ TaralokaAsset::register($this);
 								</address>
 								
 								<ul class="list-inline">
-									<li><a href="#"><i class="fa fa-2x fa-facebook"></i></a></li>
+									<li><a href="https://www.facebook.com/TaralokaFoundation"><i class="fa fa-2x fa-facebook"></i></a></li>
 									<li><a href="#"><i class="fa fa-2x fa-twitter"></i></a></li>
 									<li><a href="#"><i class="fa fa-2x fa-google-plus"></i></a></li>
 									<li><a href="#"><i class="fa fa-2x fa-youtube"></i></a></li>
-									<li><a href="#"><i class="fa fa-2x fa-envelope"></i></a></li>
+									<li><a href="mailto:contact@taraloka.org"><i class="fa fa-2x fa-envelope"></i></a></li>
 								</ul>
 							</div>
 						</div>
