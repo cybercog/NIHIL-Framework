@@ -31,10 +31,10 @@ $this->registerMetaTag(['og:description' => 'The Taraloka Foundation is a regist
 					  <!-- Wrapper for slides -->
 					  <div class="carousel-inner">
 						<div class="item active">
-						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall.jpg" alt="Slide 1" />
+						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall-cropped.png" alt="Slide 1" />
 						</div>
 						<div class="item">
-						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall.jpg" alt="Slide 2" />
+						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall-cropped.png" alt="Slide 2" />
 						</div>
 					  </div>
 
