@@ -52,4 +52,5 @@ class PostView extends \yii\db\ActiveRecord
             'user_agent' => 'User Agent',
         ];
     }
+	
 }
