@@ -67,4 +67,9 @@ class Attribute extends \yii\db\ActiveRecord
     {
         return $this->hasOne(EcomAttributeGroups::className(), ['id' => 'group_id']);
     }
+	
+	public function getAttribute($id)
+	{
+		return Attribute::find()->where(['id' => $id])->one();
+	}
 }

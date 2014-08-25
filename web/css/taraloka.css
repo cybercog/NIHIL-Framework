@@ -36,6 +36,27 @@ a:hover{
 	text-decoration:none;
 }
 
+.btn-success {
+	background-color:#ec008c;
+	border:2px solid #afbd21;
+}
+
+.btn-success:hover {
+	background-color:#afbd21;
+	border:2px solid #ec008c;
+}
+
+.btn-lg {
+	font-size:28px;
+}
+
+.input-group-btn .btn {
+	height:34px !important;
+}
+
+.field-confirmform-token {
+	display:none;
+}
 
 
 
@@ -154,6 +175,91 @@ color: #333;
 
 #site-content {
 	margin-bottom:20px;
+	font-size:16px;
+}
+
+
+
+
+.staff-name {
+	margin:10px 0 0 0;
+	padding:0;
+}
+
+.staff-job {
+	margin:0 0 20px 0;
+	padding:0;
+}
+
+.staff-image {
+	margin-bottom:20px;
+}
+
+.board-links {
+	margin-top:20px;
+}
+
+.content-image {
+	width:300px;
+	margin: auto 10px;
+}
+
+
+
+
+
+
+.product-image-view {
+	margin-top:20px;
+}
+
+.product-index-name {
+	margin:10px 0 0 0;
+	padding:0;
+}
+
+.product-index-price {
+	margin:0 0 20px 0;
+	padding:0;
+}
+
+.product-view-name {
+	margin:20px 0 0 0;
+	padding:0;
+}
+
+.product-view-id {
+	margin:0 0 10px 0;
+	padding:0;
+}
+
+.product-view-stock {
+	margin:0 0 10px 0;
+	padding:0;
+}
+
+.product-view-price {
+	margin:20px 0 0 0;
+	padding:0;
+	/*color:#afbd21;
+	font-weight:bold;*/
+}
+
+.product-view-description {
+	font-size:16px;
+}
+
+.product-view-size {
+	margin-bottom:10px;
+}
+
+
+
+
+
+
+#cart {
+	font-size:14px;
 }
 
 

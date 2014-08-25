@@ -460,6 +460,24 @@ class FirstDataAPI
 	public function getAuthNumber() {
 		return $this->getValueByKey($this->getArrayResponse(), 'authorization_num');
 	}
+	
+	public function getCreditCardType() {
+		return $this->getValueByKey($this->getArrayResponse(), 'credit_card_type');
+	}
+	public function getCreditCardNumber() {
+		return $this->getValueByKey($this->getArrayResponse(), 'cc_number');
+	}
+	public function getTransactionTag() {
+		return $this->getValueByKey($this->getArrayResponse(), 'transaction_tag');
+	}
+	public function getClientIp() {
+		return $this->getValueByKey($this->getArrayResponse(), 'client_ip');
+	}
+	public function setTransactionTag($token) {
+		$this->setPostData('transaction_tag', (string) $token);
+		return $this;
+	}
+	
 	/**
 	 * Get transaction transarmor token
 	 * @return string

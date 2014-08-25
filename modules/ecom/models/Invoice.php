@@ -3,6 +3,7 @@
 namespace app\modules\ecom\models;
 
 use Yii;
+use app\modules\ecom\models\InvoiceItem;
 
 /**
  * This is the model class for table "ecom_invoices".
@@ -87,15 +88,15 @@ class Invoice extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEcomInvoiceItems()
+    public function getInvoiceItems()
     {
-        return $this->hasMany(EcomInvoiceItems::className(), ['invoice_id' => 'id']);
+        return $this->hasMany(InvoiceItem::className(), ['invoice_id' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getShipping0()
+    public function getShipping()
     {
         return $this->hasOne(EcomShippingAddresses::className(), ['id' => 'shipping_id']);
     }
@@ -131,4 +132,41 @@ class Invoice extends \yii\db\ActiveRecord
     {
         return $this->hasMany(EcomOrders::className(), ['invoice_id' => 'id']);
     }
+	
+	public function addLineItem($pid, $name, $qty, $price, $total, $taxed, $description, $details = NULL)
+	{
+		$invoiceItem = new InvoiceItem;
+		
+		$iItem = InvoiceItem::find()
+			->where(['invoice_id' => $this->id, 'product_id' => $pid])
+			->one();
+		
+		if($iItem) {
+			$iItem->quantity += $qty;
+			
+			if($iItem->save()) {
+				return TRUE;
+			}
+			
+		}else{
+
+			$invoiceItem->invoice_id = $this->id;
+			$invoiceItem->product_id = $pid;
+			$invoiceItem->name = $name;
+			$invoiceItem->quantity = $qty;
+			$invoiceItem->unit_price = $price;
+			$invoiceItem->total = $total;
+			$invoiceItem->taxed = $taxed;
+			$invoiceItem->description = $description;
+			$invoiceItem->details = $details;
+			
+			if($invoiceItem->save()) {
+				return TRUE;
+			}
+			
+		}
+		
+		return FALSE;
+		
+	}
 }

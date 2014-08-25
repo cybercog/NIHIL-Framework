@@ -2,7 +2,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\DetailView;
+use yii\widgets\ActiveForm;
+use app\modules\ecom\components\CartWidget;
+use app\modules\core\widgets\MailingListWidget;
 
 /* @var $this yii\web\View */
 
@@ -32,40 +34,76 @@ $this->params['breadcrumbs'][] = $product->name;
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
 
 						<div class="ecom-products-view">
-							<h1><?php echo $product->name; ?></h1>
+							
+							<div class="row">
+								
+								<div class="col-sm-4">
+									<div class="row">
+										<div class="col-xs-12">
+										<?php if($product->image) { ?>
+											<img class="img-responsive product-image-view" src="<?php echo Yii::$app->homeUrl; ?>img/<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>" />
+										<?php }else{ ?>
+											<img class="img-responsive product-image-view" src="http://placehold.it/600x600&text=Product" />
+										<?php } ?>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-sm-8">
+									<div class="row">
+										<div class="col-sm-8">
+											<h1 class="product-view-name"><?php echo $product->name; ?> <small>from <?php echo $product->manufacturer_id; ?></small></h1>
+										</div>
+										<div class="col-sm-4 text-right">
+											<h2 class="product-view-price">$<?php echo $product->price; ?></h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-8">
+											<h3 class="product-view-id">Product Id: <?php echo str_pad($product->id, 5, '0', STR_PAD_LEFT); ?></h3>
+										</div>
+										<div class="col-sm-4 text-right">
+											<h3 class="product-view-stock">IN STOCK</h3>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<p class="product-view-description"><?php echo $product->description; ?></p>
+										</div>
+									</div>
+									<?php $form = ActiveForm::begin([
+										'id' => 'ecom-addtocart-form',
+										//'options' => ['onsubmit' => '$("#processingModal").modal("show");'],
+									]); ?>
+									<div class="row">
+										<div class="col-sm-2">
+											<?= $form->field($model, 'qty') ?>
+										</div>
+										<div class="col-sm-6">
+											<?= $form->field($model, 'paid')->dropDownList($model->paDropdown($product->id),['prompt'=>'']); ?>
+										</div>
+										<div class="col-sm-4">
+											<?= Html::submitButton('add to cart', ['class' => 'btn btn-lg btn-success btn-block']) ?>
+										</div>
+									</div>
+									<?php ActiveForm::end(); ?>
+								</div>
+								
+							</div>
 
-							<p>
-								<?= Html::a('Update', ['update', 'id' => $product->id], ['class' => 'btn btn-primary']) ?>
-								<?= Html::a('Delete', ['delete', 'id' => $product->id], [
-									'class' => 'btn btn-danger',
-									'data' => [
-										'confirm' => 'Are you sure you want to delete this item?',
-										'method' => 'post',
-									],
-								]) ?>
-							</p>
-
-							<?= DetailView::widget([
-								'model' => $product,
-								'attributes' => [
-									'id',
-									'visible',
-									'sku:ntext',
-									'manufacturer_id',
-									'name',
-									'image',
-									'cost',
-									'price',
-									'description:ntext',
-									'details:ntext',
-									'sold',
-								],
-							]) ?>
+							
 						</div>
 
+					</div>
+					<div class="col-sm-3">
+					
+						<?= CartWidget::widget(); ?>
+						
+						<?= MailingListWidget::widget(); ?>
+					
 					</div>
 				</div>
 			</div>

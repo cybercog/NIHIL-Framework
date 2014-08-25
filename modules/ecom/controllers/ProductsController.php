@@ -10,6 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
+use app\modules\ecom\models\ProductAttribute;
+use app\modules\ecom\models\forms\AddToCartForm;
+
 /**
  * ProductsController implements the CRUD actions for Product model.
  */
@@ -62,9 +65,17 @@ class ProductsController extends Controller
 			throw new NotFoundHttpException('Product not found.');
 		}
 		
-        return $this->render('view', [
-            'product' => $product,
-        ]);
+		$model = new AddToCartForm();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['cart']);
+        } else {
+            return $this->render('view', [
+                'model' => $model,
+				'product' => $product,
+            ]);
+        }
+
     }
 	
 	/**
@@ -78,7 +89,7 @@ class ProductsController extends Controller
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
-        return $this->render('view', [
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -163,6 +174,32 @@ class ProductsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	public function actionCart()
+    {
+		if (!\Yii::$app->user->can('ecomProductsCart')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+		//\Yii::$app->cart->clear();
+	
+        return $this->redirect(['/shop']);
+    }
+	
+	public function actionRemoveFromCart($uid = NULL)
+	{
+		//if (!\Yii::$app->user->can('ecomProductsCart')) {
+		//	throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		//}
+		
+		if (!$uid OR !\Yii::$app->cart->remove($uid)) {
+			throw new NotFoundHttpException('Item not found in cart.');
+		}
+	
+		//\Yii::$app->cart->remove($uid);
+	
+        return $this->redirect(['/shop']);
+	}
 
     /**
      * Finds the Product model based on its primary key value.

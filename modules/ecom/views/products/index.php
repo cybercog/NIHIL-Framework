@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use app\modules\ecom\components\CartWidget;
+use app\modules\core\widgets\MailingListWidget;
 
 /* @var $this yii\web\View */
 
@@ -44,37 +46,29 @@ $this->params['breadcrumbs'][] = 'Shop';
 							<?php
 								foreach($products as $product) {
 							?>
+								<a href="<?php echo Yii::$app->homeUrl; ?>products/<?php echo $product->slug; ?>">
 									<div class="col-sm-4">
 										<div class="row">
 											<div class="col-xs-12">
-												<a href="<?php echo Yii::$app->homeUrl; ?>products/<?php echo $product->slug; ?>">
-													<?php if($product->image) { ?>
-														<img class="img-responsive" src="<?php echo Yii::$app->homeUrl; ?>img/<?php echo $product->image; ?>" />
-													<?php }else{ ?>
-														<img class="img-responsive" src="http://placehold.it/600x600&text=Product" />
-													<?php } ?>
-												</a>
+												<?php if($product->image) { ?>
+													<img class="img-responsive" src="<?php echo Yii::$app->homeUrl; ?>img/<?php echo $product->image; ?>" />
+												<?php }else{ ?>
+													<img class="img-responsive" src="http://placehold.it/600x600&text=Product" />
+												<?php } ?>
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-xs-12">
-												<h2><a href="<?php echo Yii::$app->homeUrl; ?>products/<?php echo $product->slug; ?>"><?php echo $product->name; ?></a></h2>
+											<div class="col-xs-12 text-center">
+												<h2 class="product-index-name"><?php echo $product->name; ?></h2>
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-xs-12">
-												<p><?php echo $product->description; ?></p>
+											<div class="col-xs-12 text-center">
+												<h3 class="product-index-price">$<?php echo $product->price; ?></h3>
 											</div>
-										</div>
-										<div class="row">
-											<div class="col-xs-12">
-												<a href="#" class="btn btn-lg btn-block btn-primary">$<?php echo $product->price; ?> | Add to Cart</a>
-											</div>
-										</div>
-										
-										
-										
+										</div>	
 									</div>
+								</a>
 							<?php
 								}
 							?>
@@ -87,61 +81,9 @@ $this->params['breadcrumbs'][] = 'Shop';
 					</div>
 					<div class="col-sm-3">
 						
-						<div class="row">
-							<div class="col-xs-12">
-								<h3>Cart</h3>
-							</div>
-							<div class="col-xs-12">
-								<p>You have 0 items in your cart.</p>
-							</div>
-						</div>
+						<?= CartWidget::widget(); ?>
 						
-						<div class="row">
-							<div class="col-xs-12">
-								<h3>Cart</h3>
-							</div>
-							<div class="col-xs-12">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Item</th>
-											<th>Qty</th>
-											<th>Price</th>
-											<th>&nbsp;</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Jacket</td>
-											<td>1</td>
-											<td>$100.00</td>
-											<td><a href="#">X</a></td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<td colspan="2" class="text-right">Subtotal</td>
-											<td colspan="2" class="text-right">$100.00</td>
-										</tr>
-										<tr>
-											<td colspan="2" class="text-right">Tax</td>
-											<td colspan="2" class="text-right">$0.00</td>
-										</tr>
-										<tr>
-											<td colspan="2" class="text-right">Shipping</td>
-											<td colspan="2" class="text-right">$0.00</td>
-										</tr>
-										<tr>
-											<td colspan="2" class="text-right">Total</td>
-											<td colspan="2" class="text-right">$100.00</td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-							<div class="col-xs-12">
-								<a href="#" class="btn btn-lg btn-block btn-success">Checkout</a>
-							</div>
-						</div>
+						<?= MailingListWidget::widget(); ?>
 						
 					</div>
 				</div>

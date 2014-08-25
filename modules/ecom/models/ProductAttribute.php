@@ -56,4 +56,14 @@ class ProductAttribute extends \yii\db\ActiveRecord
             'details' => 'Details',
         ];
     }
+	
+	public function getProductAttribute($id)
+	{
+		return static::findOne(['id' => $id]);
+	}
+	
+	public function getAllForProduct($pid)
+	{
+		return ProductAttribute::find()->where(['product_id' => $pid])->all();
+	}
 }

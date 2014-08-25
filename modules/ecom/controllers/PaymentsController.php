@@ -4,7 +4,11 @@ namespace app\modules\ecom\controllers;
 
 use Yii;
 use app\modules\ecom\models\Payment;
+use app\modules\ecom\models\Invoice;
+use app\modules\ecom\models\Customer;
 use app\modules\ecom\models\search\PaymentSearch;
+use app\modules\ecom\models\forms\DonationForm;
+use app\modules\ecom\models\forms\ConfirmForm;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
@@ -50,7 +54,61 @@ class PaymentsController extends Controller
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
-        return $this->render('donate');
+        $model = new DonationForm;
+
+        //if ($model->load(Yii::$app->request->post()) && $token = $model->invoice()) {
+		if ($model->load(Yii::$app->request->post()) && $token = $model->fdAuthorizeDonation()) {
+            return $this->redirect(['confirm', 'token' => $token]);
+        } else {
+            return $this->render('donate', [
+                'model' => $model,
+            ]);
+        }
+    }
+	
+	public function actionConfirm($token)
+    {
+		if (!\Yii::$app->user->can('ecomPaymentsConfirm')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
+		$model = new ConfirmForm;
+	
+		//if (Yii::$app->request->post()) {
+		if ($model->load(Yii::$app->request->post()) && $model->captureFDDonation()) {
+
+			//return $this->render('success');
+			return $this->redirect(['success']);
+			
+        } else {
+			
+			$invoice = Invoice::find()->where(['token' => $token])->one();
+			
+			if($invoice->invoice_status_id != 4) {
+				$model = NULL;
+			}
+			
+			//$invoice_items = $invoice->invoiceItems;
+			$payment = Payment::find()->where(['id' => $invoice->payment_id])->one();
+			$customer = Customer::find()->where(['id' => $invoice->customer_id])->one();
+
+            return $this->render('confirm', [
+				'token' => $token,
+				'invoice' => $invoice,
+				'payment' => $payment,
+				'customer' => $customer,
+				'model' => $model,
+			]);
+        }
+    }
+	
+	public function actionSuccess()
+    {
+		if (!\Yii::$app->user->can('ecomPaymentsSuccess')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
+        return $this->render('success');
     }
 
     /**

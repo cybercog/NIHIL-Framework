@@ -20,6 +20,9 @@ $config = [
 			'assignmentTable' => 'ac_auth_assignments',
 			'ruleTable' => 'ac_auth_rules',
         ],
+		'cart' => [
+			'class' => 'app\modules\ecom\components\Cart',
+		],
 		'user' => [
 			'class' => 'yii\web\User',
 			'identityClass' => 'app\modules\ac\models\Users',
@@ -31,6 +34,15 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                ],
+            ],
+        ],
 		'mail' => [
             'class' => 'yii\swiftmailer\Mailer',
 			// send all mails to a file by default. You have to set
@@ -40,23 +52,22 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'charger.websitewelcome.com',
-                'username' => 'no-reply@uclemmer.com',
+                'username' => 'no-reply@taraloka.org',
                 'password' => 'Bayl0r!',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
+			// 'transport' => [
+                // 'class' => 'Swift_SmtpTransport',
+                // 'host' => 'charger.websitewelcome.com',
+                // 'username' => 'no-reply@uclemmer.com',
+                // 'password' => 'Bayl0r!',
+                // 'port' => '465',
+                // 'encryption' => 'ssl',
+            // ],
 			'messageConfig' => [
 				'from' => ['no-reply@uclemmer.com' => 'uclemmer'],
 			],
-        ],
-        'log' => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
-                ],
-            ],
         ],
 		'urlManager' => [
             'enablePrettyUrl' => true,
@@ -76,6 +87,11 @@ $config = [
 				'reset' => 'ac/users/reset',
 				'shop' => 'ecom/products/index',
 				'donate' => 'ecom/payments/donate',
+				
+				'cart' => 'ecom/products/cart',
+				'cart/remove/<uid>' => 'ecom/products/remove-from-cart',
+				'checkout' => 'ecom/orders/checkout',
+				
 				'products/<slug>' => 'ecom/products/view',
 				'pages' => 'cms/pages/index',
 				'pages/<slug>' => 'cms/pages/view',

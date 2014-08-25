@@ -152,6 +152,19 @@ class OrdersController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	/**
+     * Checkout.
+     * @return mixed
+     */
+    public function actionCheckout()
+    {
+		if (!\Yii::$app->user->can('ecomOrdersCheckout')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+
+        return $this->render('checkout');
+    }
 
     /**
      * Finds the Order model based on its primary key value.

@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use app\modules\ecom\components\CartWidget;
+use app\modules\core\widgets\MailingListWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\cms\models\Page */
@@ -66,7 +68,9 @@ $this->params['breadcrumbs'][] = $page->name;
 					</div>
 					<div class="col-sm-3" style="padding-top:15px;padding-bottom:10px;">
 					
-						&nbsp;
+						<?= CartWidget::widget(); ?>
+						
+						<?= MailingListWidget::widget(); ?>
 					
 					</div>
 				</div>

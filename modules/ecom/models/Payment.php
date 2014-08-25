@@ -41,12 +41,12 @@ class Payment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['payment_type_id', 'customer_id', 'payment_method_id', 'transaction_id'], 'integer'],
+            [['payment_type_id', 'customer_id', 'payment_method_id'], 'integer'],
             [['date_created'], 'safe'],
             [['amount'], 'number'],
             [['comments', 'details'], 'string'],
             [['account_type', 'account_number'], 'string', 'max' => 100],
-            [['token'], 'string', 'max' => 128]
+            [['token', 'transaction_id'], 'string', 'max' => 128]
         ];
     }
 
