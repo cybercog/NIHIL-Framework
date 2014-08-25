@@ -32,6 +32,7 @@ phpunit.phar
 # Config Files
 /config/db.php
 /config/params.php
+/config/web.php
 
 # Imgaes
 /web/img
