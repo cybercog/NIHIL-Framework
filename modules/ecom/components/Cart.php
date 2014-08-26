@@ -46,6 +46,10 @@ class Cart extends Component
 		
 		$cData = $this->storage->load($this);
 		//die(print_r($cData));
+		if($cData['confirm_token']) {
+			$this->confirm_token = $cData['confirm_token'];
+		}
+		
 		if(!empty($cData['items'])) {
 			$this->items = $cData['items'];
 			$this->subtotal = $cData['subtotal'];
@@ -108,6 +112,7 @@ class Cart extends Component
 		$this->tax = 0;
 		$this->shipping = 0;
 		$this->total = 0;
+		$this->confirm_token = NULL;
 
         $save && $this->storage->save($this);
         return $this;
@@ -220,13 +225,21 @@ class Cart extends Component
 	
 	public function getCart()
 	{
-		return array(
-			'items' => $this->getItems(),
-			'subtotal' => $this->getSubtotal(),
-			'tax' => $this->getTax(),
-			'shipping' => $this->getShipping(),
-			'total' => $this->getTotal(),
-		);
+		if($t = $this->getConfirmToken()) {
+			return array(
+				'confirm_token' => $t,
+			);
+		}else{
+			return array(
+				'items' => $this->getItems(),
+				'subtotal' => $this->getSubtotal(),
+				'tax' => $this->getTax(),
+				'shipping' => $this->getShipping(),
+				'total' => $this->getTotal(),
+				'confirm_token' => $this->getConfirmToken(),
+			);
+		}
+		
 	}
 	
 	/**
@@ -344,11 +357,10 @@ class Cart extends Component
     }
 	
 	public function confirmOrderCart($token, $save = TRUE) {
-		if($this->setConfirmToken(token)) {
-			$save && $this->storage->save($this);
-			return $this;
-		}
-		return FALSE;
+		$this->confirm_token = $token;
+		
+		$save && $this->storage->save($this);
+		return $this;
 	}
 	
 	public function recalcTotals($save = true)

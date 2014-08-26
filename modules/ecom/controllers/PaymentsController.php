@@ -58,7 +58,9 @@ class PaymentsController extends Controller
 
         //if ($model->load(Yii::$app->request->post()) && $token = $model->invoice()) {
 		if ($model->load(Yii::$app->request->post()) && $token = $model->fdAuthorizeDonation()) {
-            return $this->redirect(['confirm', 'token' => $token]);
+			if(\Yii::$app->cart->confirmOrderCart($token)) {
+				return $this->redirect(['donation-confirm']);
+			}
         } else {
             return $this->render('donate', [
                 'model' => $model,
@@ -66,19 +68,23 @@ class PaymentsController extends Controller
         }
     }
 	
-	public function actionConfirm($token)
+	public function actionDonationConfirm()
     {
-		if (!\Yii::$app->user->can('ecomPaymentsConfirm')) {
+		if (!\Yii::$app->user->can('ecomPaymentsDonationConfirm')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+		
+		if(!$token = \Yii::$app->cart->getConfirmToken()) {
+			return $this->redirect(['donate']);
 		}
 		
 		$model = new ConfirmForm;
 	
 		//if (Yii::$app->request->post()) {
 		if ($model->load(Yii::$app->request->post()) && $model->captureFDDonation()) {
-
+			
 			//return $this->render('success');
-			return $this->redirect(['success']);
+			return $this->redirect(['donation-success']);
 			
         } else {
 			
@@ -92,7 +98,7 @@ class PaymentsController extends Controller
 			$payment = Payment::find()->where(['id' => $invoice->payment_id])->one();
 			$customer = Customer::find()->where(['id' => $invoice->customer_id])->one();
 
-            return $this->render('confirm', [
+            return $this->render('donation-confirm', [
 				'token' => $token,
 				'invoice' => $invoice,
 				'payment' => $payment,
@@ -102,13 +108,19 @@ class PaymentsController extends Controller
         }
     }
 	
-	public function actionSuccess()
+	public function actionDonationSuccess()
     {
-		if (!\Yii::$app->user->can('ecomPaymentsSuccess')) {
+		if (!\Yii::$app->user->can('ecomPaymentsDonationSuccess')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
-        return $this->render('success');
+		if(!$token = \Yii::$app->cart->getConfirmToken()) {
+			return $this->redirect(['donate']);
+		}
+		
+		\Yii::$app->cart->clear();
+		
+        return $this->render('donation-success');
     }
 
     /**

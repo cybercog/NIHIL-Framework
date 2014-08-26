@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = 'Donate';
 								'id' => 'ecom-donate-form',
 								'options' => ['onsubmit' => '$("#processingModal").modal("show");'],
 							]); ?>
-							<div class="row">
+							<div class="row" style="margin-bottom:10px;">
 								<div class="col-md-12">
 									<button type="button" class="btn btn-success btn-lg btn-donate-amount" onclick="document.getElementById('donationform-amount').value = Number(250).toFixed(2);">$250</button>
 									<button type="button" class="btn btn-success btn-lg btn-donate-amount" onclick="document.getElementById('donationform-amount').value = Number(100).toFixed(2);">$100</button>
@@ -141,7 +141,7 @@ $this->params['breadcrumbs'][] = 'Donate';
 								<div class="modal-content">
 								  <div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="myModalLabel">Your Payment Is Being Processed</h4>
+									<h4 class="modal-title" id="myModalLabel">Your Payment Is Being Authorized</h4>
 								  </div>
 								  <div class="modal-body" style="text-align:center;">
 										<i class="fa fa-spinner fa-spin fa-5x"></i><br />

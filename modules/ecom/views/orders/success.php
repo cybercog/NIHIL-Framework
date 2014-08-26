@@ -5,8 +5,9 @@ use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 
-$this->title = Yii::$app->params['siteMeta']['title'] . ' | Checkout';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Checkout Success';
 $this->params['breadcrumbs'][] = 'Checkout';
+$this->params['breadcrumbs'][] = 'Success';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -33,8 +34,8 @@ $this->params['breadcrumbs'][] = 'Checkout';
 					<div class="col-md-12">
 
 						<div class="ecom-orders-index">
-							<h1>Checkout</h1>
-							<p>We first need your mailing address:</p>
+							<h1>Checkout Success</h1>
+							<p>Bingo.  We are good to go.</p>
 						</div>
 
 					</div>

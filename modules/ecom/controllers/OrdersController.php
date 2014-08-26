@@ -157,14 +157,54 @@ class OrdersController extends Controller
      * Checkout.
      * @return mixed
      */
-    public function actionCheckout()
+    public function actionCheckout($step = NULL)
     {
 		if (!\Yii::$app->user->can('ecomOrdersCheckout')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
+		
+		if(!($step == NULL OR $step == 'shipping' OR $step == 'payment' OR $step == 'confirm')) {
+			throw new NotFoundHttpException('That part of the checkout process was not found.');
+		}
+		
+		if($step == 'shipping') {
+			return $this->render('shipping');
+		}elseif($step == 'payment') {
+			return $this->render('payment');
+		}elseif($step == 'confirm'){
+			return $this->render('confirm');
+		}else{
+			return $this->render('checkout');
+		}
 
-        return $this->render('checkout');
+        
     }
+	
+	public function actionCart()
+    {
+		if (!\Yii::$app->user->can('ecomOrdersCart')) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+		//\Yii::$app->cart->clear();
+	
+        return $this->render('cart');
+    }
+	
+	public function actionRemoveFromCart($uid = NULL)
+	{
+		//if (!\Yii::$app->user->can('ecomProductsCart')) {
+		//	throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		//}
+		
+		if (!$uid OR !\Yii::$app->cart->remove($uid)) {
+			throw new NotFoundHttpException('Item not found in cart.');
+		}
+	
+		//\Yii::$app->cart->remove($uid);
+	
+        return $this->redirect(['/shop']);
+	}
 
     /**
      * Finds the Order model based on its primary key value.

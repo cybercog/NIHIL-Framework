@@ -174,32 +174,6 @@ class ProductsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-	
-	public function actionCart()
-    {
-		if (!\Yii::$app->user->can('ecomProductsCart')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
-		//\Yii::$app->cart->clear();
-	
-        return $this->redirect(['/shop']);
-    }
-	
-	public function actionRemoveFromCart($uid = NULL)
-	{
-		//if (!\Yii::$app->user->can('ecomProductsCart')) {
-		//	throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		//}
-		
-		if (!$uid OR !\Yii::$app->cart->remove($uid)) {
-			throw new NotFoundHttpException('Item not found in cart.');
-		}
-	
-		//\Yii::$app->cart->remove($uid);
-	
-        return $this->redirect(['/shop']);
-	}
 
     /**
      * Finds the Product model based on its primary key value.
