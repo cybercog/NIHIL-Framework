@@ -21,6 +21,7 @@ $this->registerMetaTag(['og:description' => 'The Taraloka Foundation is a regist
 			
 				<!-- START: CTA SLIDER -->
 				<div class="col-sm-12">
+				
 					<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					  <!-- Indicators -->
 					  <ol class="carousel-indicators">
@@ -33,18 +34,15 @@ $this->registerMetaTag(['og:description' => 'The Taraloka Foundation is a regist
 						<div class="item active">
 						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall-cropped.png" alt="Slide 1" />
 						</div>
-						<div class="item">
-						  <img src="<?php echo Yii::$app->homeUrl; ?>img/girls-waterfall-cropped.png" alt="Slide 2" />
-						</div>
 					  </div>
 
 					  <!-- Controls -->
-					  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+					  <!--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
 						<span class="glyphicon glyphicon-chevron-left"></span>
 					  </a>
 					  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
 						<span class="glyphicon glyphicon-chevron-right"></span>
-					  </a>
+					  </a>-->
 					</div>
 				</div>
 				<!-- END: CTA SLIDER -->
@@ -53,3 +51,19 @@ $this->registerMetaTag(['og:description' => 'The Taraloka Foundation is a regist
 			
 		</section>
 		<!-- END: SITE BANNER -->
+		
+		
+		<?php
+			//echo Yii::$app->getUrlManager()->getBaseUrl();
+			//print_r(Yii::$app->modules['debug']->dataPath);
+			//echo '<br />';
+			//print_r(Yii::$app->modules['debug']->module);
+			//echo '<br />';
+			//echo Yii::getAlias('@app') . '<br />';
+			//echo Yii::getAlias('@web') . '<br />';
+			//echo Yii::getAlias('@webroot') . '<br />';
+			//echo Yii::getAlias('@runtime') . '<br />';
+			//echo \Yii::$app->basePath . '<br />';
+			//echo \Yii::$app->request->BaseUrl . '<br />';
+			
+		?>
