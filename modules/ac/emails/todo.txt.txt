@@ -1,4 +1,0 @@
-convert to new directory structure
-    [email name]
-        html.php
-        text.php
