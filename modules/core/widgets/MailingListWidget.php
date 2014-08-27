@@ -16,7 +16,7 @@ class MailingListWidget extends Widget
         return '<div class="row"><div class="col-xs-12"><h4>Join Our Mailing List</h4>
 								<p>Keep up-to-date with events, news, and any other important announcements.</p>
 								<div class="input-group">
-								  <input type="email" class="form-control">
+								  <input type="email" class="form-control" placeholder="jsmith@taraloka.org">
 								  <span class="input-group-btn">
 									<button class="btn btn-success" type="button">join</button>
 								  </span>
