@@ -71,9 +71,9 @@ TaralokaAsset::register($this);
 									Welcome ' . Yii::$app->user->identity->username . ' <span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a href="' . Yii::$app->homeUrl . 'ac/users"><i class="fa fa-user"></i> Portal</a></li>
-									<li><a href="' . Yii::$app->homeUrl . 'ac/users/settings"><i class="fa fa-gear"></i> Settings</a></li>
-									<li><a href="' . Yii::$app->homeUrl . 'logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+									<li><a href="/portal"><i class="fa fa-user"></i> Portal</a></li>
+									<li><a href="/settings"><i class="fa fa-gear"></i> Settings</a></li>
+									<li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 								  </ul>
 								</div>';
 							}
@@ -152,8 +152,8 @@ TaralokaAsset::register($this);
 						</div>
 						<div class="row">
 							<div class="col-sm-12">
-								<p><strong class="font-green">The Taraloka Foundation</strong> is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.</p>
-								<p>[You can provide everything a girl needs for $2500/year, feed the whole house of 30 for $25/day, or pay our three employees for $100/week.  A dollar goes a long way, so make your donation today.]</p>
+								<p><strong class="font-green">The Taraloka Foundation</strong> is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.</p>
+								<p>A donation of $160 per month can pay the salary of our cook - providing wonderful meals for the girls, pay the salary of our house mother, or sponsor all of the needs of one of our girls for one month.  A dollar goes a long way, so please make a donation today!</p>
 							</div>
 						</div>
 						
@@ -257,7 +257,7 @@ TaralokaAsset::register($this);
 								  <strong class="font-green">The Taraloka Foundation</strong><br>
 								  705 Northern Avenue<br />
 								  Signal Mountain, TN 37377<br />
-								  <a href="tel:14236056163">+1.423.605.6163</a><br />
+								  <a href="tel:14236056163">423.605.6163</a><br />
 								  <a href="mailto:contact@taraloka.org">contact@taraloka.org</a>
 								</address>
 								
