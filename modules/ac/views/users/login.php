@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | Login';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Login';
 //$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 //$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Login';
@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = 'Login';
 							<?= $form->field($model, 'rememberMe')->checkbox() ?>
 
 							<div class="form-group">
-								<?= Html::submitButton('Login', ['class' => 'btn btn-default']) ?>
+								<?= Html::submitButton('login', ['class' => 'btn btn-success btn-lg']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
@@ -64,8 +64,8 @@ $this->params['breadcrumbs'][] = 'Login';
 					<div class="col-md-5">
 
 						<div class="btn-aclinks">
-							<a href="/register">Register</a> | 
-							<a href="/reset">Reset Account</a>
+							<a href="/register">register</a> | 
+							<a href="/reset">reset account</a>
 						</div>
 
 					</div>

@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | Register';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Register';
 //$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 //$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Register';
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = 'Register';
 							</div>
 
 							<div class="form-group">
-								<?= Html::submitButton('Register', ['class' => 'btn btn-default']) ?>
+								<?= Html::submitButton('register', ['class' => 'btn btn-success btn-lg']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
@@ -86,8 +86,8 @@ $this->params['breadcrumbs'][] = 'Register';
 					<div class="col-md-5">
 
 						<div class="btn-aclinks">
-							<a href="/login">Login</a> | 
-							<a href="/reset">Reset Account</a>
+							<a href="/login">login</a> | 
+							<a href="/reset">reset account</a>
 						</div>
 
 					</div>

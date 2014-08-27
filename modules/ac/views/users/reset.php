@@ -9,10 +9,10 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users Reset';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Account Reset';
 //$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 //$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
-$this->params['breadcrumbs'][] = 'Reset';
+$this->params['breadcrumbs'][] = 'Account Reset';
 ?>
 
 		<section id="site-breadcrumbs">
@@ -40,14 +40,14 @@ $this->params['breadcrumbs'][] = 'Reset';
 
 						<div class="ac-users-reset">
 						
-							<h1>Reset Account</h1>
+							<h1>Account Reset</h1>
 
 							<?php $form = ActiveForm::begin(); ?>
 
 							<?= $form->field($model, 'email')->textInput(['maxlength' => 150]) ?>
 
 							<div class="form-group">
-								<?= Html::submitButton('Reset Account', ['class' => 'btn btn-default']) ?>
+								<?= Html::submitButton('reset account', ['class' => 'btn btn-success btn-lg']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
@@ -60,8 +60,8 @@ $this->params['breadcrumbs'][] = 'Reset';
 					<div class="col-md-5">
 
 						<div class="btn-aclinks">
-							<a href="/login">Login</a> | 
-							<a href="/register">Register</a>
+							<a href="/login">login</a> | 
+							<a href="/register">register</a>
 						</div>
 
 					</div>

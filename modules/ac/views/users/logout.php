@@ -8,7 +8,7 @@ use yii\widgets\Breadcrumbs;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | Logout';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Logout';
 //$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 //$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Logout';

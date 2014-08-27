@@ -74,11 +74,12 @@ class ChangePasswordForm extends Model
 			
 			$data = array('user' => $user);
 			
-			$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/html/password-change', $data, true);
-			$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/text/password-change', $data, true);
+			$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/password-change/html', $data, true);
+			$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/password-change/text', $data, true);
 			
 			Yii::$app->mail->compose()
 				->setTo($user->email)
+				->setFrom([\Yii::$app->mail->transport->getUsername() => \Yii::$app->params['siteMeta']['title']])
 				->setSubject('Password Change')
 				->setTextBody($textBody)
 				->setHtmlBody($htmlBody)

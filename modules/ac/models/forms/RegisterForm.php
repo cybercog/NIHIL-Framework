@@ -116,12 +116,13 @@ class RegisterForm extends Model
 				
 				$data = array('user' => $user, 'authkey' => $authkey);
 			
-				$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/html/register', $data, true);
-				$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/text/register', $data, true);
+				$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/register/html', $data, true);
+				$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/register/text', $data, true);
 				
 				Yii::$app->mail->compose()
 					->setTo($this->email)
-					->setSubject('Welcome to The NIHIL Framework')
+					->setFrom([\Yii::$app->mail->transport->getUsername() => \Yii::$app->params['siteMeta']['title']])
+					->setSubject('Welcome to ' . \Yii::$app->params['siteMeta']['title'])
 					->setTextBody($textBody)
 					->setHtmlBody($htmlBody)
 					->send();

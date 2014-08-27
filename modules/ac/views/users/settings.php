@@ -8,9 +8,9 @@ use yii\widgets\Breadcrumbs;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users';
-$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
-$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Settings';
+//$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
+//$this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Settings';
 ?>
 
@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = 'Settings';
 
 						<div class="ac-users-index">
 
-							<h1>AC Users Settings</h1>
+							<h1>Settings</h1>
 							
 							<div class="table-responsive">
 							  <table class="table">
@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = 'Settings';
 									</tr>
 									<tr>
 										<th>Password</th>
-										<td><a href="/ac/users/change-password">Change Password</a></td>
+										<td><a href="/change-password">change password</a></td>
 									</tr>
 									<tr>
 										<th>Email</th>
@@ -71,7 +71,7 @@ $this->params['breadcrumbs'][] = 'Settings';
 									</tr>
 									<tr>
 										<th>Credit</th>
-										<td>$<?php echo $user->credit; ?> <a href="#">Add</a></td>
+										<td>$<?php echo $user->credit; ?> <a href="#">add</a></td>
 									</tr>
 								</tbody>
 							  </table>

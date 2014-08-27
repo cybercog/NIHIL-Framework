@@ -58,11 +58,12 @@ class ResetForm extends Model
 			
 			$data = array('user' => $user, 'authkey' => $authkey);
 			
-			$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/html/reset', $data, true);
-			$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/text/reset', $data, true);
+			$htmlBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/reset/html', $data, true);
+			$textBody = Yii::$app->controller->renderPartial('@app/modules/ac/emails/reset/text', $data, true);
 			
 			Yii::$app->mail->compose()
 				->setTo($this->email)
+				->setFrom([\Yii::$app->mail->transport->getUsername() => \Yii::$app->params['siteMeta']['title']])
 				->setSubject('Account Reset')
 				->setTextBody($textBody)
 				->setHtmlBody($htmlBody)

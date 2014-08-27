@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Users Verify';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Verify Account';
 $this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
 $this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users');
 $this->params['breadcrumbs'][] = 'Verify';
@@ -40,14 +40,14 @@ $this->params['breadcrumbs'][] = 'Verify';
 
 						<div class="ac-users-verify">
 
-							<h1>AC Users Verify</h1>
+							<h1>Verify Account</h1>
 							
 							<?php $form = ActiveForm::begin(); ?>
 
 							<?= $form->field($model, 'code')->textInput(['maxlength' => 100]) ?>
 
 							<div class="form-group">
-								<?= Html::submitButton('Verify Email', ['class' => 'btn btn-primary']) ?>
+								<?= Html::submitButton('verify email', ['class' => 'btn btn-success btn-lg']) ?>
 							</div>
 
 							<?php ActiveForm::end(); ?>
