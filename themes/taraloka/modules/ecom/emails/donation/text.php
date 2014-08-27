@@ -23,6 +23,6 @@ Signal Mountain, TN 37377
 
 *You received this email because you made a donation at The Taraloka Foundation online.
 
-https://www.taraloka.org
-https://www.taraloka.org/privacy
-https://www.taraloka.org/unsubscribe
+<?php echo \Yii::$app->params['siteMeta']['url']; ?>
+<?php echo \Yii::$app->params['siteMeta']['url']; ?>/pages/privacy
+<?php echo \Yii::$app->params['siteMeta']['url']; ?>/unsubscribe

@@ -285,9 +285,9 @@
                                                                     <td valign="top" align="right" style="color:#FFFFFF; font-family:Helvetica; font-size:12px; line-height:125%; text-align:Right; padding-bottom:20px;">
 																		 *You received this email because you made a <br />donation at <strong style="color:#afbd21;">The Taraloka Foundation</strong> online.
 																		 <ul style="padding:0;margin:0;">
-																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="https://www.taraloka.org" style="color:#ec008c;">www.taraloka.org</a></li>
-																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="https://www.taraloka.org/privacy" style="color:#ec008c;">privacy policy</a></li>
-																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="https://www.taraloka.org/unsubscribe" style="color:#ec008c;">unsubscribe</a></li>
+																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="<?php echo \Yii::$app->params['siteMeta']['url']; ?>" style="color:#ec008c;">www.taraloka.org</a></li>
+																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="<?php echo \Yii::$app->params['siteMeta']['url']; ?>/pages/privacy" style="color:#ec008c;">privacy policy</a></li>
+																			<li style="list-style:none;display:inline;margin:0;padding:0;"><a href="<?php echo \Yii::$app->params['siteMeta']['url']; ?>/unsubscribe" style="color:#ec008c;">unsubscribe</a></li>
 																		 </ul>
                                                                     </td>
                                                                 </tr>
