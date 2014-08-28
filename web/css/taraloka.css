@@ -78,10 +78,11 @@ a:hover{
 
 
 #site-header {
-	background-color:#292929;
+	/*background-color:#292929;*/
 	padding-top:20px;
 	padding-bottom:20px;
 	border-bottom:2px solid #afbd21;
+	background: #292929 url("../img/bg-weave1.png") repeat top right;
 }
 
 #header-cartnav {
@@ -98,7 +99,8 @@ a:hover{
 }
 
 .navbar-default {
-	background-color: #292929;
+	/*background-color: #292929;*/
+	background:transparent;
 	border: 0;
 }
 
@@ -271,14 +273,15 @@ color: #333;
 	color:#FFF;
 	border-top:5px solid #ec008c;
 	font-size:16px;
+	background: #292929 url("../img/bg-weave1.png") repeat top right;
 }
 
 #site-footer #footer-navigation {
-	background-color:#ec008c; /* pink */
-	background-color:#afbd21; /* green */
-	background-color:#3A3A3A;
-	background-color:#727272;
-	background-color:#292929;
+	/*background-color:#ec008c;*/ /* pink */
+	/*background-color:#afbd21;*/ /* green */
+	/*background-color:#3A3A3A;*/
+	/*background-color:#727272;*/
+	/*background-color:#292929;*/
 	height:272.5px;
 	padding-top:20px;
 	border-top:2px solid #afbd21;
@@ -321,7 +324,7 @@ color: #333;
 }
 
 #site-footer #footer-legal {
-	background-color:#292929;
+	/*background-color:#292929;*/
 	height:85px;
 	padding:30px 0;
 }

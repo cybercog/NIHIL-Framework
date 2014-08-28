@@ -82,6 +82,7 @@ a:hover{
 	padding-top:20px;
 	padding-bottom:20px;
 	border-bottom:2px solid #afbd21;
+	background: #292929 url("../img/bg-waeve1.png") repeat top right;
 }
 
 #header-cartnav {
