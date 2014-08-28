@@ -62,18 +62,18 @@ TaralokaAsset::register($this);
 								
 						<?php 
 							if(Yii::$app->user->isGuest) {
-								echo '<a href="' . Yii::$app->homeUrl . 'register" class="btn btn-mystic">Register</a>
-									<a href="' . Yii::$app->homeUrl . 'login" class="btn btn-mystic">Login</a>';
+								echo '<a href="' . Yii::$app->homeUrl . 'register" class="btn btn-mystic">register</a>
+									<a href="' . Yii::$app->homeUrl . 'login" class="btn btn-mystic">login</a>';
 							}else{
 								echo '<!-- Single button -->
 								<div class="btn-group">
 								  <a href="#" class="btn btn-mystic dropdown-toggle" data-toggle="dropdown">
-									Welcome ' . Yii::$app->user->identity->username . ' <span class="caret"></span>
+									welcome ' . Yii::$app->user->identity->username . ' <span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a href="/portal"><i class="fa fa-user"></i> Portal</a></li>
-									<li><a href="/settings"><i class="fa fa-gear"></i> Settings</a></li>
-									<li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+									<li><a href="/portal"><i class="fa fa-user"></i> portal</a></li>
+									<li><a href="/settings"><i class="fa fa-gear"></i> settings</a></li>
+									<li><a href="/logout"><i class="fa fa-sign-out"></i> logout</a></li>
 								  </ul>
 								</div>';
 							}
