@@ -46,7 +46,7 @@ class Cart extends Component
 		
 		$cData = $this->storage->load($this);
 		//die(print_r($cData));
-		if($cData['confirm_token']) {
+		if(isset($cData['confirm_token'])) {
 			$this->confirm_token = $cData['confirm_token'];
 		}
 		
