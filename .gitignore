@@ -35,4 +35,4 @@ phpunit.phar
 /config/web.php
 
 # Imgaes
-/web/img
+**/img
