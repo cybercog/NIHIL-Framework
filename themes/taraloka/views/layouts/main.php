@@ -51,7 +51,7 @@ TaralokaAsset::register($this);
 				
 					<!-- START: HEADER LOGO -->
 					<div class="col-sm-3 col-md-2">
-						<a href="<?php echo Yii::$app->homeUrl; ?>"><img class="img-responsive" src="<?php echo Yii::$app->homeUrl; ?>img/taraloka-logo.png" alt="The Taraloka Foundation" /></a>
+						<a href="<?php echo Yii::$app->homeUrl; ?>"><img class="img-responsive" src="<?php echo \Yii::$app->homeUrl; ?>img/taraloka-logo.png" alt="The Taraloka Foundation" /></a>
 					</div>
 					<!-- END: HEADER LOGO -->
 					
