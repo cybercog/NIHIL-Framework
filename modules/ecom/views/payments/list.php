@@ -6,7 +6,7 @@ use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 
-$this->title = 'uclemmer | Ecom Payments List';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Ecom Payments List';
 $this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
 $this->params['breadcrumbs'][] = ['label' => 'Payments', 'url' => '/ecom/payments'];
 $this->params['breadcrumbs'][] = 'List';
