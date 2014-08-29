@@ -35,4 +35,5 @@ phpunit.phar
 /config/web.php
 
 # Imgaes
-#**/img
+web/img/**
+web/themes/**/img/**
