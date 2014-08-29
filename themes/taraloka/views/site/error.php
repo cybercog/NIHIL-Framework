@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
  * @var Exception $exception
  */
 
-$this->title = 'uclemmer | Error';
+$this->title = Yii::$app->params['siteMeta']['title'] . ' | Error';
 $this->params['breadcrumbs'][] = 'Error';
 ?>
 		<!--
