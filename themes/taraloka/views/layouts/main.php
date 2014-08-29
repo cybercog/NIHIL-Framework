@@ -18,6 +18,7 @@ TaralokaAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?= $this->registerMetaTag(['author' => 'Uriah M. Clemmer IV']); ?>
 	<?= Html::csrfMetaTags() ?>
+	<link rel="icon" type="image/png" href="<?php echo \Yii::$app->homeUrl; ?>img/favicon/favicon_32x32.png">
 		
     <title><?= Html::encode($this->title) ?></title>
 	

@@ -7,7 +7,7 @@ $this->registerMetaTag(['description' => 'The Taraloka Foundation is a registere
 $this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation, tutorials, blog, books']);
 
 $this->registerMetaTag(['og:title' => 'Taraloka Foundation']);
-$this->registerMetaTag(['og:image' => 'http://www.taraloka.org/favicon/600x600.png']);
+$this->registerMetaTag(['og:image' => 'http://www.taraloka.org/img/favicon/512x512.png']);
 $this->registerMetaTag(['og:url' => 'http://www.taraloka.org']);
 $this->registerMetaTag(['og:site_name' => 'taraloka.org']);
 $this->registerMetaTag(['og:type' => 'website']);

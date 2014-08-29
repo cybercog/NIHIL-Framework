@@ -10,7 +10,7 @@ use app\modules\core\widgets\MailingListWidget;
 $this->title = Yii::$app->params['siteMeta']['title'] . ' | Shop';
 $this->params['breadcrumbs'][] = 'Shop';
 ?>
-
+		<!--
 		<section id="site-breadcrumbs">
 			<div class="container">
 				<div class="row">
@@ -28,6 +28,7 @@ $this->params['breadcrumbs'][] = 'Shop';
 				</div>
 			</div>
 		</section>
+		-->
 		
 		<section id="site-content">
 			<div class="container">
