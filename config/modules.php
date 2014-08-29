@@ -19,6 +19,9 @@ return [
 	'media' => [
 		'class' => 'app\modules\media\Module',
 	],
+	'pda' => [
+		'class' => 'app\modules\pda\Module',
+	],
 	//'social' => [
     //    'class' => 'app\modules\social\Module',
     //],
