@@ -387,13 +387,30 @@ class DonationForm extends Model {
 	{
 		$data = $this;
 		$data->card_number = $fdResponse->getCreditCardNumber();
-		
 		$transaction = new Transaction;
+		
 		$transaction->transaction_id = $fdResponse->getAuthNumber();
-		$transaction->ip_address = $fdResponse->getClientIp();
 		$transaction->timestamp = date('Y-m-d H:i:s');
 		$transaction->data_sent = serialize($data);
-		$transaction->data_received = serialize($fdResponse->getArrayResponse());
+		
+		if($fdResponse->isApproved()) {
+			$transaction->ip_address = $fdResponse->getClientIp();
+			$transaction->data_received = serialize($fdResponse->getArrayResponse());
+		}else{
+			//die(print_r($fdResponse));
+			$transaction->ip_address = \Yii::$app->request->getUserIP();
+			$da = array();
+			
+			if($fdResponse->isError()) {
+				$da[$fdResponse->getErrorCode()] = $fdResponse->getErrorMessage();
+			}
+			
+			if($fdResponse->getBankResponseCode() != 100) {
+				$da[$fdResponse->getBankResponseCode()] = $fdResponse->getBankResponseComments();
+			}
+
+			$transaction->data_received = serialize($da);
+		}
 		
 		return $transaction->save();
 	}
