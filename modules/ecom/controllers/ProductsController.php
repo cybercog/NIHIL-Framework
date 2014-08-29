@@ -68,7 +68,7 @@ class ProductsController extends Controller
 		$model = new AddToCartForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['cart']);
+            return $this->redirect(['/cart']);
         } else {
             return $this->render('view', [
                 'model' => $model,
