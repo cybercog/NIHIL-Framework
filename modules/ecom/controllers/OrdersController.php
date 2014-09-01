@@ -10,6 +10,12 @@ use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
+use app\modules\ecom\models\forms\OrderConfirmForm;
+use app\modules\ecom\models\forms\OrderPaymentForm;
+use app\modules\ecom\models\forms\ShippingAddressForm;
+use app\modules\ecom\models\forms\ShippingMethodForm;
+
+
 /**
  * OrdersController implements the CRUD actions for Order model.
  */
@@ -168,13 +174,53 @@ class OrdersController extends Controller
 		}
 		
 		if($step == 'shipping') {
-			return $this->render('shipping');
+
+			$model = new ShippingMethodForm;
+
+			if ($model->load(Yii::$app->request->post()) && $model->saveMethod()) {
+				return $this->redirect(['checkout', 'step' => 'payment']);
+			} else {
+				return $this->render('shipping', [
+					'model' => $model,
+				]);
+			}
+			
 		}elseif($step == 'payment') {
-			return $this->render('payment');
+		
+			$model = new OrderPaymentForm;
+
+			if ($model->load(Yii::$app->request->post()) && $model->authPayment()) {
+				return $this->redirect(['checkout', 'step' => 'confirm']);
+			} else {
+				return $this->render('payment', [
+					'model' => $model,
+				]);
+			}
+			
 		}elseif($step == 'confirm'){
-			return $this->render('confirm');
+		
+			$model = new OrderConfirmForm;
+
+			if ($model->load(Yii::$app->request->post()) && $model->confirmOrder()) {
+				return $this->redirect(['checkout', 'step' => 'success']);
+			} else {
+				return $this->render('confirm', [
+					'model' => $model,
+				]);
+			}
+			
 		}else{
-			return $this->render('checkout');
+		
+			$model = new ShippingAddressForm;
+
+			if ($model->load(Yii::$app->request->post()) && $model->calcUSPSShipping()) {
+				return $this->redirect(['checkout', 'step' => 'shipping']);
+			} else {
+				return $this->render('checkout', [
+					'model' => $model,
+				]);
+			}
+			
 		}
 
         

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 
@@ -31,13 +32,72 @@ $this->params['breadcrumbs'][] = 'Checkout';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
 
-						<div class="ecom-orders-index">
-							<h1>Checkout</h1>
-							<p>We first need your mailing address:</p>
+						<div class="ecom-payments-index">
+						
+							<div class="row">
+								<div class="col-sm-12">
+									<h1>Shipping Address</h1>
+									<p>First we need your shipping address.</p>
+								</div>
+							</div>
+							<?php $form = ActiveForm::begin([
+								'id' => 'ecom-checkoutshippingaddress-form',
+							]); ?>
+							
+							<div class="row">
+								<div class="col-md-6">
+									<?= $form->field($model, 'first_name') ?>
+								</div>
+								<div class="col-md-6">
+									<?= $form->field($model, 'last_name') ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-7">
+									<?= $form->field($model, 'email') ?>
+								</div>
+								<div class="col-md-5">
+									<?= $form->field($model, 'phone') ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<?= $form->field($model, 'address1') ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<?= $form->field($model, 'address2') ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-7">
+									<?= $form->field($model, 'city') ?>
+								</div>
+								<div class="col-md-2">
+									<?= $form->field($model, 'state')->dropDownList($model->statesDropdown(),['prompt'=>'']); ?>
+								</div>
+								<div class="col-md-3">
+									<?= $form->field($model, 'postal_code') ?>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<?= $form->field($model, 'comments')->textarea(['rows' => 5]) ?>
+								</div>
+							</div>
+
+							<?= Html::submitButton('continue', ['class' => 'btn btn-success btn-lg pull-right']) ?>
+
+							<?php ActiveForm::end(); ?>
+							
 						</div>
 
+					</div>
+					<div class="col-sm-3">
+					
 					</div>
 				</div>
 			</div>
