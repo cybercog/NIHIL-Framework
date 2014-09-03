@@ -1,11 +1,13 @@
 <?php
 namespace app\modules\ecom\components\usps;
 
+use app\modules\ecom\components\usps\USPSBase;
+use app\modules\ecom\components\usps\USPSAddress;
 /**
  * Load required classes
  */
-require_once('USPSBase.php');
-require_once('USPSAddress.php');
+//require_once('USPSBase.php');
+//require_once('USPSAddress.php');
 
 /**
  * USPS Address Verify Class

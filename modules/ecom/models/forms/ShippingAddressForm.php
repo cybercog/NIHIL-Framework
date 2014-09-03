@@ -111,31 +111,102 @@ class ShippingAddressForm extends Model
 	}
 	
 	
-	
+	// Get total volume of order items
+	// Select shipping container with volume > sum(volume order items)
+	// Volume of Container is 100%
+	// Fill with Order Items to 80%
+	// If remainder of order is <=10%, add to container
+	// Otherwise get new box
 	
 	
 	public function calcUSPSShipping()
 	{
 		$rate = new USPSRate;
 		
-		$package = new USPSRatePackage;
-		$package->setService(USPSRatePackage::SERVICE_FIRST_CLASS);
-		$package->setFirstClassMailType(USPSRatePackage::MAIL_TYPE_LETTER);
-		$package->setZipOrigination(91601);
-		$package->setZipDestination(91730);
-		$package->setPounds(0);
-		$package->setOunces(3.5);
-		$package->setContainer('');
-		$package->setSize(USPSRatePackage::SIZE_REGULAR);
-		$package->setField('Machinable', true);
+		$package1 = new USPSRatePackage;
+		$package1->setService(USPSRatePackage::SERVICE_ALL);
+		$package1->setFirstClassMailType(USPSRatePackage::MAIL_TYPE_PACKAGE_SERVICE);
+		$package1->setZipOrigination(\Yii::$app->params['usps']['origin_address']['zipcode']);
+		$package1->setZipDestination($this->postal_code);
+		$package1->setPounds(1);
+		$package1->setOunces(8);
+		$package1->setContainer(USPSRatePackage::CONTAINER_VARIABLE);
+		$package1->setSize(USPSRatePackage::SIZE_REGULAR);
+		$package1->setField('Width', 15);
+		$package1->setField('Length', 15);
+		$package1->setField('Height', 30);
+		
+		$package1->setField('Machinable', true);
 
 		// add the package to the rate stack
-		$rate->addPackage($package);
+		$rate->addPackage($package1);
 		
-		die(print_r($rate->getRate()));
+		//die(print_r($rate));
+		$c = $this->createVirtualContainer(15,30,15);
+		$this->printVirtualContainer($c);
+		//die(print_r($c));
+		//die(print count($c[0][0]));
+		
+		$rate->getRate();
+		
+		die(print_r($rate->getArrayResponse()));
 	}
 	
 	
+	
+	
+	
+	
+	public function createVirtualContainer($width, $length, $height) 
+	{
+		$ret = array_fill(0, floor($width), array_fill(0, floor($length), array_fill(0, floor($height), 0)));
+		return $ret;
+	}
+	
+	public function printVirtualContainer($vc)
+	{
+		$top = '<h1>Top</h1>' . "\n";
+		$bottom = '<h1>Bottom</h1>' . "\n";
+		$front = '<h1>Front</h1>' . "\n";
+		$right = '<h1>Right</h1>' . "\n";
+		$back = '<h1>Back</h1>' . "\n";
+		$left = '<h1>Left</h1>' . "\n";
+		
+		for($i = 0; $i < count($vc); $i++) {
+			for($j = 0; $j < count($vc[$i]); $j++) {
+				for($k = 0; $k < count($vc[$i][$j]); $k++) {
+					
+					// Top
+					if($k == count($vc[$i][$j])-1) {
+						$top .= $vc[$i][$j][$k] . ' ';
+					}
+					
+					// Bottom
+					if($k == 0) {
+						$bottom .= $vc[$i][$j][$k] . ' ';
+					}
+					
+				}
+			}
+			$top .= "<br />\n";
+			$bottom .= "<br />\n";
+		}
+		
+		die($top . $front . $right . $back . $left . $bottom);
+	}
+	
+	public function printVCTop($vc) 
+	{
+		$ret = '';
+		for($i = 0; $i < count($vc); $i++) {
+			for($j = 0; $j < count($vc[$i]); $j++) {
+				$ret .= $vc[$i][$j][count($vc[$i][$j])-1] . ' ';
+			}
+			$ret .= "<br />\n";
+		}
+		
+		return $ret;
+	}
 	
 	
 	

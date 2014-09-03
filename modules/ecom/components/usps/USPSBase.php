@@ -1,10 +1,11 @@
 <?php
 namespace app\modules\ecom\components\usps;
 
+use app\modules\ecom\components\usps\XMLParser;
 /**
  * Load required classes
  */
-require_once('XMLParser.php');
+//require_once('XMLParser.php');
 /**
  * USPS Base class
  * used to perform the actual api calls

@@ -1,10 +1,11 @@
 <?php
 namespace app\modules\ecom\components\usps;
 
+use app\modules\ecom\components\usps\USPSBase;
 /**
  * Load required classes
  */
-require_once('USPSBase.php');
+//require_once('USPSBase.php');
 /**
  * USPS Rate calculator class
  * used to get a rate for shipping methods
