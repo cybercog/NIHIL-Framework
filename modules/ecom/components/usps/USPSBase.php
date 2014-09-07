@@ -15,6 +15,8 @@ use app\modules\ecom\components\usps\XMLParser;
 class USPSBase {
   const LIVE_API_URL = 'http://production.shippingapis.com/ShippingAPI.dll';
   const TEST_API_URL = 'http://production.shippingapis.com/ShippingAPITest.dll';
+  const LIVE_API_URL_SSL = 'https://secure.shippingapis.com/ShippingAPI.dll';
+  const TEST_API_URL_SSL = 'https://secure.shippingapis.com/ShippingAPITest.dll';
 
   /**
    * @var string - the usps username provided by the usps website
@@ -93,6 +95,8 @@ class USPSBase {
     CURLOPT_TIMEOUT        => 60,
     CURLOPT_FRESH_CONNECT  => 1,
     CURLOPT_PORT       => 443,
+	CURLOPT_SSLVERSION => 3,
+	CURLOPT_SSL_CIPHER_LIST => 'SSLv3',
     CURLOPT_USERAGENT      => 'usps-php',
     CURLOPT_FOLLOWLOCATION => true,
     CURLOPT_RETURNTRANSFER => true,
