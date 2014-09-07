@@ -276,13 +276,8 @@ TaralokaAsset::register($this);
 					<!-- END: FOOTER NAVIGATION 2 -->
 					
 				</div>
-			
-			</div>
-		</div>
-		<div id="footer-legal">
-			<div class="container">
-			
-				<div class="row">
+				
+				<div class="row" id="footer-legal">
 				
 					<!-- START: FOOTER COPYRIGHT -->
 					<div class="col-sm-6">
