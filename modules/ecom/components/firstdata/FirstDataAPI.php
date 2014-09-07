@@ -1,6 +1,16 @@
 <?php
 namespace app\modules\ecom\components\firstdata;
 
+// configuring cURL not to verify the server certificate:
+//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+// setting the path where cURL can find the client certificate:
+//curl_setopt($ch, CURLOPT_SSLCERT, "C:\certs\WS101._.1.pem");
+// setting the path where cURL can find the client certificate’s
+// private key:
+//curl_setopt($ch, CURLOPT_SSLKEY, "C:\certs\WS101._.1.key");
+// setting the key password:
+//curl_setopt($ch, CURLOPT_SSLKEYPASSWD, " ckp_1256591851");
+
 /**
  * FirstData
  * Performs API calls to FirstData
@@ -77,6 +87,8 @@ class FirstDataAPI
 	    CURLOPT_FOLLOWLOCATION => false,
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_CUSTOMREQUEST  => 'POST',
+		CURLOPT_SSLVERSION => 3,
+		CURLOPT_SSL_CIPHER_LIST => 'SSLv3',
 		CURLOPT_HTTPHEADER	   => array('Content-Type: application/json; charset=UTF-8;','Accept: application/json' ),
 	);
 
