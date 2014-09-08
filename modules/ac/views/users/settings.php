@@ -35,48 +35,87 @@ $this->params['breadcrumbs'][] = 'Settings';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-5">
-
-						<div class="ac-users-index">
-
-							<h1>Settings</h1>
+					<div class="col-md-6">
+						<h1>Settings</h1>
+					</div>
+				</div>
+			
+				<div class="row">
+					<div class="col-md-6">
 							
-							<div class="table-responsive">
-							  <table class="table">
-								<thead>
-									<tr>
-										<th colspan="2"><h2>Profile</h2></th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>Username</th>
-										<td><?php echo $user->username; ?></td>
-									</tr>
-									<tr>
-										<th>Password</th>
-										<td><a href="/change-password">change password</a></td>
-									</tr>
-									<tr>
-										<th>Email</th>
-										<td><?php echo $user->email; ?></td>
-									</tr>
-									<tr>
-										<th>Nickname</th>
-										<td><?php echo $user->nickname; ?></td>
-									</tr>
-									<tr>
-										<th>Birthday</th>
-										<td><?php echo $user->birthday; ?></td>
-									</tr>
-									<tr>
-										<th>Credit</th>
-										<td>$<?php echo $user->credit; ?> <a href="#">add</a></td>
-									</tr>
-								</tbody>
-							  </table>
-							</div>
+						<div class="table-responsive">
+						  <table class="table">
+							<thead>
+								<tr>
+									<th colspan="2"><h2>Account Information</h2></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Username</th>
+									<td><?php echo $user->username; ?></td>
+								</tr>
+								<tr>
+									<th>Password</th>
+									<td><a href="/change-password">change password</a></td>
+								</tr>
+								<tr>
+									<th>Email</th>
+									<td><?php echo $user->email; ?></td>
+								</tr>
+								<tr>
+									<th>Nickname</th>
+									<td><?php echo $user->nickname; ?></td>
+								</tr>
+								<tr>
+									<th>Birthday</th>
+									<td><?php echo $user->birthday; ?></td>
+								</tr>
+								<tr>
+									<th>Credit</th>
+									<td>$<?php echo $user->credit; ?> <a href="#">add</a></td>
+								</tr>
+							</tbody>
+						  </table>
+						</div>
 
+					</div>
+					<div class="col-md-6">
+							
+						<div class="table-responsive">
+						  <table class="table">
+							<thead>
+								<tr>
+									<th colspan="2"><h2>Contact Information</h2></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Username</th>
+									<td><?php echo $user->username; ?></td>
+								</tr>
+								<tr>
+									<th>Password</th>
+									<td><a href="/change-password">change password</a></td>
+								</tr>
+								<tr>
+									<th>Email</th>
+									<td><?php echo $user->email; ?></td>
+								</tr>
+								<tr>
+									<th>Nickname</th>
+									<td><?php echo $user->nickname; ?></td>
+								</tr>
+								<tr>
+									<th>Birthday</th>
+									<td><?php echo $user->birthday; ?></td>
+								</tr>
+								<tr>
+									<th>Credit</th>
+									<td>$<?php echo $user->credit; ?> <a href="#">add</a></td>
+								</tr>
+							</tbody>
+						  </table>
 						</div>
 
 					</div>
