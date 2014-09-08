@@ -5,6 +5,7 @@ namespace app\modules\ac\controllers;
 use Yii;
 use app\modules\ac\models\Users;
 use app\modules\ac\models\AuthKeys;
+use app\modules\ecom\models\Customer;
 use app\modules\ac\models\search\UsersSearch;
 use app\modules\ac\models\forms\LoginForm;
 use app\modules\ac\models\forms\RegisterForm;
@@ -325,6 +326,7 @@ class UsersController extends Controller
 	
         return $this->render('settings', [
             'user' => Yii::$app->user->identity,
+			'customer' => Customer::find()->where(['user_id' => Yii::$app->user->identity->getUserID()])->one(),
         ]);
     }
 
@@ -343,4 +345,5 @@ class UsersController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
 }
