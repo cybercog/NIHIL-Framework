@@ -36,6 +36,21 @@ a:hover{
 	text-decoration:none;
 }
 
+.btn-mystic{
+	color:#afbd21;
+}
+
+.btn-mystic:hover{
+	color:#ec008c;
+	text-decoration:none;
+}
+
+.btn-group.open .dropdown-toggle {
+	color:#afbd21;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+}
+
 .btn-success {
 	background-color:#ec008c;
 	border:2px solid #afbd21;
@@ -54,7 +69,7 @@ a:hover{
 	height:34px !important;
 }
 
-.field-confirmform-token {
+.field-confirmform-token, .field-orderconfirmform-token {
 	display:none;
 }
 

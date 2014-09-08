@@ -72,8 +72,8 @@ TaralokaAsset::register($this);
 									welcome ' . Yii::$app->user->identity->username . ' <span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a href="/portal"><i class="fa fa-user"></i> portal</a></li>
-									<li><a href="/settings"><i class="fa fa-gear"></i> settings</a></li>
+									<li><a href="/account/overview"><i class="fa fa-home"></i> overview</a></li>
+									<li><a href="/account/settings"><i class="fa fa-gear"></i> settings</a></li>
 									<li><a href="/logout"><i class="fa fa-sign-out"></i> logout</a></li>
 								  </ul>
 								</div>';
