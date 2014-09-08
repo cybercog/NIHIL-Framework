@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = 'Shop';
 												<?php if($product->image) { ?>
 													<img class="img-responsive" src="<?php echo Yii::$app->homeUrl; ?>img/<?php echo $product->image; ?>" />
 												<?php }else{ ?>
-													<img class="img-responsive" src="http://placehold.it/600x600&text=Product" />
+													<img class="img-responsive" src="<?php echo Yii::$app->homeUrl; ?>img/Product_600x600.gif" />
 												<?php } ?>
 											</div>
 										</div>

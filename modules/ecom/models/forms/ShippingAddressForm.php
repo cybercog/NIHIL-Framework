@@ -5,6 +5,7 @@ namespace app\modules\ecom\models\forms;
 use Yii;
 use yii\base\Model;
 
+use app\modules\ecom\models\Invoice;
 use app\modules\ecom\models\ShippingAddress;
 
 use app\modules\ecom\components\usps\USPSRate;
@@ -25,7 +26,6 @@ class ShippingAddressForm extends Model
 	public $city;
 	public $state;
 	public $postal_code;
-	public $comments;
 
     /**
      * @var \amnah\yii2\user\models\User
@@ -39,7 +39,7 @@ class ShippingAddressForm extends Model
         return [
             [["first_name", "last_name", "email", "address1", "city", "state", "postal_code"], "required"],
             ["email", "email"],
-			[["phone", "address2", "comments"], "safe"],
+			[["phone", "address2"], "safe"],
         ];
     }
 	
@@ -117,6 +117,49 @@ class ShippingAddressForm extends Model
 	// Fill with Order Items to 80%
 	// If remainder of order is <=10%, add to container
 	// Otherwise get new box
+	
+	// $shipping_containers = array(
+		// 0 => array(
+			// 'name' => 'SM FLAT RATE BOX',
+			// 'width' => 8.625,
+			// 'length' => 5.375,
+			// 'height' => 1.625,
+			// 'volume' => 75.334,
+			// 'description' => '8 5/8" x 5 3/8" x 1 5/8"';
+		// ),
+		// 1 => array(
+			// 'name' => 'MD FLAT RATE BOX',
+			// 'width' => 11.000,
+			// 'length' => 8.500,
+			// 'height' => 5.500,
+			// 'volume' => 514.250,
+			// 'description' => '11" x 8 1/2" x 5 1/2"';
+		// ),
+		// 2 => array(
+			// 'name' => 'MD FLAT RATE BOX',
+			// 'width' => 13.675,
+			// 'length' => 11.875,
+			// 'height' => 3.375,
+			// 'volume' => 548.068,
+			// 'description' => '13 5/8" x 11 7/8" x 3 3/8"';
+		// ),
+		// 3 => array(
+			// 'name' => 'LG FLAT RATE BOX',
+			// 'width' => 12.000,
+			// 'length' => 12.000,
+			// 'height' => 5.500,
+			// 'volume' => 792.000,
+			// 'description' => '12" x 12" x 5 1/2"';
+		// ),
+		// 4 => array(
+			// 'name' => 'SM FLAT RATE ENVELOPE',
+			// 'width' => 10.000,
+			// 'length' => 6.000,
+			// 'height' => 0.250,
+			// 'volume' => 15.000,
+			// 'description' => '10" x 6" x 1/4"';
+		// ),
+	// );
 	
 	
 	public function calcUSPSShipping()
@@ -209,6 +252,71 @@ class ShippingAddressForm extends Model
 	}
 	
 	
+	
+	
+	
+	public function startCheckout()
+	{
+		// validate form
+		if ($this->validate()) {
+		
+			// get customer
+			$shipping_address = $this->saveShippingAddress();
+			
+			// save shipping address to cart session
+			if(\Yii::$app->cart->addShippingAddress($shipping_address)) {
+				return TRUE;
+			}
+			
+		}
+		
+		// invalid form
+		return FALSE;
+		
+	}
+	
+	public function saveShippingAddress() 
+	{
+		// find customer or create new customer
+		$shipping_address = ShippingAddress::find()
+			->where([
+				'first' => $this->first_name,
+				'last' => $this->last_name,
+				'email' => $this->email,
+				'address1' => $this->address1,
+				'city' => $this->city,
+				'state' => $this->state,
+				'zipcode' => $this->postal_code,
+				'country' => 'US'
+			])
+			->one();
+			
+		if(!$shipping_address) {
+			$shipping_address = new ShippingAddress;
+
+			$shipping_address->first = $this->first_name;
+			$shipping_address->last = $this->last_name;
+			$shipping_address->email = $this->email;
+			$shipping_address->address1 = $this->address1;
+			$shipping_address->city = $this->city;
+			$shipping_address->state = $this->state;
+			$shipping_address->zipcode = $this->postal_code;
+			$shipping_address->country = 'US';
+			if(isset($this->phone) AND $this->phone != '') {
+				$shipping_address->phone = $this->phone;
+			}
+			if(isset($this->address2) AND $this->address2 != '') {
+				$shipping_address->address2 = $this->address2;
+			}
+
+			if(!$shipping_address->save()) {
+				//die('bad shipping_address');
+				return FALSE;
+			}
+		}
+		
+		return $shipping_address->id;
+	}
 	
     
 }

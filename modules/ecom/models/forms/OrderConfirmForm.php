@@ -7,6 +7,7 @@ use yii\base\Model;
 
 use app\modules\ecom\models\Payment;
 use app\modules\ecom\models\Invoice;
+use app\modules\ecom\models\Order;
 use app\modules\ecom\models\Customer;
 use app\modules\ecom\models\Transaction;
 use app\modules\ecom\components\FirstData;
@@ -58,7 +59,66 @@ class OrderConfirmForm extends Model {
 		return TRUE;
 	}
 	
+	public function confirmOrder()
+	{
+		//
+		$data = $this->payInvoice();
+		
+		$products = array();
+		foreach($data['invoice']->invoiceItems as $item) {
+			$products[$item->product_attribute_id] = $item;
+		}
+		
+		$data['products'] = $products;
+		
+		// Create Order
+		if(!$this->createOrder($data)) {
+			return FALSE;
+		}
+		
+		die('Through');
+		
+		if(!$this->emailReceipt($data)) {
+			return FALSE;
+		}
+		
+		return TRUE;
+	}
 	
+	public function createOrder($data)
+	{
+		//die(print_r($data));
+	
+		$order = new Order;
+		
+		$order->customer_id = $data['invoice']->customer_id;
+		$order->shipping_id = $data['invoice']->shipping_id;
+		$order->shipping_method_id = \Yii::$app->cart->getShippingMethod();
+		$order->invoice_id = $data['invoice']->id;
+		$order->order_status_id = 1; // New
+		$order->date_created = date('Y-m-d H:i:s');
+		$order->ip_address = \Yii::$app->request->getUserIP();
+		$order->number_items = count($data['products']);
+		
+		foreach($data['products'] as $paid => $pa) {
+			
+			die(print_r($pa));
+			
+			$p = Product::find()->where(['id' => $pa->product_id])->one();
+			$a = Attribute::find()->where(['id' => $pa->attribute_id])->one();
+			
+			if(!$order->addLineItem($paid, $qty, $p->name . ' - ' . $a->name)) {
+				return FALSE;
+			}
+			
+		}
+		
+		if(!$order->update()) {
+			return FALSE;
+		}
+		
+		return TRUE;
+	}
 	
 	public function emailReceipt($data)
 	{
@@ -99,7 +159,7 @@ class OrderConfirmForm extends Model {
 				//update payment_type_id and invoice_status_id
 				$invoice->invoice_status_id = 3; // Paid
 				$invoice->date_paid = date('Y-m-d H:i:s');
-				$payment->payment_type_id = 2; // Donation
+				$payment->payment_type_id = 1; // Payment
 				$pdc = $payment->date_created;
 				$ptid = $payment->transaction_id;
 				$payment->transaction_id = $d->getAuthNumber();
@@ -110,7 +170,7 @@ class OrderConfirmForm extends Model {
 					return FALSE;
 				}	
 			
-			}elseif($payment->payment_type_id == 2) {
+			}elseif($payment->payment_type_id == 1) {
 			
 				//payment is good
 				//update invoice_status_id
@@ -124,7 +184,7 @@ class OrderConfirmForm extends Model {
 		
 		}
 	
-		if($invoice->invoice_status_id == 3 AND $payment->payment_type_id == 2) {
+		if($invoice->invoice_status_id == 3 AND $payment->payment_type_id == 1) {
 			$customer = Customer::find()->where(['id' => $invoice->customer_id])->one();
 			return array('invoice' => $invoice, 'payment' => $payment, 'customer' => $customer);
 		}

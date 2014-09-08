@@ -98,7 +98,7 @@ class Invoice extends \yii\db\ActiveRecord
      */
     public function getShipping()
     {
-        return $this->hasOne(EcomShippingAddresses::className(), ['id' => 'shipping_id']);
+        return $this->hasOne(ShippingAddress::className(), ['id' => 'shipping_id']);
     }
 
     /**
@@ -106,7 +106,7 @@ class Invoice extends \yii\db\ActiveRecord
      */
     public function getInvoiceStatus()
     {
-        return $this->hasOne(EcomInvoiceStatuses::className(), ['id' => 'invoice_status_id']);
+        return $this->hasOne(InvoiceStatus::className(), ['id' => 'invoice_status_id']);
     }
 
     /**
@@ -114,7 +114,7 @@ class Invoice extends \yii\db\ActiveRecord
      */
     public function getPayment()
     {
-        return $this->hasOne(EcomPayments::className(), ['id' => 'payment_id']);
+        return $this->hasOne(Payment::className(), ['id' => 'payment_id']);
     }
 
     /**
@@ -122,23 +122,23 @@ class Invoice extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(EcomCustomers::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEcomOrders()
+    public function getOrders()
     {
-        return $this->hasMany(EcomOrders::className(), ['invoice_id' => 'id']);
+        return $this->hasMany(Order::className(), ['invoice_id' => 'id']);
     }
 	
-	public function addLineItem($pid, $name, $qty, $price, $total, $taxed, $description, $details = NULL)
+	public function addLineItem($paid, $name, $qty, $price, $total, $taxed, $description, $details = NULL)
 	{
 		$invoiceItem = new InvoiceItem;
 		
 		$iItem = InvoiceItem::find()
-			->where(['invoice_id' => $this->id, 'product_id' => $pid])
+			->where(['invoice_id' => $this->id, 'product_attribute_id' => $paid])
 			->one();
 		
 		if($iItem) {
@@ -151,7 +151,44 @@ class Invoice extends \yii\db\ActiveRecord
 		}else{
 
 			$invoiceItem->invoice_id = $this->id;
-			$invoiceItem->product_id = $pid;
+			$invoiceItem->product_attribute_id = $paid;
+			$invoiceItem->name = $name;
+			$invoiceItem->quantity = $qty;
+			$invoiceItem->unit_price = $price;
+			$invoiceItem->total = $total;
+			$invoiceItem->taxed = $taxed;
+			$invoiceItem->description = $description;
+			$invoiceItem->details = $details;
+			
+			if($invoiceItem->save()) {
+				return TRUE;
+			}
+			
+		}
+		
+		return FALSE;
+		
+	}
+	
+	public function newAddLineItem($paid, $name, $qty, $price, $total, $taxed, $description, $details = NULL)
+	{
+		$invoiceItem = new InvoiceItem;
+		
+		$iItem = InvoiceItem::find()
+			->where(['invoice_id' => $this->id, 'product_attribute_id' => $paid])
+			->one();
+		
+		if($iItem) {
+			$iItem->quantity += $qty;
+			
+			if($iItem->save()) {
+				return TRUE;
+			}
+			
+		}else{
+
+			$invoiceItem->invoice_id = $this->id;
+			$invoiceItem->product_attribute_id = $paid;
 			$invoiceItem->name = $name;
 			$invoiceItem->quantity = $qty;
 			$invoiceItem->unit_price = $price;

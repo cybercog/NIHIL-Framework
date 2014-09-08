@@ -6,6 +6,7 @@ use yii\base\InvalidParamException;
 use yii\web\Session;
 use app\modules\ecom\models\ProductAttribute;
 use app\modules\ecom\models\Product;
+use app\modules\ecom\models\ShippingAddress;
 
 class Cart extends Component
 {
@@ -15,6 +16,8 @@ class Cart extends Component
 	protected $tax;
 	protected $shipping;
 	protected $total;
+	protected $shipping_address;
+	protected $shipping_method;
 	protected $confirm_token;
 	
 	/**
@@ -58,6 +61,10 @@ class Cart extends Component
 			$this->total = $cData['total'];
 		}else{
 			$this->recalcTotals();
+		}
+		
+		if(!empty($cData['shipping_address'])) {
+			$this->shipping_address = $cData['shipping_address'];
 		}
     }
 
@@ -112,6 +119,8 @@ class Cart extends Component
 		$this->tax = 0;
 		$this->shipping = 0;
 		$this->total = 0;
+		$this->shipping_address = NULL;
+		$this->shipping_method = NULL;
 		$this->confirm_token = NULL;
 
         $save && $this->storage->save($this);
@@ -133,6 +142,7 @@ class Cart extends Component
 			return FALSE;
         }
         unset($this->items[$uniqueId]);
+		$this->shipping_method = NULL;
 		
 		$this->recalcTotals();
 
@@ -157,6 +167,9 @@ class Cart extends Component
 			if($item['productAttribute']->id == $productAttribute->id) {
 				$key = $k;
 				$qty = ($item['quantity'] + $quantity);
+				if($qty > $productAttribute->stock) {
+					return 'quantity-error';
+				}
 				break;
 			}
 		}
@@ -236,6 +249,8 @@ class Cart extends Component
 				'tax' => $this->getTax(),
 				'shipping' => $this->getShipping(),
 				'total' => $this->getTotal(),
+				'shipping_address' => $this->getShippingAddress(),
+				'shipping_method' => $this->getShippingMethod(),
 				'confirm_token' => $this->getConfirmToken(),
 			);
 		}
@@ -356,6 +371,42 @@ class Cart extends Component
         return $this->confirm_token;
     }
 	
+	/**
+     * @param $total
+     * @return Cart
+     */
+    public function setShippingAddress(ShippingAddress $shipping_address)
+    {
+        $this->shipping_address = $shipping_address;
+        return $this;
+    }
+
+    /**
+     * @return total
+     */
+    public function getShippingAddress()
+    {
+        return $this->shipping_address;
+    }
+	
+	/**
+     * @param $total
+     * @return Cart
+     */
+    public function setShippingMethod($id)
+    {
+        $this->shipping_method = $id;
+        return $this;
+    }
+
+    /**
+     * @return total
+     */
+    public function getShippingMethod()
+    {
+        return $this->shipping_method;
+    }
+	
 	public function confirmOrderCart($token, $save = TRUE) {
 		$this->confirm_token = $token;
 		
@@ -373,9 +424,9 @@ class Cart extends Component
 				
 				$product = Product::getProduct($item['productAttribute']->product_id);
 				
-				$this->subtotal += ($item['quantity'] * ($product->price + $item['productAttribute']->additional_price));
-				$this->tax = $this->subtotal * $this->tax_rate;
-				$this->total = $this->subtotal + $this->tax + $this->shipping;
+				$this->subtotal += number_format(($item['quantity'] * ($product->price + $item['productAttribute']->additional_price)),2);
+				$this->tax = number_format($this->subtotal * $this->tax_rate, 2);
+				$this->total = number_format($this->subtotal + $this->tax + $this->shipping, 2);
 			}
 			
 		}else{
@@ -387,6 +438,24 @@ class Cart extends Component
 		
 		$save && $this->storage->save($this);
         return $this;
+	}
+	
+	public function addShippingAddress($shipping_address, $save = TRUE)
+	{
+		$this->shipping_address = $shipping_address;
+		
+		$save && $this->storage->save($this);
+		return $this;
+	}
+	
+	public function addShippingRate($shipping_rate, $save = TRUE)
+	{
+		$this->shipping = number_format($shipping_rate,2);
+		
+		$save && $this->storage->save($this);
+		
+		$this->recalcTotals();
+		return $this;
 	}
 	
 

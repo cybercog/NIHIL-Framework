@@ -43,7 +43,7 @@ class CartWidget extends Widget
 											<td>' . $item['quantity'] . '</td>
 											<td>' . $product->name . '</td>
 											<td>$' . number_format(($item['quantity'] * ($product->price + $item['productAttribute']->additional_price )), 2) . '</td>
-											<td><a href="/cart"><i class="fa fa-edit"></i></a> <a href="/cart/remove/' . $key . '"><i class="fa fa-times"></i></a></td>
+											<td><a href="/cart/remove/' . $key . '"><i class="fa fa-times"></i></a></td>
 										</tr>';
 			}			
 										
@@ -69,7 +69,7 @@ class CartWidget extends Widget
 								</table>
 							</div>
 							<div class="col-xs-12">
-								<a href="/checkout" class="btn btn-lg btn-block btn-success">checkout</a>
+								<a href="/cart" class="btn btn-lg btn-block btn-success">view cart</a>
 							</div>
 						</div>';
 		}else{
@@ -143,7 +143,7 @@ class CartWidget extends Widget
 								</table>
 							</div>
 							<div class="col-xs-12">
-								<a href="/checkout" class="btn btn-lg btn-block btn-success">checkout</a>
+								<a href="/cart" class="btn btn-lg btn-block btn-success">view cart</a>
 							</div>
 						</div>';
     }

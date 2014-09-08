@@ -4,6 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use yii\widgets\ActiveForm;
 
+use app\modules\ecom\components\CartWidget;
+use app\modules\core\widgets\MailingListWidget;
+
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->params['siteMeta']['title'] . ' | Checkout';
@@ -44,7 +47,7 @@ $this->params['breadcrumbs'][] = 'Payment';
 							</div>
 							<?php $form = ActiveForm::begin([
 								'id' => 'ecom-orderpayment-form',
-								'options' => ['onsubmit' => '$("#processingModal").modal("show");'],
+								'options' => ['onsubmit' => '$("#processingModal").modal("show");setTimeout(function(){$("#processingModal").modal("hide")}, 3000);'],
 							]); ?>
 							<div class="row">
 								<div class="col-md-5">
@@ -97,6 +100,11 @@ $this->params['breadcrumbs'][] = 'Payment';
 									<?= $form->field($model, 'postal_code') ?>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<?= $form->field($model, 'comments')->textarea(['rows' => 5]) ?>
+								</div>
+							</div>
 							
 							<a href="/checkout/shipping" class="btn btn-lg btn-success pull-left">back</a>
 							<?= Html::submitButton('continue', ['class' => 'btn btn-success btn-lg pull-right']) ?>
@@ -123,6 +131,8 @@ $this->params['breadcrumbs'][] = 'Payment';
 
 					</div>
 					<div class="col-sm-3">
+						
+						<?= MailingListWidget::widget(); ?>
 					
 					</div>
 				</div>

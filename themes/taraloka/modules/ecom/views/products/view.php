@@ -77,7 +77,6 @@ $this->params['breadcrumbs'][] = $product->name;
 									</div>
 									<?php $form = ActiveForm::begin([
 										'id' => 'ecom-addtocart-form',
-										//'options' => ['onsubmit' => '$("#processingModal").modal("show");'],
 									]); ?>
 									<div class="row">
 										<div class="col-sm-2">

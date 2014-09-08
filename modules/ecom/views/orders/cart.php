@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = 'Cart';
 		<section id="site-content">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-12">
+					<div class="col-md-9">
 
 						<div class="ecom-orderitems-index">
 							<h1>Cart</h1>

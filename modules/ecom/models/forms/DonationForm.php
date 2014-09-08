@@ -8,6 +8,7 @@ use yii\base\Model;
 use app\modules\ecom\models\Payment;
 use app\modules\ecom\models\Invoice;
 use app\modules\ecom\models\Customer;
+use app\modules\ecom\models\Product;
 use app\modules\ecom\models\Transaction;
 use app\modules\ecom\components\FirstData;
 
@@ -278,6 +279,7 @@ class DonationForm extends Model {
 				$this->addError('card_exp_year', 'Bad year.');
 			}else{
 				// Unknown Error
+				die(print_r($firstData));
 				$this->addError('card_number', 'Unknown Processing Error.');
 			}
 			
@@ -330,7 +332,11 @@ class DonationForm extends Model {
 				return FALSE;
 			}
 			
-			if(!$invoice->addLineItem(1, 'Donation', 1, $payment->amount, $payment->amount, 0, 'General funding donation.')) {
+			// 6 is Donation
+			$p = Product::find()->where(['id' => 6])->one();
+			
+			// 22 is Donation
+			if(!$invoice->addLineItem(22, $p->name, 1, $payment->amount, $payment->amount, 0, $p->description)) {
 				return FALSE;
 			}
 		

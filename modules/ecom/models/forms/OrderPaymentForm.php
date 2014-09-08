@@ -6,6 +6,8 @@ use Yii;
 use yii\base\Model;
 
 use app\modules\ecom\models\Payment;
+use app\modules\ecom\models\Product;
+use app\modules\ecom\models\Attribute;
 use app\modules\ecom\models\Invoice;
 use app\modules\ecom\models\Customer;
 use app\modules\ecom\models\Transaction;
@@ -14,7 +16,8 @@ use app\modules\ecom\components\FirstData;
 /**
  * DonateForm is the model behind the donate form.
  */
-class OrderPaymentForm extends Model {
+class OrderPaymentForm extends Model
+{
 
     public $first_name;
     public $last_name;
@@ -29,6 +32,7 @@ class OrderPaymentForm extends Model {
 	public $city;
 	public $state;
 	public $postal_code;
+	public $comments;
 
     /**
      * @var \amnah\yii2\user\models\User
@@ -40,11 +44,10 @@ class OrderPaymentForm extends Model {
      */
     public function rules() {
         return [
-            [["amount", "first_name", "last_name", "card_number", "card_exp_month", "card_exp_year", "card_cvv2", "email", "address1", "city", "state", "postal_code"], "required"],
+            [["first_name", "last_name", "card_number", "card_exp_month", "card_exp_year", "card_cvv2", "email", "address1", "city", "state", "postal_code"], "required"],
             ["card_number", "validateCardNumber"],
             ["email", "email"],
-			["amount", "match", 'pattern'=>'/^[0-9]{1,9}(\.[0-9]{0,2})?$/'],
-			[["phone", "address2"], "safe"],
+			[["phone", "address2", "comments"], "safe"],
         ];
     }
 	
@@ -54,13 +57,13 @@ class OrderPaymentForm extends Model {
     public function attributeLabels()
     {
         return [
-            'amount' => 'Amount',
             'card_number' => 'Card Number',
 			'card_exp_month' => 'Month',
 			'card_exp_year' => 'Year',
 			'card_cvv2' => 'CVV2',
             'first_name' => 'First Name',
             'last_name' => 'Last Name',
+			'comments' => 'Comments',
         ];
     }
 	
@@ -152,7 +155,7 @@ class OrderPaymentForm extends Model {
 	
 	
 	
-	public function fdAuthorizeDonation()
+	public function fdAuthorizeTransaction()
 	{
 		// validate form
 		if ($this->validate()) {
@@ -166,7 +169,9 @@ class OrderPaymentForm extends Model {
 			}
 			
 			// check for invoice
-			$invoice = $this->getAuthorizedInvoice($customer->id, $payment);
+			if(!$invoice = $this->getAuthorizedInvoice($customer->id, $payment)){
+				return FALSE;
+			}
 			
 			return $invoice->token;
 		}
@@ -193,7 +198,7 @@ class OrderPaymentForm extends Model {
 				'payment_type_id' => 5, // 5 = Authorization
 				'customer_id' => $cid,
 				'account_number' => 'XXXX' . substr($this->card_number, -4),
-				'amount' => $this->amount,
+				'amount' => \Yii::$app->cart->getTotal(),
 			])
 			->andWhere('date_created > :threshold', [':threshold' => date('Y-m-d H:i:s', time() - (30 * 24 * 60 * 60))])
 			->one();
@@ -212,7 +217,7 @@ class OrderPaymentForm extends Model {
 			
 			$payment->customer_id = $cid;
 			$payment->payment_type_id = 5;
-			$payment->amount = $this->amount;
+			$payment->amount = \Yii::$app->cart->getTotal();
 			$payment->date_created = date('Y-m-d H:i:s', $t);
 			$payment->payment_method_id = 5;
 			$payment->account_type = $data->getCreditCardType();
@@ -243,7 +248,7 @@ class OrderPaymentForm extends Model {
 		$firstData->setCreditCardNumber($this->card_number)
 				  ->setCreditCardName($this->first_name . ' ' . $this->last_name)
 				  ->setCreditCardExpiration(str_pad($this->card_exp_month, 2, '0', STR_PAD_LEFT) . $this->card_exp_year)
-				  ->setAmount($this->amount)
+				  ->setAmount(\Yii::$app->cart->getTotal())
 				  ->setCreditCardVerification($this->card_cvv2)
 				  ->setCreditCardAddress($addr[0])
 				  ->setCreditCardZipCode($this->postal_code)
@@ -309,26 +314,42 @@ class OrderPaymentForm extends Model {
 		
 			$invoice = new Invoice;
 			
-			$invoice->invoice_number = 'DR-' . date('YmdGis', strtotime($payment->date_created));
+			$invoice->invoice_number = 'O-' . date('YmdGis', strtotime($payment->date_created));
 			$invoice->customer_id = $cid;
 			$invoice->payment_id = $payment->id;
+			$invoice->shipping_id = \Yii::$app->cart->getShippingAddress();
 			$invoice->invoice_status_id = 4;
 			$invoice->date_created = $payment->date_created;
 			$invoice->date_due = date('Y-m-d H:i:s', strtotime($payment->date_created) + (30 * 24 * 60 * 60));
 			$invoice->subtotal = $payment->amount;
-			$invoice->shipping = 0.00;
+			$invoice->shipping = \Yii::$app->cart->getShipping();
 			$invoice->credit = 0.00;
-			$invoice->tax = 0.00;
+			$invoice->tax = \Yii::$app->cart->getTax();
 			$invoice->tax_rate = 0.00;
-			$invoice->total = $payment->amount;
+			$invoice->total = \Yii::$app->cart->getTotal();
 			$invoice->token = MD5($invoice->invoice_number . $invoice->date_created . $invoice->total);
 			
 			if(!$invoice->save()) {
 				return FALSE;
 			}
 			
-			if(!$invoice->addLineItem(1, 'Donation', 1, $payment->amount, $payment->amount, 0, 'General funding donation.')) {
-				return FALSE;
+			
+			foreach(\Yii::$app->cart->getItems() as $item) {
+				$p = Product::find()
+					->where([
+					'id' => $item['productAttribute']->product_id,
+				])
+				->one();
+				//die(print_r($p));
+				$a = Attribute::find()
+					->where([
+					'id' => $item['productAttribute']->attribute_id,
+				])
+				->one();
+				//die(print_r($a));
+				if(!$invoice->addLineItem($p->id, $p->name . ' - ' . $a->name, $item['quantity'], ($p->price + $item['productAttribute']->additional_price), ($item['quantity']*($p->price + $item['productAttribute']->additional_price)), 0, $p->description )) {
+					return FALSE;
+				}
 			}
 		
 		}

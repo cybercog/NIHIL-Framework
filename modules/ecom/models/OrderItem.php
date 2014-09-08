@@ -4,12 +4,15 @@ namespace app\modules\ecom\models;
 
 use Yii;
 
+use app\modules\ecom\models\ProductAttribute;
+use app\modules\ecom\models\Order;
+
 /**
  * This is the model class for table "ecom_order_items".
  *
  * @property integer $id
  * @property integer $order_id
- * @property integer $product_id
+ * @property integer $product_attribute_id
  * @property integer $quantity
  * @property string $description
  * @property string $details
@@ -33,7 +36,7 @@ class OrderItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_id', 'product_id', 'quantity'], 'integer'],
+            [['order_id', 'product_attribute_id', 'quantity'], 'integer'],
             [['description', 'details'], 'string']
         ];
     }
@@ -46,7 +49,7 @@ class OrderItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'order_id' => 'Order ID',
-            'product_id' => 'Product ID',
+            'product_attribute_id' => 'Product Attribute ID',
             'quantity' => 'Quantity',
             'description' => 'Description',
             'details' => 'Details',
@@ -56,9 +59,9 @@ class OrderItem extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProduct()
+    public function getProductAttribute()
     {
-        return $this->hasOne(EcomProducts::className(), ['id' => 'product_id']);
+        return $this->hasOne(ProductAttribute::className(), ['id' => 'product_attribute_id']);
     }
 
     /**
@@ -66,6 +69,6 @@ class OrderItem extends \yii\db\ActiveRecord
      */
     public function getOrder()
     {
-        return $this->hasOne(EcomOrders::className(), ['id' => 'order_id']);
+        return $this->hasOne(Order::className(), ['id' => 'order_id']);
     }
 }

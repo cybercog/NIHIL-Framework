@@ -4,6 +4,8 @@ namespace app\modules\ecom\models;
 
 use Yii;
 
+use app\modules\ecom\models\OrderItem;
+
 /**
  * This is the model class for table "ecom_orders".
  *
@@ -73,9 +75,9 @@ class Order extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEcomOrderItems()
+    public function getOrderItems()
     {
-        return $this->hasMany(EcomOrderItems::className(), ['order_id' => 'id']);
+        return $this->hasMany(OrderItem::className(), ['order_id' => 'id']);
     }
 
     /**
@@ -83,7 +85,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getOrderStatus()
     {
-        return $this->hasOne(EcomOrderStatuses::className(), ['id' => 'order_status_id']);
+        return $this->hasOne(OrderStatus::className(), ['id' => 'order_status_id']);
     }
 
     /**
@@ -91,7 +93,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getCustomer()
     {
-        return $this->hasOne(EcomCustomers::className(), ['id' => 'customer_id']);
+        return $this->hasOne(Customer::className(), ['id' => 'customer_id']);
     }
 
     /**
@@ -99,7 +101,7 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getShipping()
     {
-        return $this->hasOne(EcomShippingAddresses::className(), ['id' => 'shipping_id']);
+        return $this->hasOne(ShippingAddress::className(), ['id' => 'shipping_id']);
     }
 
     /**
@@ -107,6 +109,39 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getInvoice()
     {
-        return $this->hasOne(EcomInvoices::className(), ['id' => 'invoice_id']);
+        return $this->hasOneInvoice::className(), ['id' => 'invoice_id']);
     }
+	
+	public function addLineItem($paid, $qty, $description, $details = NULL)
+	{
+		$orderItem = new OrderItem;
+		
+		$oItem = OrderItem::find()
+			->where(['order_id' => $this->id, 'product_attribute_id' => $paid])
+			->one();
+		
+		if($oItem) {
+			$oItem->quantity += $qty;
+			
+			if($oItem->save()) {
+				return TRUE;
+			}
+			
+		}else{
+
+			$orderItem->order_id = $this->id;
+			$orderItem->product_attribute_id = $paid;
+			$orderItem->quantity = $qty;
+			$orderItem->description = $description;
+			$orderItem->details = $details;
+			
+			if($orderItem->save()) {
+				return TRUE;
+			}
+			
+		}
+		
+		return FALSE;
+		
+	}
 }

@@ -3,6 +3,9 @@
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 
+use app\modules\ecom\components\CartWidget;
+use app\modules\core\widgets\MailingListWidget;
+
 /* @var $this yii\web\View */
 
 $this->title = Yii::$app->params['siteMeta']['title'] . ' | Checkout';
@@ -97,6 +100,11 @@ $this->params['breadcrumbs'][] = 'Payment';
 									<?= $form->field($model, 'postal_code') ?>
 								</div>
 							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<?= $form->field($model, 'comments')->textarea(['rows' => 5]) ?>
+								</div>
+							</div>
 
 							<?= Html::submitButton('continue', ['class' => 'btn btn-success btn-lg pull-right']) ?>
 
@@ -123,6 +131,8 @@ $this->params['breadcrumbs'][] = 'Payment';
 
 					</div>
 					<div class="col-sm-3">
+						
+						<?= MailingListWidget::widget(); ?>
 					
 					</div>
 				</div>

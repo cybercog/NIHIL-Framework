@@ -45,8 +45,9 @@ class ConfirmForm extends Model {
 		
 		//die(print_r($data));
 		
+		$products = array();
 		foreach($data['invoice']->invoiceItems as $item) {
-			$products[$item->product_id] = $item;
+			$products[$item->product_attribute_id] = $item;
 		}
 		
 		$data['products'] = $products;

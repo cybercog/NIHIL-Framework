@@ -43,7 +43,17 @@ class AddToCartForm extends Model {
 	{
 		$paModel = new ProductAttribute;
 		$pa = $paModel->getProductAttribute($this->paid);
-		\Yii::$app->cart->add($pa, $this->qty);
+		
+		if (!$pa OR ($this->qty > $pa->stock)) {
+            $this->addError('qty', 'Only ' . $pa->stock . ' in stock.');
+			return FALSE;
+        }
+		
+		if(\Yii::$app->cart->add($pa, $this->qty) == 'quantity-error'){
+			$this->addError('qty', 'Only ' . $pa->stock . ' in stock.');
+			return FALSE;
+		}
+		
 		return TRUE;
 	}
 	
