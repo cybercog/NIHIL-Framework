@@ -209,4 +209,7 @@ class Users extends ActiveRecord implements IdentityInterface
         return $dropdown;
     }
 	
+	public function getUserID() {
+		return $this->id;
+	}
 }
