@@ -73,6 +73,18 @@ a:hover{
 	display:none;
 }
 
+.label-invoice {
+	display:block;
+	font-size: 3.5em;
+}
+
+.label-paid {
+	background:#FFF;
+	color:#d9534f;
+	text-transform:uppercase;
+	border: 5px solid #d9534f;
+}
+
 
 
 
