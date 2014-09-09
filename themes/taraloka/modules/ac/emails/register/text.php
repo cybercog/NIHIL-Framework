@@ -5,7 +5,7 @@ Thank you for registering with The Taraloka Foundation.  Use the following code 
 
     Verification Code: <?php echo $authkey->key; ?>
     
-of go to the following link:
+or go to the following link:
 
 <?php echo \Yii::$app->params['siteMeta']['url']; ?>/verify/<?php echo $authkey->key; ?>
 

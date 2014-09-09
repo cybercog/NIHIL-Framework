@@ -34,10 +34,12 @@ class ChangePasswordForm extends Model
      *
      * @return boolean whether the user is logged in successfully
      */
-    public function changePassword($authkey)
+    public function changePassword($code)
     {
         if ($this->validate()) {
-
+			
+			$authkey = AuthKeys::find()->where(['key' => $code])->one();
+			
 			// Get User
 			$user = Users::findIdentity($authkey->user_id);
 			

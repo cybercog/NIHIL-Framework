@@ -228,15 +228,15 @@ class UsersController extends Controller
 			//
 			$model->code = $code;
 			if ($user = $model->verify()) {
-				return $this->redirect('/ac/users/login',302);
+				return $this->redirect('/login',302);
             }else{
-				return $this->redirect('/ac/users/verify',302);
+				return $this->redirect('/verify',302);
 			}
 		}
 	
 		if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->verify()) {
-				return $this->redirect('/ac/users/login',302);
+				return $this->redirect('/login',302);
             }
         }
 
@@ -253,7 +253,7 @@ class UsersController extends Controller
     public function actionReset()
     {
 		if(!\Yii::$app->user->isGuest) {
-			return $this->redirect('/ac/users',302);
+			return $this->redirect('/account/overview',302);
 		}
 		
 		if (!\Yii::$app->user->can('acUsersReset')) {
@@ -283,10 +283,10 @@ class UsersController extends Controller
 		$model = new ChangePasswordForm();
 		
 		if(\Yii::$app->user->isGuest AND !$authkey = AuthKeys::findByCode($code, 4)) {
-			return $this->redirect('/ac/users/reset',302);
+			return $this->redirect('/reset',302);
 		}
 		
-		if (!\Yii::$app->user->can('acUsersChangePassword')) {
+		if (!\Yii::$app->user->can('acUsersChangePassword', ['key' => $code])) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 		
@@ -295,13 +295,13 @@ class UsersController extends Controller
 				
 				if($user = $model->changeOwnPassword()) {
 					Yii::$app->user->logout();
-					return $this->redirect('/ac/users/login',302);
+					return $this->redirect('/login',302);
 				}
 				
 			}else{
 			
-				if ($user = $model->changePassword($authkey)) {
-					return $this->redirect('/ac/users/login',302);
+				if ($user = $model->changePassword($code)) {
+					return $this->redirect('/login',302);
 				}
 				
 			}	

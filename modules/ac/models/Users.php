@@ -82,7 +82,7 @@ class Users extends ActiveRecord implements IdentityInterface
 	{
 		if (parent::beforeSave($insert)) {
 			if ($this->isNewRecord) {
-				$this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
+				$this->auth_key = Yii::$app->getSecurity()->generateRandomString();
 				$this->date_created = date("Y-m-d H:i:s");
 			}
 			return true;
@@ -185,7 +185,7 @@ class Users extends ActiveRecord implements IdentityInterface
      */
     public function generateAuthKey()
     {
-        $this->auth_key = Yii::$app->getSecurity()->generateRandomKey();
+        $this->auth_key = \Yii::$app->getSecurity()->generateRandomString();
     }
 	
 	/**

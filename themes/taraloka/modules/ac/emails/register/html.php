@@ -101,7 +101,7 @@
                                                                         <br />
                                                                         Thank you for registering with The Taraloka Foundation.  Use the following code to verify your account:<br /><br />
 																		<strong>Verification Code:</strong> <code style="color:#afbd21;font-weight:bold;font-size:1.1em;"><?php echo $authkey->key; ?></code><br /><br />
-																		of go to the following link:<br /><br />
+																		or go to the following link:<br /><br />
 																		<a href="<?php echo \Yii::$app->params['siteMeta']['url']; ?>/verify/<?php echo $authkey->key; ?>" style="color:#ec008c;"><?php echo \Yii::$app->params['siteMeta']['url']; ?>/verify/<?php echo $authkey->key; ?></a><br /><br />
 																		We look forward to seeing you around.  If you need any more information, or if you have any questions/concerns, please be in touch.
                                                                     </td>

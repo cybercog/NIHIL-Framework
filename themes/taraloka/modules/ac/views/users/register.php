@@ -3,7 +3,11 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
+
+use yii\bootstrap\Modal;
+use kartik\widgets\ActiveForm;
+use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
@@ -55,23 +59,14 @@ $this->params['breadcrumbs'][] = 'Register';
 							
 							<?= $form->field($model, 'nickname')->textInput(['maxlength' => 100]) ?>
 							
-							<div class="row">
-							<div class="col-sm-4">
-							
-							<?= $form->field($model, 'dob_month')->dropDownList($model->monthsDropdown(), ['prompt'=>''] ); ?>
-							
-							</div>
-							<div class="col-sm-4">
-							
-							<?= $form->field($model, 'dob_day')->dropDownList($model->daysDropdown(), ['prompt'=>''] ); ?>
-							
-							</div>
-							<div class="col-sm-4">
-							
-							<?= $form->field($model, 'dob_year')->dropDownList($model->yearsDropdown(), ['prompt'=>''] ); ?>
-							
-							</div>
-							</div>
+							<?= $form->field($model, 'birthday')->widget(DatePicker::classname(), [
+									'options' => ['placeholder' => 'YYYY-MM-DD'],
+									'pluginOptions' => [
+										'autoclose'=>true,
+										'format' => 'yyyy-mm-dd'
+									]
+								]);
+							?>
 
 							<div class="form-group">
 								<?= Html::submitButton('register', ['class' => 'btn btn-success btn-lg']) ?>
