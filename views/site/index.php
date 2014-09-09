@@ -41,7 +41,7 @@ $this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrica
 						(adsbygoogle = window.adsbygoogle || []).push({});
 						</script>
 					<?php }else{ ?>
-						<img src="http://placehold.it/300x250&text=Ad" alt="Ad" />
+						<img src="/img/Ad_300x250.gif" alt="Ad" />
 					<?php } ?>
 					
 					</div>
@@ -59,26 +59,7 @@ $this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrica
 						<div class="site-index">
 
 								<div class="row">
-									<?php foreach($projects as $project) { ?>
-										<div class="col-sm-4 clearfix">
-										
-											<!--<div class="row">
-												<div class="col-xs-12">
-													<img class="img-responsive" src="<?php echo $project->image; ?>" alt="<?php echo $project->title; ?>" />
-												</div>
-											</div>-->
-											<div class="row">
-												<div class="col-xs-12">
-													<h2><?php echo $project->title; ?></h2>
-
-													<p><?php echo $project->description; ?></p>
-
-													<p><a class="btn btn-default read-more" href="/tutorials/<?php echo $project->slug; ?>">Read More &raquo;</a></p>
-												</div>
-											</div>
-											
-										</div>
-									<?php } ?>
+									
 								</div>
 
 						</div>
