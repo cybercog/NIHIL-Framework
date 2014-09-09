@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
 
+use app\modules\ecom\widgets\UsersRecentInvoicesWidget;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -41,44 +43,9 @@ $this->params['breadcrumbs'][] = 'Portal';
 				</div>
 			
 				<div class="row">
-					<div class="col-sm-5">
+					<div class="col-sm-12">
 					
-						asdf
-
-					</div>
-					<div class="col-sm-5 col-sm-offset-1">
-					
-						<div class="table-responsive">
-						  <table class="table">
-							<thead>
-								<tr>
-									<th colspan="2"><h2>Recent Activity</h2></th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<th>Date</th>
-									<th>Description</th>
-									<th>&nbsp;</th>
-								</tr>
-								<tr>
-									<td>01/01/2014</td>
-									<td>You made a donation.</td>
-									<td><a href="#">view</a> | <a href="#">print</a></td>
-								</tr>
-								<tr>
-									<td>02/02/2014</td>
-									<td>You made an order.</td>
-									<td><a href="#">view</a> | <a href="#">print</a></td>
-								</tr>
-								<tr>
-									<td>03/03/2014</td>
-									<td>You joined our mailing list.</td>
-									<td><a href="#">manage</a></td>
-								</tr>
-							</tbody>
-						  </table>
-						</div>
+						<?= UsersRecentInvoicesWidget::widget(); ?>
 
 					</div>
 				</div>
