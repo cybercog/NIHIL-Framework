@@ -4,6 +4,9 @@ namespace app\modules\ecom\controllers;
 
 use Yii;
 use app\modules\ecom\models\Invoice;
+use app\modules\ecom\models\ShippingAddress;
+use app\modules\ecom\models\Payment;
+use app\modules\ecom\models\Customer;
 use app\modules\ecom\models\search\InvoiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -45,14 +48,41 @@ class InvoicesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
+    public function actionView($token)
     {
-		if (!\Yii::$app->user->can('ecomInvoicesView')) {
+		if(!$invoice = Invoice::find()->where(['token' => $token])->one()){
+			throw new NotFoundHttpException('The requested page does not exist.');
+		}
+	
+		if (!\Yii::$app->user->can('ecomInvoicesView', ['invoice' => $invoice])) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'invoice' => $invoice,
+			'customer' => Customer::find()->where(['id' => $invoice->customer_id])->one(),
+			'shipping_address' => ShippingAddress::find()->where(['id' => $invoice->shipping_id])->one(),
+			'payment' => Payment::find()->where(['id' => $invoice->payment_id])->one(),
+        ]);
+    }
+	
+	/**
+     * Displays a single Invoice model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrint($token)
+    {
+		if(!$invoice = Invoice::find()->where(['token' => $token])->one()){
+			throw new NotFoundHttpException('The requested page does not exist.');
+		}
+		
+		if (!\Yii::$app->user->can('ecomInvoicesPrint', ['invoice' => $invoice])) {
+			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		}
+	
+        return $this->render('print', [
+            'invoice' => $invoice,
         ]);
     }
 	
