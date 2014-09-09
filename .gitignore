@@ -30,9 +30,7 @@ phpunit.phar
 /data/logs
 
 # Config Files
-/config/db.php
-/config/params.php
-/config/web.php
+/config/**
 
 # Imgaes
 web/img/**
