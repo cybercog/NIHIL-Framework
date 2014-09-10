@@ -48,13 +48,17 @@ class PaymentsController extends Controller
      * Donate.
      * @return mixed
      */
-    public function actionDonate()
+    public function actionDonate($amount = NULL)
     {
 		if (!\Yii::$app->user->can('ecomPaymentsDonate')) {
 			throw new ForbiddenHttpException('You do not have privileges to view this content.');
 		}
 	
         $model = new DonationForm;
+		
+		if($amount) {
+			$model->amount = $amount;
+		}
 
         //if ($model->load(Yii::$app->request->post()) && $token = $model->invoice()) {
 		if ($model->load(Yii::$app->request->post()) && $token = $model->fdAuthorizeDonation()) {
