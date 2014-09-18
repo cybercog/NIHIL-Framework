@@ -769,12 +769,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "fa6d40551abe4340fde10ac6e5e15d30b46c3b41"
+                "reference": "0623f70077e96a44b1eb96ac52917cc17688a9df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/fa6d40551abe4340fde10ac6e5e15d30b46c3b41",
-                "reference": "fa6d40551abe4340fde10ac6e5e15d30b46c3b41",
+                "url": "https://api.github.com/repos/yiisoft/yii2-debug/zipball/0623f70077e96a44b1eb96ac52917cc17688a9df",
+                "reference": "0623f70077e96a44b1eb96ac52917cc17688a9df",
                 "shasum": ""
             },
             "require": {
@@ -803,7 +803,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2014-09-16 20:53:12"
+            "time": "2014-09-18 04:07:30"
         },
         {
             "name": "yiisoft/yii2-faker",
