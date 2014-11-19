@@ -18,8 +18,8 @@ class PostSearch extends Post
     public function rules()
     {
         return [
-            [['id', 'author', 'views', 'votes_up', 'votes_down'], 'integer'],
-            [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
+            [['id', 'author', 'votes_up', 'votes_down', 'views'], 'integer'],
+            [['name', 'slug', 'description', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
         ];
     }
 
@@ -34,11 +34,14 @@ class PostSearch extends Post
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = static::find();
+        $query = Post::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -55,13 +58,14 @@ class PostSearch extends Post
             'date_updated' => $this->date_updated,
             'date_published' => $this->date_published,
             'votes_up' => $this->votes_up,
-			'votes_down' => $this->votes_down,
-			'views' => $this->views,
+            'votes_down' => $this->votes_down,
+            'views' => $this->views,
             'date_lastview' => $this->date_lastview,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

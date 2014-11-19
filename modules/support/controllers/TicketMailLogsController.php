@@ -4,13 +4,14 @@ namespace app\modules\support\controllers;
 
 use Yii;
 use app\modules\support\models\TicketMailLog;
-use app\modules\support\models\search\TicketMailLogsSearch;
+use app\modules\support\models\search\TicketMailLogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TicketMailLogController implements the CRUD actions for TicketMailLog model.
+ * TicketMailLogsController implements the CRUD actions for TicketMailLog model.
  */
 class TicketMailLogsController extends Controller
 {
@@ -32,6 +33,15 @@ class TicketMailLogsController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('supportTicketMailLogsIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('index');
     }
 
@@ -42,7 +52,37 @@ class TicketMailLogsController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('supportTicketMailLogsView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single TicketMailLog model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('supportTicketMailLogsDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -54,6 +94,15 @@ class TicketMailLogsController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('supportTicketMailLogsCreate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new TicketMailLog();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +122,15 @@ class TicketMailLogsController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('supportTicketMailLogsUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,18 +150,36 @@ class TicketMailLogsController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('supportTicketMailLogsDelete')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all TicketMailLog models.
      * @return mixed
      */
     public function actionList()
     {
-        $searchModel = new TicketMailLogsSearch();
+		if (!\Yii::$app->user->can('supportTicketMailLogsList')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $searchModel = new TicketMailLogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [

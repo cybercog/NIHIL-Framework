@@ -23,7 +23,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug') ?>
 
-    <?= $form->field($model, 'date_created') ?>
+    <?= $form->field($model, 'image') ?>
+
+    <?php // echo $form->field($model, 'description') ?>
+
+    <?php // echo $form->field($model, 'date_created') ?>
 
     <?php // echo $form->field($model, 'date_updated') ?>
 

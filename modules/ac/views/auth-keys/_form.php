@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\AuthKeys */
+/* @var $model app\modules\ac\models\AuthKey */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="auth-keys-form">
+<div class="auth-key-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

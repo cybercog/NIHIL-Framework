@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\Content */
+/* @var $model app\modules\cms\models\Post */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-form">
+<div class="post-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -18,6 +18,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 150]) ?>
 
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+
     <?= $form->field($model, 'date_created')->textInput() ?>
 
     <?= $form->field($model, 'date_updated')->textInput() ?>
@@ -25,6 +27,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'date_published')->textInput() ?>
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+
+    <?= $form->field($model, 'votes_up')->textInput() ?>
+
+    <?= $form->field($model, 'votes_down')->textInput() ?>
 
     <?= $form->field($model, 'views')->textInput() ?>
 

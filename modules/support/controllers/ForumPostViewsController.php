@@ -4,13 +4,14 @@ namespace app\modules\support\controllers;
 
 use Yii;
 use app\modules\support\models\ForumPostView;
-use app\modules\support\models\search\ForumPostViewsSearch;
+use app\modules\support\models\search\ForumPostViewSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ForumPostViewController implements the CRUD actions for ForumPostView model.
+ * ForumPostViewsController implements the CRUD actions for ForumPostView model.
  */
 class ForumPostViewsController extends Controller
 {
@@ -32,6 +33,15 @@ class ForumPostViewsController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('supportForumPostViewsIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('index');
     }
 
@@ -42,7 +52,37 @@ class ForumPostViewsController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('supportForumPostViewsView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single ForumPostView model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('supportForumPostViewsDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -54,6 +94,15 @@ class ForumPostViewsController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('supportForumPostViewsCreate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new ForumPostView();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +122,15 @@ class ForumPostViewsController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('supportForumPostViewsUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,18 +150,36 @@ class ForumPostViewsController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('supportForumPostViewsDelete')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all ForumPostView models.
      * @return mixed
      */
     public function actionList()
     {
-        $searchModel = new ForumPostViewsSearch();
+		if (!\Yii::$app->user->can('supportForumPostViewsList')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $searchModel = new ForumPostViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [

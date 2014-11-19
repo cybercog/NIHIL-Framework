@@ -1,52 +1,35 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
+use yii\grid\GridView;
+
+use app\modules\ecom\widgets\InvoicesWidget;
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\modules\ecom\models\search\InvoiceSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | Ecom Invoices';
-$this->params['breadcrumbs'][] = ['label' => 'Ecom', 'url' => '/ecom'];
-$this->params['breadcrumbs'][] = 'Invoices';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Invoices';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
+	  <section id="ac-user-index">
+        <div class="container">
 		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-			
-					</div>
+          <div class="row">
+		    <div class="col-xs-12">
+				<div class="row">
+				  <div class="col-sm-12">
+				    <h1 class="page-header">Invoices</h1>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= InvoicesWidget::widget(); ?>
+				  </div>
 				</div>
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="ecom-invoices-index">
-							<h1><?= $this->context->action->uniqueId ?></h1>
-							<p>
-								This is the view content for action "<?= $this->context->action->id ?>".
-								The action belongs to the controller "<?= get_class($this->context) ?>"
-								in the "<?= $this->context->module->id ?>" module.
-							</p>
-							<p>
-								You may customize this page by editing the following file:<br>
-								<code><?= __FILE__ ?></code>
-							</p>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+		  </div>
+		  
+		</div>
+	  </section>

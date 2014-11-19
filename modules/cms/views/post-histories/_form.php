@@ -4,17 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\ContentHistory */
+/* @var $model app\modules\cms\models\PostHistory */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-history-form">
+<div class="post-history-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'content_id')->textInput() ?>
-
-    <?= $form->field($model, 'type')->textInput() ?>
+    <?= $form->field($model, 'post_id')->textInput() ?>
 
     <?= $form->field($model, 'author')->textInput() ?>
 

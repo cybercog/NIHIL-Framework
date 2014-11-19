@@ -4,9 +4,9 @@ namespace app\modules\ecom\controllers;
 
 use Yii;
 use app\modules\ecom\models\Invoice;
-use app\modules\ecom\models\ShippingAddress;
+use app\modules\ecom\models\InvoiceLog;
 use app\modules\ecom\models\Payment;
-use app\modules\ecom\models\Customer;
+use app\modules\ecom\models\forms\CreditCardForm;
 use app\modules\ecom\models\search\InvoiceSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -18,6 +18,8 @@ use yii\filters\VerbFilter;
  */
 class InvoicesController extends Controller
 {
+	public $layout;
+	
     public function behaviors()
     {
         return [
@@ -37,9 +39,14 @@ class InvoicesController extends Controller
     public function actionIndex()
     {
 		if (!\Yii::$app->user->can('ecomInvoicesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         return $this->render('index');
     }
 
@@ -48,56 +55,42 @@ class InvoicesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($token)
+    public function actionView($id)
     {
-		if(!$invoice = Invoice::find()->where(['token' => $token])->one()){
-			throw new NotFoundHttpException('The requested page does not exist.');
-		}
-	
-		if (!\Yii::$app->user->can('ecomInvoicesView', ['invoice' => $invoice])) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
-        return $this->render('view', [
-            'invoice' => $invoice,
-			'customer' => Customer::find()->where(['id' => $invoice->customer_id])->one(),
-			'shipping_address' => ShippingAddress::find()->where(['id' => $invoice->shipping_id])->one(),
-			'payment' => Payment::find()->where(['id' => $invoice->payment_id])->one(),
-        ]);
-    }
-	
-	/**
-     * Displays a single Invoice model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionPrint($token)
-    {
-		if(!$invoice = Invoice::find()->where(['token' => $token])->one()){
-			throw new NotFoundHttpException('The requested page does not exist.');
+		if (!\Yii::$app->user->can('ecomInvoicesView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
-		if (!\Yii::$app->user->can('ecomInvoicesPrint', ['invoice' => $invoice])) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
+		$il = new InvoiceLog;
+		$il->makeLog($id, 'Invoice View', 'Invoice (#' . $id . ') viewed.');
 	
-        return $this->render('print', [
-            'invoice' => $invoice,
+        return $this->render('view', [
+            'model' => $this->findModel($id),
         ]);
     }
 	
 	/**
-     * Displays a single Invoice model.
+     * Displays the details for a single Invoice model.
      * @param integer $id
      * @return mixed
      */
     public function actionDetails($id)
     {
 		if (!\Yii::$app->user->can('ecomInvoicesDetails')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
-        return $this->render('view', [
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -110,9 +103,14 @@ class InvoicesController extends Controller
     public function actionCreate()
     {
 		if (!\Yii::$app->user->can('ecomInvoicesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         $model = new Invoice();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -133,9 +131,14 @@ class InvoicesController extends Controller
     public function actionUpdate($id)
     {
 		if (!\Yii::$app->user->can('ecomInvoicesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -156,24 +159,34 @@ class InvoicesController extends Controller
     public function actionDelete($id)
     {
 		if (!\Yii::$app->user->can('ecomInvoicesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
-     * Lists all Invoices models.
+	    /**
+     * Lists all Invoice models.
      * @return mixed
      */
     public function actionList()
     {
 		if (!\Yii::$app->user->can('ecomInvoicesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         $searchModel = new InvoiceSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -181,6 +194,76 @@ class InvoicesController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+	
+	/**
+     * Displays a single Invoice model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPrint($id)
+    {
+		if (!\Yii::$app->user->can('ecomInvoicesPrint')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+		$this->layout = 'print';
+		
+        return $this->render('print', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays a single Invoice model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionPay($id)
+    {
+		if (!\Yii::$app->user->can('ecomInvoicesPay')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+		$invoice = $this->findModel($id);
+		
+		// PAYMENT
+		if($invoice->payment_id) {
+			
+			Yii::$app->session->setFlash('info', 'Your invoice has already been paid.');
+			return $this->redirect(['view', 'id' => $invoice->token]);
+
+		}else{
+		
+			$paymentForm = new CreditCardForm;
+			
+			if ($paymentForm->load(Yii::$app->request->post()) && $paymentForm->save($invoice)) {
+				
+				return $this->render('success', [
+					'invoice' => $invoice,
+				]);
+				
+			} else {
+				
+				return $this->render('pay-payment-information', [
+					'invoice' => $invoice,
+					'model' => $paymentForm,
+				]);
+				
+			}
+		
+		}
+		
     }
 
     /**
@@ -190,9 +273,17 @@ class InvoicesController extends Controller
      * @return Invoice the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    // protected function findModel($id)
+    // {
+        // if (($model = Invoice::findOne($id)) !== null) {
+            // return $model;
+        // } else {
+            // throw new NotFoundHttpException('The requested page does not exist.');
+        // }
+    // }
+	protected function findModel($id)
     {
-        if (($model = Invoice::findOne($id)) !== null) {
+        if (($model = Invoice::find()->where(['token' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

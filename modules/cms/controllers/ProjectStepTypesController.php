@@ -7,7 +7,6 @@ use app\modules\cms\models\ProjectStepType;
 use app\modules\cms\models\search\ProjectStepTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class ProjectStepTypesController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('index');
     }
 
@@ -47,11 +42,19 @@ class ProjectStepTypesController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single ProjectStepType model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -63,10 +66,6 @@ class ProjectStepTypesController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new ProjectStepType();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,10 +85,6 @@ class ProjectStepTypesController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -109,25 +104,17 @@ class ProjectStepTypesController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all ProjectStepType models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsProjectStepTypesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new ProjectStepTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

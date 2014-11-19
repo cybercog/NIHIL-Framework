@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\Users */
+/* @var $model app\modules\ac\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="users-form">
+<div class="user-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -30,11 +30,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_last_login')->textInput() ?>
 
+    <?= $form->field($model, 'last_login_ip')->textInput(['maxlength' => 16]) ?>
+
     <?= $form->field($model, 'login_attempts')->textInput() ?>
 
     <?= $form->field($model, 'details')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'last_login_ip')->textInput(['maxlength' => 16]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

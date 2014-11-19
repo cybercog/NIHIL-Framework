@@ -17,17 +17,21 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
+    <?= $form->field($model, 'user_id') ?>
+
     <?= $form->field($model, 'invoice_number') ?>
 
     <?= $form->field($model, 'invoice_status_id') ?>
 
-    <?= $form->field($model, 'customer_id') ?>
+    <?= $form->field($model, 'billing_id') ?>
 
-    <?= $form->field($model, 'shipping_id') ?>
+    <?php // echo $form->field($model, 'shipping_id') ?>
 
     <?php // echo $form->field($model, 'payment_id') ?>
 
     <?php // echo $form->field($model, 'date_created') ?>
+
+    <?php // echo $form->field($model, 'date_updated') ?>
 
     <?php // echo $form->field($model, 'date_due') ?>
 

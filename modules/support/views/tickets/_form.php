@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'ref_code')->textInput(['maxlength' => 32]) ?>
 
+    <?= $form->field($model, 'parent')->textInput() ?>
+
     <?= $form->field($model, 'type')->textInput() ?>
 
     <?= $form->field($model, 'status')->textInput() ?>
@@ -28,12 +30,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'assignee')->textInput() ?>
 
-    <?= $form->field($model, 'resolution')->textInput() ?>
-
-    <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'parent')->textInput() ?>
-
     <?= $form->field($model, 'date_reported')->textInput() ?>
 
     <?= $form->field($model, 'date_assigned')->textInput() ?>
@@ -47,6 +43,10 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'time_estimated')->textInput() ?>
 
     <?= $form->field($model, 'time_actual')->textInput() ?>
+
+    <?= $form->field($model, 'resolution')->textInput() ?>
+
+    <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'details')->textarea(['rows' => 6]) ?>
 

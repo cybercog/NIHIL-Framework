@@ -15,32 +15,14 @@ $this->params['breadcrumbs'][] = array('label' => 'Users', 'url' => '/ac/users')
 $this->params['breadcrumbs'][] = 'Verify';
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-			
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<section id="site-content">
+		<section id="ac-users-verify">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-5">
 
 						<div class="ac-users-verify">
 
-							<h1>Verify Account</h1>
+							<h1>Verify Email Address</h1>
 							
 							<?php $form = ActiveForm::begin(); ?>
 

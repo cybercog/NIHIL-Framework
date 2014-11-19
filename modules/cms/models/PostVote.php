@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $timestamp
  * @property string $vote
+ *
+ * @property CmsPosts $post
+ * @property AcUsers $user
  */
 class PostVote extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class PostVote extends \yii\db\ActiveRecord
             'timestamp' => 'Timestamp',
             'vote' => 'Vote',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(CmsPosts::className(), ['id' => 'post_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

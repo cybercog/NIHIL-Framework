@@ -14,6 +14,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'parent')->textInput() ?>
 
+    <?= $form->field($model, 'forum_id')->textInput() ?>
+
     <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 128]) ?>

@@ -18,6 +18,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 150]) ?>
 
+    <?= $form->field($model, 'image')->textInput(['maxlength' => 255]) ?>
+
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+
     <?= $form->field($model, 'date_created')->textInput() ?>
 
     <?= $form->field($model, 'date_updated')->textInput() ?>

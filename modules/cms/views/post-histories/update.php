@@ -1,49 +1,28 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\ContentHistory */
+/* @var $model app\modules\cms\models\PostHistory */
 
-$this->title = 'uclemmer | CMS Post Histories Update';
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
-$this->params['breadcrumbs'][] = ['label' => 'Post Histories', 'url' => '/cms/post-histories'];
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Update Post History: ' . ' ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Post Histories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
+	  <section id="post-history-update">
+        <div class="container">
+          <div class="row">
+		    <div class="col-sm-9">
+				<h1><?= Html::encode('Post History Update') ?></h1>
+				<?= $this->render('_form', [
+					'model' => $model,
+				]) ?>
+			</div>
+			<div class="col-sm-9">
 			
-					</div>
-				</div>
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="cms-posthistories-update">
-							<h1>CMS Post Histories Update</h1>
-
-							<?= $this->render('_form', [
-								'model' => $model,
-							]) ?>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+		  </div>
+		</div>
+	  </section>

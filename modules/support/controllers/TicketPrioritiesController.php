@@ -4,13 +4,14 @@ namespace app\modules\support\controllers;
 
 use Yii;
 use app\modules\support\models\TicketPriority;
-use app\modules\support\models\search\TicketPrioritiesSearch;
+use app\modules\support\models\search\TicketPrioritySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TicketPriorityController implements the CRUD actions for TicketPriority model.
+ * TicketPrioritiesController implements the CRUD actions for TicketPriority model.
  */
 class TicketPrioritiesController extends Controller
 {
@@ -32,6 +33,15 @@ class TicketPrioritiesController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('index');
     }
 
@@ -42,7 +52,37 @@ class TicketPrioritiesController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single TicketPriority model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -54,6 +94,15 @@ class TicketPrioritiesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesCreate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new TicketPriority();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +122,15 @@ class TicketPrioritiesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,18 +150,36 @@ class TicketPrioritiesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('supportTicketPrioritiesDelete')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all TicketPriority models.
      * @return mixed
      */
     public function actionList()
     {
-        $searchModel = new TicketPrioritiesSearch();
+		if (!\Yii::$app->user->can('supportTicketPrioritiesList')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $searchModel = new TicketPrioritySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [

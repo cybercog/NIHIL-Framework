@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\search\ContentVoteSearch */
+/* @var $model app\modules\cms\models\search\PostVoteSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-vote-search">
+<div class="post-vote-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'content_id') ?>
+    <?= $form->field($model, 'post_id') ?>
 
     <?= $form->field($model, 'user_id') ?>
 

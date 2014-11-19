@@ -14,6 +14,8 @@ use Yii;
  * @property string $time_estimated
  * @property string $content
  * @property integer $order
+ *
+ * @property CmsProjects $project
  */
 class ProjectStep extends \yii\db\ActiveRecord
 {
@@ -53,5 +55,13 @@ class ProjectStep extends \yii\db\ActiveRecord
             'content' => 'Content',
             'order' => 'Order',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProject()
+    {
+        return $this->hasOne(CmsProjects::className(), ['id' => 'project_id']);
     }
 }

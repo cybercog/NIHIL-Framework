@@ -11,6 +11,9 @@ use Yii;
  * @property integer $parent
  * @property string $name
  * @property string $description
+ *
+ * @property Category $parent0
+ * @property Category[] $categories
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -46,5 +49,21 @@ class Category extends \yii\db\ActiveRecord
             'name' => 'Name',
             'description' => 'Description',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent0()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'parent']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(Category::className(), ['parent' => 'id']);
     }
 }

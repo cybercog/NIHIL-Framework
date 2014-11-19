@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\ecom\models\PaymentType;
 
 /**
- * PaymentTypeSearch represents the model behind the search form about `app\modules\ecom\models\PaymentType`.
+ * PaymenTypetSearch represents the model behind the search form about `app\modules\ecom\models\PaymentType`.
  */
 class PaymentTypeSearch extends PaymentType
 {

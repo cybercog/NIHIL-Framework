@@ -18,8 +18,8 @@ class PaymentSearch extends Payment
     public function rules()
     {
         return [
-            [['id', 'payment_type_id', 'customer_id', 'payment_method_id', 'transaction_id'], 'integer'],
-            [['date_created', 'account_type', 'account_number', 'token', 'comments', 'details'], 'safe'],
+            [['id', 'payment_type_id', 'user_id', 'payment_method_id'], 'integer'],
+            [['date_created', 'account_type', 'account_number', 'transaction_id', 'token', 'comments', 'details'], 'safe'],
             [['amount'], 'number'],
         ];
     }
@@ -55,15 +55,15 @@ class PaymentSearch extends Payment
         $query->andFilterWhere([
             'id' => $this->id,
             'payment_type_id' => $this->payment_type_id,
-            'customer_id' => $this->customer_id,
+            'user_id' => $this->user_id,
             'date_created' => $this->date_created,
             'amount' => $this->amount,
             'payment_method_id' => $this->payment_method_id,
-            'transaction_id' => $this->transaction_id,
         ]);
 
         $query->andFilterWhere(['like', 'account_type', $this->account_type])
             ->andFilterWhere(['like', 'account_number', $this->account_number])
+            ->andFilterWhere(['like', 'transaction_id', $this->transaction_id])
             ->andFilterWhere(['like', 'token', $this->token])
             ->andFilterWhere(['like', 'comments', $this->comments])
             ->andFilterWhere(['like', 'details', $this->details]);

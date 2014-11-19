@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\EmailChanges */
+/* @var $model app\modules\ac\models\EmailChange */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="email-changes-form">
+<div class="email-change-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

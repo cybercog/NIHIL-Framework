@@ -4,15 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\ContentVote */
+/* @var $model app\modules\cms\models\PostVote */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-vote-form">
+<div class="post-vote-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'content_id')->textInput() ?>
+    <?= $form->field($model, 'post_id')->textInput() ?>
 
     <?= $form->field($model, 'user_id')->textInput() ?>
 

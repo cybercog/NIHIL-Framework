@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\search\ContentHistorySearch */
+/* @var $model app\modules\cms\models\search\PostHistorySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-history-search">
+<div class="post-history-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,15 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'content_id') ?>
-
-    <?= $form->field($model, 'type') ?>
+    <?= $form->field($model, 'post_id') ?>
 
     <?= $form->field($model, 'author') ?>
 
     <?= $form->field($model, 'name') ?>
 
-    <?php // echo $form->field($model, 'slug') ?>
+    <?= $form->field($model, 'slug') ?>
 
     <?php // echo $form->field($model, 'date_created') ?>
 

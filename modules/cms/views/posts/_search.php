@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\cms\models\search\ContentSearch */
+/* @var $model app\modules\cms\models\search\PostSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="content-search">
+<div class="post-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -17,13 +17,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'type') ?>
-
     <?= $form->field($model, 'author') ?>
 
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'slug') ?>
+
+    <?= $form->field($model, 'description') ?>
 
     <?php // echo $form->field($model, 'date_created') ?>
 
@@ -32,6 +32,10 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'date_published') ?>
 
     <?php // echo $form->field($model, 'content') ?>
+
+    <?php // echo $form->field($model, 'votes_up') ?>
+
+    <?php // echo $form->field($model, 'votes_down') ?>
 
     <?php // echo $form->field($model, 'views') ?>
 

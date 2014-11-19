@@ -11,6 +11,8 @@ use Yii;
  * @property string $name
  * @property string $slug
  * @property string $description
+ *
+ * @property SupportTickets[] $supportTickets
  */
 class TicketType extends \yii\db\ActiveRecord
 {
@@ -46,6 +48,14 @@ class TicketType extends \yii\db\ActiveRecord
             'slug' => 'Slug',
             'description' => 'Description',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportTickets()
+    {
+        return $this->hasMany(SupportTickets::className(), ['type' => 'id']);
     }
 	
 	/**

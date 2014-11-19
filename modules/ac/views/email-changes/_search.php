@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\search\EmailChangesSearch */
+/* @var $model app\modules\ac\models\search\EmailChangeSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="email-changes-search">
+<div class="email-change-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

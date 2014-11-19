@@ -1,49 +1,28 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\cms\models\Page */
 
-$this->title = 'uclemmer | CMS Pages Create';
-$this->params['breadcrumbs'][] = ['label' => 'CMS', 'url' => '/cms'];
-$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => '/cms/pages'];
-$this->params['breadcrumbs'][] = 'Create';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Page Create';
+$this->params['breadcrumbs'][] = ['label' => 'Pages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
+	<section id="page-create">
+        <div class="container">
+          <div class="row">
+		    <div class="col-sm-9">
+				<h1><?= Html::encode('Page Create') ?></h1>
+				<?= $this->render('_form', [
+					'model' => $model,
+				]) ?>
+			</div>
+			<div class="col-sm-3">
 			
-					</div>
-				</div>
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="cms-pages-create">
-							<h1>CMS Pages Create</h1>
-
-							<?= $this->render('_form', [
-								'model' => $model,
-							]) ?>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+		  </div>
+		</div>
+	  </section>

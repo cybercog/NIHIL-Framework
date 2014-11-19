@@ -3,7 +3,6 @@
 namespace app\modules\cms\models;
 
 use Yii;
-use app\modules\cms\models\ProjectStep;
 
 /**
  * This is the model class for table "cms_projects".
@@ -22,6 +21,9 @@ use app\modules\cms\models\ProjectStep;
  * @property integer $votes_down
  * @property integer $views
  * @property string $date_lastview
+ *
+ * @property CmsProjectSteps[] $cmsProjectSteps
+ * @property AcUsers $author
  */
 class Project extends \yii\db\ActiveRecord
 {
@@ -71,60 +73,20 @@ class Project extends \yii\db\ActiveRecord
             'date_lastview' => 'Date Lastview',
         ];
     }
-	
-	/**
-     * Finds recent projects
-     *
-     * @param  int      $limit
-     * @return static|null
+
+    /**
+     * @return \yii\db\ActiveQuery
      */
-    public static function findRecentProjects($limit=5)
+    public function getCmsProjectSteps()
     {
-		$sql = 'SELECT * FROM cms_projects WHERE `date_published` IS NOT NULL ORDER BY `date_published` DESC LIMIT ' . $limit;
-		return static::findBySql($sql)->all();
+        return $this->hasMany(CmsProjectSteps::className(), ['project_id' => 'id']);
     }
-	
-	/**
-     * Finds by slug
-     *
-     * @param  int      $limit
-     * @return static|null
+
+    /**
+     * @return \yii\db\ActiveQuery
      */
-    public static function findBySlug($slug)
+    public function getAuthor()
     {
-		return static::findOne(['slug' => $slug]);
-    }
-	
-	/**
-     * Finds by slug
-     *
-     * @param  int      $limit
-     * @return static|null
-     */
-    public static function findProjectIntroduction($project_id)
-    {
-		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 1])->orderBy('order ASC')->all();
-    }
-	
-	/**
-     * Finds by slug
-     *
-     * @param  int      $limit
-     * @return static|null
-     */
-    public static function findProjectSteps($project_id)
-    {
-		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 2])->orderBy('order ASC')->all();
-    }
-	
-	/**
-     * Finds by slug
-     *
-     * @param  int      $limit
-     * @return static|null
-     */
-    public static function findProjectConclusion($project_id)
-    {
-		return ProjectStep::find()->where(['project_id' => $project_id, 'type' => 3])->orderBy('order ASC')->all();
+        return $this->hasOne(AcUsers::className(), ['id' => 'author_id']);
     }
 }

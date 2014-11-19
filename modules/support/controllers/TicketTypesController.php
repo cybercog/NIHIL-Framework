@@ -4,13 +4,14 @@ namespace app\modules\support\controllers;
 
 use Yii;
 use app\modules\support\models\TicketType;
-use app\modules\support\models\search\TicketTypesSearch;
+use app\modules\support\models\search\TicketTypeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * TicketTypeController implements the CRUD actions for TicketType model.
+ * TicketTypesController implements the CRUD actions for TicketType model.
  */
 class TicketTypesController extends Controller
 {
@@ -32,6 +33,15 @@ class TicketTypesController extends Controller
      */
     public function actionIndex()
     {
+		if (!\Yii::$app->user->can('supportTicketTypesIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('index');
     }
 
@@ -42,7 +52,37 @@ class TicketTypesController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('supportTicketTypesView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single TicketType model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('supportTicketTypesDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -54,6 +94,15 @@ class TicketTypesController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('supportTicketTypesCreate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new TicketType();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +122,15 @@ class TicketTypesController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('supportTicketTypesUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,18 +150,36 @@ class TicketTypesController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('supportTicketTypesDelete')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all TicketType models.
      * @return mixed
      */
     public function actionList()
     {
-        $searchModel = new TicketTypesSearch();
+		if (!\Yii::$app->user->can('supportTicketTypesList')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $searchModel = new TicketTypeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [

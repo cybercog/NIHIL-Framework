@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $timestamp
  * @property string $vote
+ *
+ * @property CmsComments $comment
+ * @property AcUsers $user
  */
 class CommentVote extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class CommentVote extends \yii\db\ActiveRecord
             'timestamp' => 'Timestamp',
             'vote' => 'Vote',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComment()
+    {
+        return $this->hasOne(CmsComments::className(), ['id' => 'comment_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

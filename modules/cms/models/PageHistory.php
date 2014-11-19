@@ -14,6 +14,9 @@ use Yii;
  * @property string $slug
  * @property string $date_created
  * @property string $content
+ *
+ * @property CmsPages $page
+ * @property AcUsers $author0
  */
 class PageHistory extends \yii\db\ActiveRecord
 {
@@ -35,7 +38,8 @@ class PageHistory extends \yii\db\ActiveRecord
             [['page_id', 'author'], 'integer'],
             [['date_created'], 'safe'],
             [['content'], 'string'],
-            [['name', 'slug'], 'string', 'max' => 128]
+            [['name', 'slug'], 'string', 'max' => 128],
+            [['slug'], 'unique']
         ];
     }
 
@@ -53,5 +57,21 @@ class PageHistory extends \yii\db\ActiveRecord
             'date_created' => 'Date Created',
             'content' => 'Content',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPage()
+    {
+        return $this->hasOne(CmsPages::className(), ['id' => 'page_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor0()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'author']);
     }
 }

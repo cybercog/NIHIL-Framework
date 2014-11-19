@@ -1,51 +1,89 @@
-#NIHIL-Framework v1.0.0
+Yii 2 Basic Application Template
+================================
 
-The NIHIL Framework is an open source project built on a YII2 backbone.
+Yii 2 Basic Application Template is a skeleton Yii 2 application best for
+rapidly creating small projects.
 
-##License
+The template contains the basic features including user login/logout and a contact page.
+It includes all commonly used configurations that would allow you to focus on adding new
+features to your application.
 
-Copyright (c) 2009-2014, The NIHIL Corporation.
-All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+DIRECTORY STRUCTURE
+-------------------
 
-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+      assets/             contains assets definition
+      commands/           contains console commands (controllers)
+      config/             contains application configurations
+      controllers/        contains Web controller classes
+      mail/               contains view files for e-mails
+      models/             contains model classes
+      runtime/            contains files generated during runtime
+      tests/              contains various tests for the basic application
+      vendor/             contains dependent 3rd-party packages
+      views/              contains view files for the Web application
+      web/                contains the entry script and Web resources
 
-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+REQUIREMENTS
+------------
 
-##Versioning
+The minimum requirement by this application template that your Web server supports PHP 5.4.0.
 
-###The current version is: 1.0.0.
 
-Font Awesome will be maintained under the Semantic Versioning guidelines as much as possible. Releases will be numbered with the following format:
+INSTALLATION
+------------
 
-`<major>.<minor>.<patch>`
+### Install from an Archive File
 
-For more information on SemVer, please visit http://semver.org.
+Extract the archive file downloaded from [yiiframework.com](http://www.yiiframework.com/download/) to
+a directory named `basic` that is directly under the Web root.
 
-##Directory Structure
+You can then access the application through the following URL:
 
+~~~
+http://localhost/basic/web/
+~~~
+
+
+### Install via Composer
+
+If you do not have [Composer](http://getcomposer.org/), you may install it by following the instructions
+at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
+
+You can then install this application template using the following command:
+
+~~~
+php composer.phar global require "fxp/composer-asset-plugin:1.0.0-beta2"
+php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+~~~
+
+Now you should be able to access the application through the following URL, assuming `basic` is the directory
+directly under the Web root.
+
+~~~
+http://localhost/basic/web/
+~~~
+
+
+CONFIGURATION
+-------------
+
+### Database
+
+Edit the file `config/db.php` with real data, for example:
+
+```php
+return [
+    'class' => 'yii\db\Connection',
+    'dsn' => 'mysql:host=localhost;dbname=yii2basic',
+    'username' => 'root',
+    'password' => '1234',
+    'charset' => 'utf8',
+];
 ```
-assets/             internally used build tools
-commands/           internally used build tools
-config/             internally used build tools
-data/               internally used build tools
-  logs/             internally used build tools
-modules/            internally used build tools
-runtime/            internally used build tools
-tests/              internally used build tools
-vendor/             internally used build tools
-web/                internally used build tools
-  css/              internally used build tools
-  fonts/            internally used build tools
-  img/              internally used build tools
-  js/               internally used build tools
-```
 
-##References
-Yii2
-Twitter Bootstrap
+**NOTE:** Yii won't create the database for you, this has to be done manually before you can access it.
+
+Also check and edit the other files in the `config/` directory to customize your application.

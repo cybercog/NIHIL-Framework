@@ -17,6 +17,13 @@ use Yii;
  * @property string $date_edited
  * @property integer $votes_up
  * @property integer $votes_down
+ *
+ * @property CmsCommentHistories[] $cmsCommentHistories
+ * @property CmsCommentVotes[] $cmsCommentVotes
+ * @property Comment $parent0
+ * @property Comment[] $comments
+ * @property CmsPosts $post
+ * @property AcUsers $user
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -58,5 +65,53 @@ class Comment extends \yii\db\ActiveRecord
             'votes_up' => 'Votes Up',
             'votes_down' => 'Votes Down',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCmsCommentHistories()
+    {
+        return $this->hasMany(CmsCommentHistories::className(), ['comment_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCmsCommentVotes()
+    {
+        return $this->hasMany(CmsCommentVotes::className(), ['comment_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent0()
+    {
+        return $this->hasOne(Comment::className(), ['id' => 'parent']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments()
+    {
+        return $this->hasMany(Comment::className(), ['parent' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(CmsPosts::className(), ['id' => 'post_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

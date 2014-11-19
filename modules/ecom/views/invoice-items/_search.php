@@ -19,13 +19,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'invoice_id') ?>
 
-    <?= $form->field($model, 'product_id') ?>
-
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'quantity') ?>
 
-    <?php // echo $form->field($model, 'unit_price') ?>
+    <?= $form->field($model, 'unit_price') ?>
 
     <?php // echo $form->field($model, 'total') ?>
 

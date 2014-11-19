@@ -34,11 +34,14 @@ class CategorySearch extends Category
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = static::find();
+        $query = Category::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -3,15 +3,15 @@
 namespace app\modules\ac\controllers;
 
 use Yii;
-use app\modules\ac\models\EmailChanges;
-use app\modules\ac\models\search\EmailChangesSearch;
+use app\modules\ac\models\EmailChange;
+use app\modules\ac\models\search\EmailChangeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EmailChangesController implements the CRUD actions for EmailChanges model.
+ * EmailChangesController implements the CRUD actions for EmailChange model.
  */
 class EmailChangesController extends Controller
 {
@@ -28,46 +28,82 @@ class EmailChangesController extends Controller
     }
 
     /**
-     * Index Action.
+     * Lists all EmailChange models.
      * @return mixed
      */
     public function actionIndex()
     {
 		if (!\Yii::$app->user->can('acEmailChangesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
-	
+		
         return $this->render('index');
     }
 
     /**
-     * Displays a single EmailChanges model.
+     * Displays a single EmailChange model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
 		if (!\Yii::$app->user->can('acEmailChangesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays the details for a single EmailChange model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('acEmailChangesDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
-     * Creates a new EmailChanges model.
+     * Creates a new EmailChange model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
 		if (!\Yii::$app->user->can('acEmailChangesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
-        $model = new EmailChanges();
+        $model = new EmailChange();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -79,15 +115,20 @@ class EmailChangesController extends Controller
     }
 
     /**
-     * Updates an existing EmailChanges model.
+     * Updates an existing EmailChange model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('acEmailChangeUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+		if (!\Yii::$app->user->can('acEmailChangesUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         $model = $this->findModel($id);
@@ -102,7 +143,7 @@ class EmailChangesController extends Controller
     }
 
     /**
-     * Deletes an existing EmailChanges model.
+     * Deletes an existing EmailChange model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +151,12 @@ class EmailChangesController extends Controller
     public function actionDelete($id)
     {
 		if (!\Yii::$app->user->can('acEmailChangesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         $this->findModel($id)->delete();
@@ -118,17 +164,22 @@ class EmailChangesController extends Controller
         return $this->redirect(['index']);
     }
 	
-	/**
-     * Lists all EmailChanges models.
+	    /**
+     * Lists all EmailChange models.
      * @return mixed
      */
     public function actionList()
     {
 		if (!\Yii::$app->user->can('acEmailChangesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
-        $searchModel = new EmailChangesSearch();
+        $searchModel = new EmailChangeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [
@@ -138,15 +189,15 @@ class EmailChangesController extends Controller
     }
 
     /**
-     * Finds the EmailChanges model based on its primary key value.
+     * Finds the EmailChange model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return EmailChanges the loaded model
+     * @return EmailChange the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = EmailChanges::findOne($id)) !== null) {
+        if (($model = EmailChange::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -12,6 +12,8 @@ use Yii;
  * @property string $timestamp
  * @property string $ip_address
  * @property string $user_agent
+ *
+ * @property SupportForumPosts $post
  */
 class ForumPostView extends \yii\db\ActiveRecord
 {
@@ -49,5 +51,13 @@ class ForumPostView extends \yii\db\ActiveRecord
             'ip_address' => 'Ip Address',
             'user_agent' => 'User Agent',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(SupportForumPosts::className(), ['id' => 'post_id']);
     }
 }

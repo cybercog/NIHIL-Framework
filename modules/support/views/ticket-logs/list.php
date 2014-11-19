@@ -2,66 +2,41 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\support\models\search\TicketLogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | Support Ticket Logs List';
-$this->params['breadcrumbs'][] = ['label' => 'Support', 'url' => '/support'];
-$this->params['breadcrumbs'][] = ['label' => 'Ticket Logs', 'url' => '/ac/ticket-logs'];
-$this->params['breadcrumbs'][] = 'List';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Ticket Log List';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-			
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
+	  <section id="ticket-log-list">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+				<h1><?= Html::encode('Ticket Log List') ?></h1>
+								    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+				
+					<p>
+						<?= Html::a('Create Ticket Log', ['create'], ['class' => 'btn btn-success']) ?>
+					</p>
 
-						<div class="support-ticketlogs-list">
-							<h1>Support Ticket Logs List</h1>
-							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+									<?= GridView::widget([
+						'dataProvider' => $dataProvider,
+						'filterModel' => $searchModel,
+        'columns' => [
+							['class' => 'yii\grid\SerialColumn'],
 
-							<p>
-								<?= Html::a('Create Ticket Log', ['create'], ['class' => 'btn btn-success']) ?>
-							</p>
+				            'id',
+            'ticket_id',
+            'timestamp',
+            'action:ntext',
 
-							<?= GridView::widget([
-								'dataProvider' => $dataProvider,
-								'filterModel' => $searchModel,
-								'columns' => [
-									['class' => 'yii\grid\SerialColumn'],
-
-									//'id',
-									'ticket_id',
-									'timestamp',
-									'action:ntext',
-
-									['class' => 'yii\grid\ActionColumn'],
-								],
-							]); ?>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+							['class' => 'yii\grid\ActionColumn'],
+						],
+					]); ?>
+							</div>
+		  </div>
+		</div>
+	  </section>

@@ -18,7 +18,7 @@ class PostViewSearch extends PostView
     public function rules()
     {
         return [
-            [['id', 'page_id', 'user_id'], 'integer'],
+            [['id', 'post_id', 'user_id'], 'integer'],
             [['timestamp', 'ip_address', 'user_agent'], 'safe'],
         ];
     }
@@ -34,6 +34,9 @@ class PostViewSearch extends PostView
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -50,7 +53,7 @@ class PostViewSearch extends PostView
 
         $query->andFilterWhere([
             'id' => $this->id,
-            'page_id' => $this->page_id,
+            'post_id' => $this->post_id,
             'user_id' => $this->user_id,
             'timestamp' => $this->timestamp,
         ]);

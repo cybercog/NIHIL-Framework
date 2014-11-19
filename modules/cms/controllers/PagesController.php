@@ -7,10 +7,7 @@ use app\modules\cms\models\Page;
 use app\modules\cms\models\search\PageSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
-
-use app\modules\cms\models\PageView;
 
 /**
  * PagesController implements the CRUD actions for Page model.
@@ -35,13 +32,7 @@ class PagesController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsPagesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
-        return $this->render('index', [
-			'pages' => Page::findRecentPages(),
-		]);
+        return $this->render('index');
     }
 
     /**
@@ -49,37 +40,20 @@ class PagesController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($slug)
+    public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsPagesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
-		$page = Page::findBySlug($slug);
-		
-		if (!$page) {
-			throw new NotFoundHttpException('Page not found.');
-		}
-		
-		$pageview = new PageView;
-		$pageview->logPageView($page);
-		
         return $this->render('view', [
-            'page' => $page,
+            'model' => $this->findModelBySlug($id),
         ]);
     }
 	
 	/**
-     * Displays a single Page model.
+     * Displays the details for a single Page model.
      * @param integer $id
      * @return mixed
      */
     public function actionDetails($id)
     {
-		if (!\Yii::$app->user->can('cmsPagesDetails')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
@@ -92,10 +66,6 @@ class PagesController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsPagesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new Page();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -115,10 +85,6 @@ class PagesController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsPagesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -138,25 +104,17 @@ class PagesController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsPagesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all Page models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsPagesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new PageSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -181,4 +139,21 @@ class PagesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+	
+	/**
+     * Finds the Page model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Page the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModelBySlug($slug)
+    {
+        if (($model = Page::find()->where(['slug' => $slug])->one()) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+	
 }

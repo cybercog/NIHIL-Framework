@@ -34,11 +34,14 @@ class CommentSearch extends Comment
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
     {
-        $query = static::find();
+        $query = Comment::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

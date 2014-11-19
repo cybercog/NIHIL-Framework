@@ -27,6 +27,17 @@ use Yii;
  * @property integer $resolution
  * @property string $message
  * @property string $details
+ *
+ * @property SupportTicketLogs[] $supportTicketLogs
+ * @property SupportTicketReplies[] $supportTicketReplies
+ * @property Ticket $parent0
+ * @property Ticket[] $tickets
+ * @property SupportTicketTypes $type0
+ * @property SupportTicketStatuses $status0
+ * @property SupportTicketPriorities $priority0
+ * @property AcUsers $reporter0
+ * @property AcUsers $assignee0
+ * @property SupportTicketResolutions $resolution0
  */
 class Ticket extends \yii\db\ActiveRecord
 {
@@ -50,7 +61,8 @@ class Ticket extends \yii\db\ActiveRecord
             [['message', 'details'], 'string'],
             [['ref_code'], 'string', 'max' => 32],
             [['name', 'slug'], 'string', 'max' => 100],
-            [['slug'], 'unique']
+            [['slug'], 'unique'],
+            [['ref_code'], 'unique']
         ];
     }
 
@@ -81,5 +93,85 @@ class Ticket extends \yii\db\ActiveRecord
             'message' => 'Message',
             'details' => 'Details',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportTicketLogs()
+    {
+        return $this->hasMany(SupportTicketLogs::className(), ['ticket_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportTicketReplies()
+    {
+        return $this->hasMany(SupportTicketReplies::className(), ['ticket_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getParent0()
+    {
+        return $this->hasOne(Ticket::className(), ['id' => 'parent']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTickets()
+    {
+        return $this->hasMany(Ticket::className(), ['parent' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getType0()
+    {
+        return $this->hasOne(SupportTicketTypes::className(), ['id' => 'type']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStatus0()
+    {
+        return $this->hasOne(SupportTicketStatuses::className(), ['id' => 'status']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPriority0()
+    {
+        return $this->hasOne(SupportTicketPriorities::className(), ['id' => 'priority']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReporter0()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'reporter']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAssignee0()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'assignee']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getResolution0()
+    {
+        return $this->hasOne(SupportTicketResolutions::className(), ['id' => 'resolution']);
     }
 }

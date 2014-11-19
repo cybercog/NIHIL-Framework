@@ -4,10 +4,9 @@ namespace app\modules\ecom\controllers;
 
 use Yii;
 use app\modules\ecom\models\PaymentType;
-use app\modules\ecom\models\search\PaymentTypeSearch;
+use app\modules\ecom\models\search\PaymenTypetSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class PaymentTypesController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         return $this->render('index');
     }
 
@@ -47,27 +42,19 @@ class PaymentTypesController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 	
 	/**
-     * Displays a single PaymentType model.
+     * Displays the details for a single PaymentType model.
      * @param integer $id
      * @return mixed
      */
     public function actionDetails($id)
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesDetails')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
-        return $this->render('view', [
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -79,10 +66,6 @@ class PaymentTypesController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $model = new PaymentType();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -102,10 +85,6 @@ class PaymentTypesController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -125,26 +104,18 @@ class PaymentTypesController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
-
-	/**
-     * Lists all Payment Types models.
+	
+	    /**
+     * Lists all PaymentType models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('ecomPaymentTypesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
-        $searchModel = new PaymentTypeSearch();
+        $searchModel = new PaymenTypetSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [
@@ -152,7 +123,7 @@ class PaymentTypesController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
-	
+
     /**
      * Finds the PaymentType model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -16,6 +16,9 @@ use Yii;
  * @property string $content
  * @property integer $votes_up
  * @property integer $votes_down
+ *
+ * @property CmsPosts $post
+ * @property AcUsers $author0
  */
 class PostHistory extends \yii\db\ActiveRecord
 {
@@ -37,7 +40,8 @@ class PostHistory extends \yii\db\ActiveRecord
             [['post_id', 'author', 'votes_up', 'votes_down'], 'integer'],
             [['date_created'], 'safe'],
             [['content'], 'string'],
-            [['name', 'slug'], 'string', 'max' => 128]
+            [['name', 'slug'], 'string', 'max' => 128],
+            [['slug'], 'unique']
         ];
     }
 
@@ -57,5 +61,21 @@ class PostHistory extends \yii\db\ActiveRecord
             'votes_up' => 'Votes Up',
             'votes_down' => 'Votes Down',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(CmsPosts::className(), ['id' => 'post_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAuthor0()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'author']);
     }
 }

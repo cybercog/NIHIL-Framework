@@ -7,7 +7,6 @@ use app\modules\ecom\models\InvoiceItem;
 use app\modules\ecom\models\search\InvoiceItemSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class InvoiceItemsController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         return $this->render('index');
     }
 
@@ -47,27 +42,19 @@ class InvoiceItemsController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 	
 	/**
-     * Displays a single InvoiceItem model.
+     * Displays the details for a single InvoiceItem model.
      * @param integer $id
      * @return mixed
      */
     public function actionDetails($id)
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsDetails')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
-        return $this->render('view', [
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -79,10 +66,6 @@ class InvoiceItemsController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $model = new InvoiceItem();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -102,10 +85,6 @@ class InvoiceItemsController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -125,25 +104,17 @@ class InvoiceItemsController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
-     * Lists all Invoice Items models.
+	    /**
+     * Lists all InvoiceItem models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('ecomInvoiceItemsList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-	
         $searchModel = new InvoiceItemSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

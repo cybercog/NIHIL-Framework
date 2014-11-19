@@ -1,12 +1,12 @@
 <?php
 namespace app\modules\ac\models\forms;
 
-use app\modules\ac\models\Users;
-use app\modules\ac\models\AuthKeys;
-use app\modules\ac\models\EmailChanges;
-use app\modules\ac\models\PasswordChanges;
-use yii\base\Model;
 use Yii;
+use yii\base\Model;
+use app\modules\ac\models\User;
+use app\modules\ac\models\AuthKey;
+use app\modules\ac\models\EmailChange;
+use app\modules\ac\models\PasswordChange;
 
 /**
  * Register form
@@ -28,20 +28,20 @@ class RegisterForm extends Model
         return [
             ['username', 'filter', 'filter' => 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\app\modules\ac\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'filter', 'filter' => 'trim'],
             ['email', 'required'],
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => '\app\modules\ac\models\Users', 'message' => 'This email address has already been taken.'],
+            ['email', 'unique', 'targetClass' => '\app\modules\ac\models\User', 'message' => 'This email address has already been taken.'],
 
             ['password', 'required'],
             ['password', 'string', 'min' => 6],
 			
 			[['confirm', 'nickname', 'birthday'], 'required'],
 			['nickname', 'filter', 'filter' => 'trim'],
-			['birthday', 'date'],
+			['birthday', 'date', 'format' => 'MM/dd/yyyy'],
 			
 			['confirm', 'compare', 'compareAttribute'=>'password', 'message'=>"Passwords do not match."],
         ];
@@ -70,7 +70,7 @@ class RegisterForm extends Model
     public function register()
     {
         if ($this->validate()) {
-            $user = new Users();
+            $user = new User();
             $user->username = $this->username;
             $user->email = $this->email;
 			$user->nickname = $this->nickname;
@@ -86,31 +86,39 @@ class RegisterForm extends Model
 				$auth->assign($urole, $user->id);
 				
 				// calculate expireTime (converting strtotime) and create userkey object
-				$authkey = new AuthKeys;
+				$authkey = new AuthKey;
 				$authkey->user_id = $user->id;
 				$authkey->type = 1;
 				//$authkey->key = Yii::$app->getSecurity()->generatePasswordHash($user->username . time());
 				$authkey->key = \Yii::$app->getSecurity()->generateRandomString();
 				$authkey->date_created = date("Y-m-d H:i:s");
 				$authkey->date_expires = date("Y-m-d H:i:s", time() + 259200);
-				$authkey->save();
+				if(!$authkey->save()) {
+					die(print_r($authkey));
+				}
 				
 				//
-				$passwordChange = new PasswordChanges;
+				$passwordChange = new PasswordChange;
 				$passwordChange->user_id = $user->id;
 				$passwordChange->hash = $user->password;
+				$passwordChange->date_created = date("Y-m-d H:i:s");
 				$passwordChange->date_expires = date("Y-m-d H:i:s", time() + 2592000);
 				$passwordChange->ip_address = Yii::$app->request->getUserIP();
 				$passwordChange->user_agent = Yii::$app->request->getUserAgent();
-				$passwordChange->save();
+				if(!$passwordChange->save()) {
+					die(print_r($passwordChange));
+				}
 				
 				//
-				$emailChange = new EmailChanges;
+				$emailChange = new EmailChange;
 				$emailChange->user_id = $user->id;
 				$emailChange->email = $user->email;
+				$emailChange->date_created = date("Y-m-d H:i:s");
 				$emailChange->ip_address = Yii::$app->request->getUserIP();
 				$emailChange->user_agent = Yii::$app->request->getUserAgent();
-				$emailChange->save();
+				if(!$emailChange->save()) {
+					die(print_r($emailChange));
+				}
 				
 				$data = array('user' => $user, 'authkey' => $authkey);
 			

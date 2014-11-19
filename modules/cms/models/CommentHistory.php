@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $date_created
  * @property string $content
+ *
+ * @property CmsComments $comment
+ * @property AcUsers $user
  */
 class CommentHistory extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class CommentHistory extends \yii\db\ActiveRecord
             'date_created' => 'Date Created',
             'content' => 'Content',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComment()
+    {
+        return $this->hasOne(CmsComments::className(), ['id' => 'comment_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

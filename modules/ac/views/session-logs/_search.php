@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\search\SessionLogsSearch */
+/* @var $model app\modules\ac\models\search\SessionLogSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="session-logs-search">
+<div class="session-log-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

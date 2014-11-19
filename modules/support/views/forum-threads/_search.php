@@ -19,11 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'parent') ?>
 
+    <?= $form->field($model, 'forum_id') ?>
+
     <?= $form->field($model, 'name') ?>
 
     <?= $form->field($model, 'slug') ?>
 
-    <?= $form->field($model, 'posts_count') ?>
+    <?php // echo $form->field($model, 'posts_count') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

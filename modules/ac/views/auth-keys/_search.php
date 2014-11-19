@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\search\AuthKeysSearch */
+/* @var $model app\modules\ac\models\search\AuthKeySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="auth-keys-search">
+<div class="auth-key-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],

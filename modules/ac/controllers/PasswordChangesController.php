@@ -3,15 +3,15 @@
 namespace app\modules\ac\controllers;
 
 use Yii;
-use app\modules\ac\models\PasswordChanges;
-use app\modules\ac\models\search\PasswordChangesSearch;
+use app\modules\ac\models\PasswordChange;
+use app\modules\ac\models\search\PasswordChangeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PasswordChangesController implements the CRUD actions for PasswordChanges model.
+ * PassowrdChangesController implements the CRUD actions for PasswordChange model.
  */
 class PasswordChangesController extends Controller
 {
@@ -28,46 +28,82 @@ class PasswordChangesController extends Controller
     }
 
     /**
-     * Index Action.
+     * Lists all PasswordChange models.
      * @return mixed
      */
     public function actionIndex()
     {
 		if (!\Yii::$app->user->can('acPasswordChangesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         return $this->render('index');
     }
 
     /**
-     * Displays a single PasswordChanges model.
+     * Displays a single PasswordChange model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
 		if (!\Yii::$app->user->can('acPasswordChangesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
+	
+	/**
+     * Displays the details for a single PasswordChange model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('acPasswordChangesDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
     /**
-     * Creates a new PasswordChanges model.
+     * Creates a new PasswordChange model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
 		if (!\Yii::$app->user->can('acPasswordChangesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
-        $model = new PasswordChanges();
+        $model = new PasswordChange();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -79,7 +115,7 @@ class PasswordChangesController extends Controller
     }
 
     /**
-     * Updates an existing PasswordChanges model.
+     * Updates an existing PasswordChange model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -87,7 +123,12 @@ class PasswordChangesController extends Controller
     public function actionUpdate($id)
     {
 		if (!\Yii::$app->user->can('acPasswordChangesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         $model = $this->findModel($id);
@@ -102,7 +143,7 @@ class PasswordChangesController extends Controller
     }
 
     /**
-     * Deletes an existing PasswordChanges model.
+     * Deletes an existing PasswordChange model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +151,12 @@ class PasswordChangesController extends Controller
     public function actionDelete($id)
     {
 		if (!\Yii::$app->user->can('acPasswordChangesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
         $this->findModel($id)->delete();
@@ -118,17 +164,22 @@ class PasswordChangesController extends Controller
         return $this->redirect(['index']);
     }
 	
-	/**
-     * Lists all PasswordChanges models.
+	    /**
+     * Lists all PasswordChange models.
      * @return mixed
      */
     public function actionList()
     {
 		if (!\Yii::$app->user->can('acPasswordChangesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
 		}
 		
-        $searchModel = new PasswordChangesSearch();
+        $searchModel = new PasswordChangeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [
@@ -138,15 +189,15 @@ class PasswordChangesController extends Controller
     }
 
     /**
-     * Finds the PasswordChanges model based on its primary key value.
+     * Finds the PasswordChange model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return PasswordChanges the loaded model
+     * @return PasswordChange the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PasswordChanges::findOne($id)) !== null) {
+        if (($model = PasswordChange::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

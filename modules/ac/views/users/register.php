@@ -3,11 +3,11 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Breadcrumbs;
-//use yii\widgets\ActiveForm;
+use yii\widgets\ActiveForm;
 
 use yii\bootstrap\Modal;
-use kartik\widgets\ActiveForm;
-use kartik\widgets\DatePicker;
+//use kartik\widgets\ActiveForm;
+//use kartik\widgets\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\ac\models\search\UsersSearch */
@@ -19,72 +19,124 @@ $this->title = Yii::$app->params['siteMeta']['title'] . ' | Register';
 $this->params['breadcrumbs'][] = 'Register';
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
+		<section id="ac-users-login">
+		  <div class="row">
+		    <div class="col-sm-6 col-sm-offset-3" id="login-alerts">
 			
-					</div>
-				</div>
+			  <?php if (Yii::$app->session->hasFlash('success')) { ?>
+  <div class="alert alert-success alert-dismissible alert-flash" id="flashMessage" role="alert">
+	<div class="container">
+	  <!--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+	  <strong><i class="fa fa-check-square"></i> Success:</strong> <?= Yii::$app->session->getFlash('success'); ?>
+	</div>
+  </div>
+  <?php }elseif (Yii::$app->session->hasFlash('warning')) { ?>
+  <div class="alert alert-warning alert-dismissible alert-flash" id="flashMessage" role="alert">
+	<div class="container">
+	  <!--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+	  <strong><i class="fa fa-exclamation-triangle"></i> Warning:</strong> <?= Yii::$app->session->getFlash('warning'); ?>
+	</div>
+  </div>
+  <?php }elseif (Yii::$app->session->hasFlash('danger')) { ?>
+  <div class="alert alert-danger alert-dismissible alert-flash" id="flashMessage" role="alert">
+	<div class="container">
+	  <!--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+	  <strong><i class="fa fa-exclamation-triangle"></i> Error:</strong> <?= Yii::$app->session->getFlash('danger'); ?>
+	</div>
+  </div>
+  <?php }elseif (Yii::$app->session->hasFlash('info')) { ?>
+  <div class="alert alert-info alert-dismissible alert-flash" id="flashMessage" role="alert">
+	<div class="container">
+	  <!--<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+	  <strong><i class="fa fa-info-circle"></i> Info:</strong> <?= Yii::$app->session->getFlash('info'); ?>
+	</div>
+  </div>
+  <?php } ?>
+
+			
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-5">
-
-						<div class="ac-users-register">
-
-							<h1>Register</h1>
-							
-							<?php $form = ActiveForm::begin(); ?>
-
-							<?= $form->field($model, 'username')->textInput(['maxlength' => 100]) ?>
-
-							<?= $form->field($model, 'password')->passwordInput(['maxlength' => 128]) ?>
-							
-							<?= $form->field($model, 'confirm')->passwordInput(['maxlength' => 128]) ?>
-							
-							<?= $form->field($model, 'email')->textInput(['maxlength' => 150]) ?>
-							
-							<?= $form->field($model, 'nickname')->textInput(['maxlength' => 100]) ?>
-							
-							<?= $form->field($model, 'birthday')->widget(DatePicker::classname(), [
-									'options' => ['placeholder' => 'MM/DD/YYYY'],
-									'pluginOptions' => [
-										'autoclose'=>true
-									]
-								]);
-							?>
-
-							<div class="form-group">
-								<?= Html::submitButton('register', ['class' => 'btn btn-success btn-lg']) ?>
-							</div>
-
-							<?php ActiveForm::end(); ?>
-
-						</div>
-
-					</div>
+		  </div>
+		  <div class="row">
+		    <div class="col-sm-6 col-sm-offset-3" id="login-main">
+			
+			  <div class="row">
+			    <div class="col-sm-6"  id="login-cta">
+				
+					cta
+				
 				</div>
-				<div class="row">
-					<div class="col-md-5">
-
-						<div class="btn-aclinks">
-							<a href="/login">login</a> | 
-							<a href="/reset">reset account</a>
-						</div>
-
+				<div class="col-sm-6" id="login-formarea">
+				
+					<h1>Sign Up</h1>
+								
+					<?php $form = ActiveForm::begin(); ?>
+					
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'first_name')->textInput(['maxlength' => 100]) ?>
+					  </div>
 					</div>
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'last_name')->textInput(['maxlength' => 100]) ?>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'email')->textInput(['maxlength' => 150]) ?>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'username')->textInput(['maxlength' => 100]) ?>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'password')->passwordInput(['maxlength' => 128]) ?>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-12">
+					    <?= $form->field($model, 'confirm')->passwordInput(['maxlength' => 128]) ?>
+					  </div>
+					</div>
+					<div class="row">
+					  <div class="col-sm-5">
+						<?= $form->field($model, 'dob_month')->dropDownList($model->getMonthsDropdown(),['prompt'=>'']); ?>
+					  </div>
+					  <div class="col-sm-3">
+					    <?= $form->field($model, 'dob_day')->dropDownList($model->getDaysDropdown(),['prompt'=>'']); ?>
+					  </div>
+					  <div class="col-sm-4">
+					    <?= $form->field($model, 'dob_year')->dropDownList($model->getYearsDropdown(),['prompt'=>'']); ?>
+					  </div>
+					</div>
+					
+					<p>By clicking &quot;sign up&quot; below, you acknowledge that you have read and agree to the <a href="/legal/terms-of-service">Terms of Service</a>.</p>
+
+					<div class="form-group">
+						<?= Html::submitButton('sign up', ['class' => 'btn btn-success btn-lg']) ?>
+						<a href="#" class="btn btn-link" disabled><i class="fa fa-lock"></i> Secure Server</a>
+					</div>
+
+					<?php ActiveForm::end(); ?>
+				
 				</div>
+			  </div>
+			  <div class="row" id="login-footer-legal">
+			    <div class="col-sm-6" id="login-footer-legal-copyright">
+				  Copyright &copy; 2010-<?php echo date("Y"); ?> The NIHIL Corporation.  All rights reserved.
+				</div>
+				<div class="col-sm-6" id="login-footer-legal-navigation">
+				  <ul class="list-inline">
+					<li><a href="/legal/privacy">Privacy</a></li>
+					<li><a href="/support">Support</a></li>
+					<li><a href="/ac/users/login">Login</a></li>
+				  </ul>
+				</div>
+			  </div>
+			
 			</div>
+		  </div>
 		</section>

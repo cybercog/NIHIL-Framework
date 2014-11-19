@@ -3,7 +3,7 @@ namespace app\modules\ac\models\forms;
 
 use Yii;
 use yii\base\Model;
-use app\modules\ac\models\Users;
+use app\modules\ac\models\User;
 
 /**
  * Login form
@@ -28,6 +28,7 @@ class LoginForm extends Model
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
             ['password', 'validatePassword'],
+			['username', 'exist', 'targetClass' => '\app\modules\ac\models\User', 'message' => 'Incorrect username or password.'],
         ];
     }
 
@@ -70,13 +71,14 @@ class LoginForm extends Model
             
         } else {
 			// Increment login attempts
-			$user = $this->getUser();
-			$na = $user->login_attempts;
-			if(!$na) {
-				$na = 0;
+			if($user = $this->getUser()) {
+				$na = $user->login_attempts;
+				if(!$na) {
+					$na = 0;
+				}
+				$user->login_attempts = $na+1;
+				$update = $user->save();
 			}
-			$user->login_attempts = $na+1;
-			$update = $user->save();
 			
             return false;
         }
@@ -90,7 +92,7 @@ class LoginForm extends Model
     public function getUser()
     {
         if ($this->_user === false) {
-            $this->_user = Users::findByUsername($this->username);
+            $this->_user = User::findByUsername($this->username);
         }
 
         return $this->_user;

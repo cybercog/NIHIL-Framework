@@ -3,15 +3,12 @@
 namespace app\modules\ecom\models;
 
 use Yii;
-use app\modules\ecom\models\ProductAttribute;
-use app\modules\ecom\models\Invoice;
 
 /**
  * This is the model class for table "ecom_invoice_items".
  *
  * @property integer $id
  * @property integer $invoice_id
- * @property integer $product_attribute_id
  * @property string $name
  * @property integer $quantity
  * @property string $unit_price
@@ -20,7 +17,6 @@ use app\modules\ecom\models\Invoice;
  * @property string $description
  * @property string $details
  *
- * @property EcomProducts $product
  * @property EcomInvoices $invoice
  */
 class InvoiceItem extends \yii\db\ActiveRecord
@@ -39,10 +35,10 @@ class InvoiceItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['invoice_id', 'product_attribute_id', 'quantity', 'taxed'], 'integer'],
-            [['unit_price', 'total'], 'number'],
-            [['description', 'details'], 'string'],
-            [['name'], 'string', 'max' => 128]
+            [['invoice_id', 'name', 'quantity', 'unit_price', 'total', 'taxed', 'description'], 'required'],
+            [['invoice_id', 'quantity', 'taxed'], 'integer'],
+            [['name', 'description', 'details'], 'string'],
+            [['unit_price', 'total'], 'number']
         ];
     }
 
@@ -54,7 +50,6 @@ class InvoiceItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'invoice_id' => 'Invoice ID',
-            'product_attribute_id' => 'Product Attribute ID',
             'name' => 'Name',
             'quantity' => 'Quantity',
             'unit_price' => 'Unit Price',
@@ -68,16 +63,8 @@ class InvoiceItem extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductAttribute()
-    {
-        return $this->hasOne(ProductAttribute::className(), ['id' => 'product_attribute_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getInvoice()
     {
-        return $this->hasOne(Invoice::className(), ['id' => 'invoice_id']);
+        return $this->hasOne(EcomInvoices::className(), ['id' => 'invoice_id']);
     }
 }

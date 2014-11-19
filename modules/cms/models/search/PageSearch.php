@@ -19,7 +19,7 @@ class PageSearch extends Page
     {
         return [
             [['id', 'author', 'views'], 'integer'],
-            [['name', 'slug', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
+            [['name', 'slug', 'image', 'description', 'date_created', 'date_updated', 'date_published', 'content', 'date_lastview'], 'safe'],
         ];
     }
 
@@ -34,6 +34,9 @@ class PageSearch extends Page
 
     /**
      * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
      * @return ActiveDataProvider
      */
     public function search($params)
@@ -60,6 +63,8 @@ class PageSearch extends Page
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'slug', $this->slug])
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

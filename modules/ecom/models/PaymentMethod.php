@@ -33,6 +33,7 @@ class PaymentMethod extends \yii\db\ActiveRecord
     {
         return [
             [['parent'], 'integer'],
+            [['name', 'description'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 100]
         ];

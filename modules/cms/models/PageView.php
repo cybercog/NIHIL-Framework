@@ -3,7 +3,6 @@
 namespace app\modules\cms\models;
 
 use Yii;
-use app\modules\cms\models\Page;
 
 /**
  * This is the model class for table "cms_page_views".
@@ -14,6 +13,9 @@ use app\modules\cms\models\Page;
  * @property string $timestamp
  * @property string $ip_address
  * @property string $user_agent
+ *
+ * @property CmsPages $page
+ * @property AcUsers $user
  */
 class PageView extends \yii\db\ActiveRecord
 {
@@ -53,21 +55,20 @@ class PageView extends \yii\db\ActiveRecord
             'user_agent' => 'User Agent',
         ];
     }
-	
-	public function logPageView(Page $page)
-	{
-		$this->page_id = $page->id;
-		$this->timestamp = date("Y-m-d H:i:s");
-		$this->ip_address = \Yii::$app->request->userIP;
-		$this->user_agent = \Yii::$app->request->userAgent;
-		
-		if (!\Yii::$app->user->isGuest) {
-            $this->user_id = \Yii::$app->user->identity->id;
-        }
-		
-		$page->updateViews();
-		
-		$this->save();
-		
-	}
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPage()
+    {
+        return $this->hasOne(CmsPages::className(), ['id' => 'page_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
+    }
 }

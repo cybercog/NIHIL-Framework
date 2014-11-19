@@ -6,9 +6,8 @@ use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
 use app\models\ContactForm;
-use app\modules\cms\models\Project;
+use yii\web\ForbiddenHttpException;
 
 class SiteController extends Controller
 {
@@ -50,15 +49,40 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+		if (!\Yii::$app->user->can('siteIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['emails']['contact'])) {
+            Yii::$app->session->setFlash('success', 'Thanks for reaching out.  Your message has been sent.');
+            return $this->refresh();
+        } else {
+            return $this->render('index', [
+                'model' => $model,
+            ]);
+        }
     }
 
     public function actionContact()
     {
+		if (!\Yii::$app->user->can('siteContact')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['emails']['contact'])) {
+            Yii::$app->session->setFlash('success', 'Thanks for reaching out.  Your message has been sent.');
             return $this->refresh();
         } else {
             return $this->render('contact', [

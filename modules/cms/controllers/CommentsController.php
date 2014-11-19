@@ -7,7 +7,6 @@ use app\modules\cms\models\Comment;
 use app\modules\cms\models\search\CommentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class CommentsController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsCommentsIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('index');
     }
 
@@ -47,11 +42,19 @@ class CommentsController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsCommentsView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single Comment model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -63,10 +66,6 @@ class CommentsController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsCommentsCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new Comment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,10 +85,6 @@ class CommentsController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsCommentsUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -109,25 +104,17 @@ class CommentsController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsCommentsDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all Comment models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsCommentsList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new CommentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

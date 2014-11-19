@@ -14,9 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'invoice_id')->textInput() ?>
 
-    <?= $form->field($model, 'product_id')->textInput() ?>
-
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 128]) ?>
+    <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'quantity')->textInput() ?>
 

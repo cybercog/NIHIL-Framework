@@ -4,13 +4,15 @@ namespace app\modules\support\controllers;
 
 use Yii;
 use app\modules\support\models\Ticket;
-use app\modules\support\models\search\TicketsSearch;
+use app\modules\support\models\search\TicketSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
- * TicketController implements the CRUD actions for Ticket model.
+ * TicketsController implements the CRUD actions for Ticket model.
  */
 class TicketsController extends Controller
 {
@@ -32,7 +34,48 @@ class TicketsController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+		if (!\Yii::$app->user->can('supportTicketsIndex')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        //return $this->render('index', [
+		//	'tickets' => Ticket::find()->where(['resolution' => [1,3]])->orderBy('status, priority')->all(),
+		//]);
+		
+		$urTickets = Ticket::find()->where(['resolution' => [1,3]])->orderBy('status, priority');
+		$urCountQuery = clone $urTickets;
+		$urPages = new Pagination(['totalCount' => $urCountQuery->count()]);
+		$urModels = $urTickets->offset($urPages->offset)
+			->limit($urPages->limit)
+			->all();
+			
+		$rTickets = Ticket::find()->where(['resolution' => [2,4]])->orderBy('date_resolved');
+		$rCountQuery = clone $rTickets;
+		$rPages = new Pagination(['totalCount' => $rCountQuery->count()]);
+		$rModels = $rTickets->offset($rPages->offset)
+			->limit($rPages->limit)
+			->all();
+			
+		$aTickets = Ticket::find()->orderBy('status, priority');
+		$aCountQuery = clone $aTickets;
+		$aPages = new Pagination(['totalCount' => $aCountQuery->count()]);
+		$aModels = $aTickets->offset($aPages->offset)
+			->limit($aPages->limit)
+			->all();
+
+		return $this->render('index', [
+			 'urModels' => $urModels,
+			 'urPages' => $urPages,
+			 'rModels' => $rModels,
+			 'rPages' => $rPages,
+			 'aModels' => $aModels,
+			 'aPages' => $aPages,
+		]);
     }
 
     /**
@@ -42,7 +85,37 @@ class TicketsController extends Controller
      */
     public function actionView($id)
     {
+		if (!\Yii::$app->user->can('supportTicketsView')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single Ticket model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+		if (!\Yii::$app->user->can('supportTicketsDetails')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -54,6 +127,15 @@ class TicketsController extends Controller
      */
     public function actionCreate()
     {
+		if (!\Yii::$app->user->can('supportTicketsCreate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = new Ticket();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -73,6 +155,15 @@ class TicketsController extends Controller
      */
     public function actionUpdate($id)
     {
+		if (!\Yii::$app->user->can('supportTicketsUpdate')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -92,18 +183,36 @@ class TicketsController extends Controller
      */
     public function actionDelete($id)
     {
+		if (!\Yii::$app->user->can('supportTicketsDelete')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all Ticket models.
      * @return mixed
      */
     public function actionList()
     {
-        $searchModel = new TicketsSearch();
+		if (!\Yii::$app->user->can('supportTicketsList')) {
+			if (!\Yii::$app->user->isGuest) {
+				throw new ForbiddenHttpException('You do not have privileges to view this content.');
+			}else{
+				Yii::$app->session->setFlash('danger', 'You do not have privileges to view this content. Please login to continue.');
+				return $this->redirect(['/ac/users/login']);
+			}
+		}
+		
+        $searchModel = new TicketSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('list', [

@@ -7,8 +7,8 @@ use app\modules\cms\models\Post;
 use app\modules\cms\models\search\PostSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
+use yii\data\Pagination;
 
 /**
  * PostsController implements the CRUD actions for Post model.
@@ -28,17 +28,23 @@ class PostsController extends Controller
     }
 
     /**
-     * Lists all Content models.
+     * Lists all Post models.
      * @return mixed
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsPostsIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
+		$pPosts = Post::find()->orderBy('date_published DESC');
+		$pCountQuery = clone $pPosts;
+		$pPages = new Pagination(['totalCount' => $pCountQuery->count()]);
+		$pModels = $pPosts->offset($pPages->offset)
+			->limit($pPages->limit)
+			->all();
+		
+		//die(print_r($pPosts));
 		
         return $this->render('index', [
-			'posts' => Post::findRecentPosts(5),
+			 'pModels' => $pModels,
+			 'pPages' => $pPages,
 		]);
     }
 
@@ -49,26 +55,18 @@ class PostsController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsPostsView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 	
 	/**
-     * Displays a single Post model.
+     * Displays the details for a single Post model.
      * @param integer $id
      * @return mixed
      */
     public function actionDetails($id)
     {
-		if (!\Yii::$app->user->can('cmsPostsDetails')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
@@ -81,10 +79,6 @@ class PostsController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsPostsCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new Post();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -104,10 +98,6 @@ class PostsController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsPostsUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -127,25 +117,17 @@ class PostsController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsPostsDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
-     * Lists all Content models.
+	    /**
+     * Lists all Post models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsPostsList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

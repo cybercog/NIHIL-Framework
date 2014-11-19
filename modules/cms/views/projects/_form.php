@@ -16,15 +16,11 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'author_id')->textInput() ?>
 
-    <?= $form->field($model, 'votes_up')->textInput() ?>
-
-    <?= $form->field($model, 'votes_down')->textInput() ?>
-
-    <?= $form->field($model, 'views')->textInput() ?>
-
     <?= $form->field($model, 'title')->textInput(['maxlength' => 128]) ?>
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 128]) ?>
+
+    <?= $form->field($model, 'image')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
@@ -34,9 +30,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'date_published')->textInput() ?>
 
-    <?= $form->field($model, 'date_lastview')->textInput() ?>
+    <?= $form->field($model, 'votes_up')->textInput() ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => 255]) ?>
+    <?= $form->field($model, 'votes_down')->textInput() ?>
+
+    <?= $form->field($model, 'views')->textInput() ?>
+
+    <?= $form->field($model, 'date_lastview')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -7,7 +7,6 @@ use app\modules\cms\models\PostView;
 use app\modules\cms\models\search\PostViewSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class PostViewsController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsPostViewsIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('index');
     }
 
@@ -47,11 +42,19 @@ class PostViewsController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsPostViewsView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single PostView model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -63,10 +66,6 @@ class PostViewsController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsPostViewsCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new PostView();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,10 +85,6 @@ class PostViewsController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsPostViewsUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -109,25 +104,17 @@ class PostViewsController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsPostViewsDelte')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all PostView models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsPostViewsList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new PostViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

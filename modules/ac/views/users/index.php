@@ -2,48 +2,41 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Breadcrumbs;
+
+use app\modules\domains\widgets\CustomerDomainsWidget;
+use app\modules\ecom\widgets\UserInvoicesWidget;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ac\models\search\UsersSearch */
+/* @var $searchModel app\modules\ac\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::$app->params['siteMeta']['title'] . ' | Portal';
-//$this->params['breadcrumbs'][] = array('label' => 'AC', 'url' => '/ac');
-$this->params['breadcrumbs'][] = 'Portal';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Users';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
+	  <section id="ac-user-index">
+        <div class="container">
 		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-			
-					</div>
+          <div class="row">
+		    <div class="col-xs-12">
+				<div class="row">
+				  <div class="col-sm-12">
+				    <h1 class="page-header-stacked"><?php echo \Yii::$app->user->getIdentity()->first_name . ' ' . \Yii::$app->user->getIdentity()->last_name; ?></h1>
+					<h4 class="page-header-stacked page-header"><?php echo date("F j, Y"); ?></h4>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <h2>Invoices</h2>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= UserInvoicesWidget::widget(); ?>
+				  </div>
 				</div>
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="ac-users-index">
-
-							<h1>Portal</h1>
-							
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+		  </div>
+		  
+		</div>
+	  </section>

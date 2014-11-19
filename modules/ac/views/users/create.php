@@ -1,52 +1,28 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\Users */
+/* @var $model app\modules\ac\models\User */
 
-$this->title = 'uclemmer | AC Users Create';
-$this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => '/ac/users'];
-$this->params['breadcrumbs'][] = 'Create';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'User Create';
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
+	<section id="user-create">
+        <div class="container">
+          <div class="row">
+		    <div class="col-sm-9">
+				<h1><?= Html::encode('User Create') ?></h1>
+				<?= $this->render('_form', [
+					'model' => $model,
+				]) ?>
+			</div>
+			<div class="col-sm-3">
 			
-					</div>
-				</div>
 			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-
-						<div class="ac-users-create">
-
-							<h1>AC Users Create</h1>
-
-							<?= $this->render('_form', [
-								'model' => $model,
-							]) ?>
-
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+		  </div>
+		</div>
+	  </section>

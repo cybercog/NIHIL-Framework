@@ -18,7 +18,7 @@ class InvoiceItemSearch extends InvoiceItem
     public function rules()
     {
         return [
-            [['id', 'invoice_id', 'product_id', 'quantity', 'taxed'], 'integer'],
+            [['id', 'invoice_id', 'quantity', 'taxed'], 'integer'],
             [['name', 'description', 'details'], 'safe'],
             [['unit_price', 'total'], 'number'],
         ];
@@ -55,7 +55,6 @@ class InvoiceItemSearch extends InvoiceItem
         $query->andFilterWhere([
             'id' => $this->id,
             'invoice_id' => $this->invoice_id,
-            'product_id' => $this->product_id,
             'quantity' => $this->quantity,
             'unit_price' => $this->unit_price,
             'total' => $this->total,

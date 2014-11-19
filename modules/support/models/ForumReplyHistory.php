@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $date_created
  * @property string $content
+ *
+ * @property SupportForumReplies $reply
+ * @property AcUsers $user
  */
 class ForumReplyHistory extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class ForumReplyHistory extends \yii\db\ActiveRecord
             'date_created' => 'Date Created',
             'content' => 'Content',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReply()
+    {
+        return $this->hasOne(SupportForumReplies::className(), ['id' => 'reply_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

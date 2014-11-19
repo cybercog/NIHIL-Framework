@@ -20,6 +20,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'slug')->textInput(['maxlength' => 64]) ?>
 
+    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+
     <?= $form->field($model, 'views_count')->textInput(['maxlength' => 11]) ?>
 
     <?= $form->field($model, 'replies_count')->textInput(['maxlength' => 11]) ?>
@@ -30,19 +32,17 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'sticky')->textInput() ?>
 
-    <?= $form->field($model, 'locked')->textInput() ?>
-
-    <?= $form->field($model, 'deleted')->textInput() ?>
-
-    <?= $form->field($model, 'accepted_answer')->textInput() ?>
-
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
-
     <?= $form->field($model, 'date_created')->textInput() ?>
 
     <?= $form->field($model, 'date_modified')->textInput() ?>
 
     <?= $form->field($model, 'date_edited')->textInput() ?>
+
+    <?= $form->field($model, 'locked')->textInput() ?>
+
+    <?= $form->field($model, 'deleted')->textInput() ?>
+
+    <?= $form->field($model, 'accepted_answer')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

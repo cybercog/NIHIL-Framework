@@ -3,8 +3,8 @@ namespace app\modules\ac\models\forms;
 
 use Yii;
 use yii\base\Model;
-use app\modules\ac\models\Users;
-use app\modules\ac\models\AuthKeys;
+use app\modules\ac\models\User;
+use app\modules\ac\models\AuthKey;
 
 /**
  * Login form
@@ -37,7 +37,7 @@ class VerificationForm extends Model
 
 			// Use the auth key
 			// Update the user roles
-			$authkey = AuthKeys::findByCode($this->code, 1);
+			$authkey = AuthKey::find()->where(['key' => $this->code])->one();
 			if(!$authkey) {
 				$this->addError('code', 'Code is bad.');
 				return FALSE;
@@ -55,7 +55,8 @@ class VerificationForm extends Model
 				$authkey->date_used = date("Y-m-d H:i:s");
 			
 				if($authkey->save()){
-					return TRUE;
+					//return TRUE;
+					return User::find()->where(['id' => $authkey->user_id])->one();
 				}
 			}
             

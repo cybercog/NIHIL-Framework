@@ -7,7 +7,6 @@ use app\modules\cms\models\PostHistory;
 use app\modules\cms\models\search\PostHistorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\filters\VerbFilter;
 
 /**
@@ -33,10 +32,6 @@ class PostHistoriesController extends Controller
      */
     public function actionIndex()
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesIndex')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('index');
     }
 
@@ -47,11 +42,19 @@ class PostHistoriesController extends Controller
      */
     public function actionView($id)
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesView')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+	
+	/**
+     * Displays the details for a single PostHistory model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDetails($id)
+    {
+        return $this->render('details', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -63,10 +66,6 @@ class PostHistoriesController extends Controller
      */
     public function actionCreate()
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesCreate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = new PostHistory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -86,10 +85,6 @@ class PostHistoriesController extends Controller
      */
     public function actionUpdate($id)
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesUpdate')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -109,25 +104,17 @@ class PostHistoriesController extends Controller
      */
     public function actionDelete($id)
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesDelete')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 	
-	/**
+	    /**
      * Lists all PostHistory models.
      * @return mixed
      */
     public function actionList()
     {
-		if (!\Yii::$app->user->can('cmsPostHistoriesList')) {
-			throw new ForbiddenHttpException('You do not have privileges to view this content.');
-		}
-		
         $searchModel = new PostHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -138,7 +125,7 @@ class PostHistoriesController extends Controller
     }
 
     /**
-     * Finds the PosttHistory model based on its primary key value.
+     * Finds the PostHistory model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return PostHistory the loaded model

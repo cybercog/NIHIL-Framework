@@ -13,6 +13,10 @@ use Yii;
  * @property string $timestamp
  * @property string $message
  * @property string $rating
+ *
+ * @property SupportForumReplyVotes[] $supportForumReplyVotes
+ * @property SupportTickets $ticket
+ * @property AcUsers $user
  */
 class TicketReply extends \yii\db\ActiveRecord
 {
@@ -51,5 +55,29 @@ class TicketReply extends \yii\db\ActiveRecord
             'message' => 'Message',
             'rating' => 'Rating',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportForumReplyVotes()
+    {
+        return $this->hasMany(SupportForumReplyVotes::className(), ['reply_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTicket()
+    {
+        return $this->hasOne(SupportTickets::className(), ['id' => 'ticket_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

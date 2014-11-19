@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\ac\models\SessionLogs */
+/* @var $model app\modules\ac\models\SessionLog */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="session-logs-form">
+<div class="session-log-form">
 
     <?php $form = ActiveForm::begin(); ?>
 

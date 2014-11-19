@@ -24,6 +24,13 @@ use Yii;
  * @property integer $locked
  * @property integer $deleted
  * @property integer $accepted_answer
+ *
+ * @property SupportForumPostHistories[] $supportForumPostHistories
+ * @property SupportForumPostViews[] $supportForumPostViews
+ * @property SupportForumPostVotes[] $supportForumPostVotes
+ * @property AcUsers $user
+ * @property SupportForumThreads $thread
+ * @property SupportForumReplies[] $supportForumReplies
  */
 class ForumPost extends \yii\db\ActiveRecord
 {
@@ -75,5 +82,53 @@ class ForumPost extends \yii\db\ActiveRecord
             'deleted' => 'Deleted',
             'accepted_answer' => 'Accepted Answer',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportForumPostHistories()
+    {
+        return $this->hasMany(SupportForumPostHistories::className(), ['post_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportForumPostViews()
+    {
+        return $this->hasMany(SupportForumPostViews::className(), ['post_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportForumPostVotes()
+    {
+        return $this->hasMany(SupportForumPostVotes::className(), ['post_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getThread()
+    {
+        return $this->hasOne(SupportForumThreads::className(), ['id' => 'thread_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getSupportForumReplies()
+    {
+        return $this->hasMany(SupportForumReplies::className(), ['post_id' => 'id']);
     }
 }

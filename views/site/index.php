@@ -1,71 +1,285 @@
 <?php
-/**
- * @var yii\web\View $this
- */
-$this->title = 'uclemmer | Home';
-$this->registerMetaTag(['description' => 'Uriah M. Clemmer IV is an Electrical Engineer by training, an application/network consultant by trade, and mechanic/blogger/gardener/reader by necessity.  This site is all about Uriah, his work, and his hobbies.']);
-$this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation, tutorials, blog, books']);
+use yii\helpers\Html;
+use yii\bootstrap\ActiveForm;
+use yii\captcha\Captcha;
 
-$this->registerMetaTag(['og:title' => 'uclemmer.com']);
-$this->registerMetaTag(['og:image' => 'http://www.uclemmer.com/favicon/600x600.png']);
-$this->registerMetaTag(['og:url' => 'http://www.uclemmer.com']);
-$this->registerMetaTag(['og:site_name' => 'uclemmer.com']);
-$this->registerMetaTag(['og:type' => 'website']);
-$this->registerMetaTag(['og:description' => 'Uriah M. Clemmer IV is an Electrical Engineer by training, an application/network consultant by trade, and mechanic/blogger/gardener/reader by necessity.  This site is all about Uriah, his work, and his hobbies.']);
+/* @var $this yii\web\View */
+
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' | Home';
 ?>
-		
-		<section id="site-jumbotron">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-8">
-		
-						<div class="jumbotron">
-							<h1>Order and Chaos</h1>
 
-							<p class="lead">"Deep in the human unconscious is a pervasive need for a logical universe that makes sense. But the real universe is always one step beyond logic." ― Frank Herbert, Dune</p>
-
-							<p><a class="btn btn-lg btn-default" href="/tutorials">Check out my tutorials</a></p>
-						</div>
-			
-					</div>
-					<div class="col-md-4" id="ad-jumbotron">
-					
-					<?php if(!YII_DEBUG) { ?>
-						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-						<!-- uclemmer MedRec -->
-						<ins class="adsbygoogle"
-							 style="display:inline-block;width:300px;height:250px"
-							 data-ad-client="ca-pub-5089214589271094"
-							 data-ad-slot="3716231707"></ins>
-						<script>
-						(adsbygoogle = window.adsbygoogle || []).push({});
-						</script>
-					<?php }else{ ?>
-						<img src="/img/Ad_300x250.gif" alt="Ad" />
-					<?php } ?>
-					
-					</div>
-				</div>
-			</div>
-		</section>
-							
-
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
+	<section id="site-banner">
+        <div class="container" id="quickstart">
+          <div class="row">
+		    <div class="col-xs-12">
+				
+				<div class="jumbotron">
+					<div class="row">
+					  <div class="col-sm-8">
+						<h1>1-Hour Quickstart</h1>
+						<p class="lead">We will walk you through everything.</p>
+						<p><a class="btn btn-lg btn-default" href="http://www.yiiframework.com">Get started for $99.99</a></p>
+					  </div>
+					  <div class="col-sm-4">
 						
-						<div class="site-index">
+						<ul class="list-group">
+						  <li class="list-group-item"><i class="fa fa-check"></i> .COM Registration</li>
+						  <li class="list-group-item"><i class="fa fa-check"></i> 1-year Shared Hosting</li>
+						  <li class="list-group-item"><i class="fa fa-check"></i> Personal Email Accounts</li>
+						  <li class="list-group-item"><i class="fa fa-check"></i> Website Analytics</li>
+						  <li class="list-group-item"><i class="fa fa-check"></i> Content Management System</li>
+						  <li class="list-group-item"><i class="fa fa-check"></i> 45-Minute Tutorial</li>
+						</ul>
+						
+					  </div>
+					</div>
+					
 
-								<div class="row">
-									
-								</div>
-
-						</div>
-
-			
+					
+				</div>
+				
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-domains">
+        <div class="container">
+		
+          <div class="row">
+		    <div class="col-xs-12">
+				
+				<form>
+				<div class="row">
+				  <div class="col-xs-12">
+					<div class="input-group input-group-lg">
+					  <input type="text" class="form-control" placeholder="Enter a domain name - example.com">
+					  <span class="input-group-btn">
+						<button class="btn btn-default" type="button">Search Domains</button>
+					  </span>
+					</div><!-- /input-group -->
+				  </div><!-- /.col-lg-6 -->
+				</div><!-- /.row -->
+				</form>
+				
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-hosting">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+					
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>Hosting</h1>
 					</div>
 				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						Shared
+					</div>
+					<div class="col-sm-3">
+						VPS
+					</div>
+					<div class="col-sm-3">
+						Dedicated
+					</div>
+					<div class="col-sm-3">
+						Email
+					</div>
+				</div>
+				
 			</div>
-		</section>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-design">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+				
+				<div class="row">
+					<div class="col-sm-6">
+						
+						<div class="row">
+							<div class="col-xs-4">
+								<div class="row">
+									<div class="col-sm-12">
+										<img class="img-responsive" src="img/logos/shirlock_350x350.png" style="margin-top:15px;margin-bottom:15px;">
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<img class="img-responsive" src="img/logos/outlaw_350x350.png" style="margin-top:15px;margin-bottom:15px;">
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-8">
+								<img class="img-responsive" src="img/logos/taraloka_600x600.png" style="margin-top:15px;margin-bottom:15px;">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<img class="img-responsive" src="img/logos/asm_600x166.png" style="margin-top:15px;margin-bottom:15px;">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<img class="img-responsive" src="img/logos/antiquarians_600x166.png" style="margin-top:15px;margin-bottom:15px;">
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-sm-6">
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<img class="img-responsive" src="img/logos/benjaminbaxton_600x150.png" style="margin-top:15px;margin-bottom:15px;">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-xs-8">
+										<img class="img-responsive" src="https://placehold.it/600x930&text=Wellness" style="margin-top:15px;margin-bottom:15px;">
+									</div>
+									<div class="col-xs-4">
+										
+										<div class="row">
+											<div class="col-sm-12">
+												<img class="img-responsive" src="img/logos/coldlifestorage_350x350.png" style="margin-top:15px;margin-bottom:15px;">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<img class="img-responsive" src="https://placehold.it/600x600&text=FlopFeet" style="margin-top:15px;margin-bottom:15px;">
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-sm-12">
+												<img class="img-responsive" src="https://placehold.it/600x600&text=Tisdale" style="margin-top:15px;margin-bottom:15px;">
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-services">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>Services</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-4">
+						
+						<div class="list-group">
+						  <a href="#" class="list-group-item active">App Development</a>
+						  <a href="#" class="list-group-item">Software Engineering</a>
+						  <a href="#" class="list-group-item">IT/Networking</a>
+						  <a href="#" class="list-group-item">Consultation</a>
+						</div>
+						
+					</div>
+					<div class="col-sm-8">
+						Description
+					</div>
+				</div>
+				
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-support">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+				
+				<div class="row">
+					<div class="col-sm-12">
+						<h1>Support</h1>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-6">
+						
+						$100 1-Hour Quickstart
+						
+					</div>
+					<div class="col-sm-6">
+						Call, Email, Chat, Tickets, Forums, Knowledgebase, Form below
+					</div>
+				</div>
+				
+			</div>
+		  </div>
+		</div>
+	  </section>
+	  
+	  <section id="site-contact">
+        <div class="container">
+		  <div class="row">
+		    <div class="col-sm-6 col-sm-offset-6 well">
+			  <div class="row">
+			    <div class="col-sm-12">
+				  <h2>Let's Get Started</h2>
+				  <p>Fill out the following form, or <a href="mailto:contact@nihil.co">email us directly</a>, with as much detail as possible to get started on your new project today.</p>
+				</div>
+			  </div>
+			  
+			  <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
+				<div class="row">
+				  <div class="col-sm-6">
+				    <?= $form->field($model, 'name') ?>
+				  </div>
+				  <div class="col-sm-6">
+				    <?= $form->field($model, 'email') ?>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= $form->field($model, 'subject') ?>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= $form->field($model, 'body')->textArea(['rows' => 6]) ?>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= $form->field($model, 'verifyCode')->widget(Captcha::className(), [
+						'template' => '<div class="row"><div class="col-lg-3">{image}</div><div class="col-lg-6">{input}</div></div>',
+					]) ?>
+				  </div>
+				</div>
+				<div class="row">
+				  <div class="col-sm-12">
+				    <?= Html::submitButton('Send Message', ['class' => 'btn btn-primary pull-right', 'name' => 'contact-button']) ?>
+				  </div>
+				</div>
+			  <?php ActiveForm::end(); ?>  
+				
+			</div>
+		  </div>
+		</div>
+	  </section>

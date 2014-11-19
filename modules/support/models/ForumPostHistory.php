@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $date_created
  * @property string $content
+ *
+ * @property SupportForumPosts $post
+ * @property AcUsers $user
  */
 class ForumPostHistory extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class ForumPostHistory extends \yii\db\ActiveRecord
             'date_created' => 'Date Created',
             'content' => 'Content',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPost()
+    {
+        return $this->hasOne(SupportForumPosts::className(), ['id' => 'post_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }

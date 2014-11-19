@@ -18,8 +18,8 @@ class InvoiceSearch extends Invoice
     public function rules()
     {
         return [
-            [['id', 'invoice_status_id', 'customer_id', 'shipping_id', 'payment_id'], 'integer'],
-            [['invoice_number', 'date_created', 'date_due', 'date_paid', 'token', 'details'], 'safe'],
+            [['id', 'user_id', 'invoice_status_id', 'billing_id', 'shipping_id', 'payment_id'], 'integer'],
+            [['invoice_number', 'date_created', 'date_updated', 'date_due', 'date_paid', 'token', 'details'], 'safe'],
             [['subtotal', 'shipping', 'credit', 'tax', 'tax_rate', 'total'], 'number'],
         ];
     }
@@ -54,11 +54,13 @@ class InvoiceSearch extends Invoice
 
         $query->andFilterWhere([
             'id' => $this->id,
+            'user_id' => $this->user_id,
             'invoice_status_id' => $this->invoice_status_id,
-            'customer_id' => $this->customer_id,
+            'billing_id' => $this->billing_id,
             'shipping_id' => $this->shipping_id,
             'payment_id' => $this->payment_id,
             'date_created' => $this->date_created,
+            'date_updated' => $this->date_updated,
             'date_due' => $this->date_due,
             'date_paid' => $this->date_paid,
             'subtotal' => $this->subtotal,

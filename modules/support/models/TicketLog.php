@@ -11,6 +11,8 @@ use Yii;
  * @property integer $ticket_id
  * @property string $timestamp
  * @property string $action
+ *
+ * @property SupportTickets $ticket
  */
 class TicketLog extends \yii\db\ActiveRecord
 {
@@ -46,5 +48,13 @@ class TicketLog extends \yii\db\ActiveRecord
             'timestamp' => 'Timestamp',
             'action' => 'Action',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTicket()
+    {
+        return $this->hasOne(SupportTickets::className(), ['id' => 'ticket_id']);
     }
 }

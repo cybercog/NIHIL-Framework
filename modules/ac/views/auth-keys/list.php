@@ -2,69 +2,44 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\ac\models\search\AuthKeysSearch */
+/* @var $searchModel app\modules\ac\models\search\AuthKeySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'uclemmer | AC Auth Keys List';
-$this->params['breadcrumbs'][] = ['label' => 'AC', 'url' => '/ac'];
-$this->params['breadcrumbs'][] = ['label' => 'Auth Keys', 'url' => '/ac/auth-keys'];
-$this->params['breadcrumbs'][] = 'List';
+$this->title = \Yii::$app->params['siteMeta']['title'] . ' - ' . 'Auth Key List';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-		<section id="site-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-		
-						<?= Breadcrumbs::widget([
-							'homeLink' => [
-								'label' => 'Home',
-								'template' => "<li><a href='\'><i class='fa fa-home'></i></a></li>\n",
-							],
-							'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-						]) ?>
-			
-					</div>
-				</div>
-			</div>
-		</section>
-		
-		<section id="site-content">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
+	  <section id="auth-key-list">
+        <div class="container">
+          <div class="row">
+		    <div class="col-xs-12">
+				<h1><?= Html::encode('Auth Key List') ?></h1>
+								    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+				
+					<p>
+						<?= Html::a('Create Auth Key', ['create'], ['class' => 'btn btn-success']) ?>
+					</p>
 
-						<div class="ac-authkeys-list">
-							<h1>AC Auth Keys List</h1>
-							<?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+									<?= GridView::widget([
+						'dataProvider' => $dataProvider,
+						'filterModel' => $searchModel,
+        'columns' => [
+							['class' => 'yii\grid\SerialColumn'],
 
-							<p>
-								<?= Html::a('Create Auth Keys', ['create'], ['class' => 'btn btn-success']) ?>
-							</p>
+				            'id',
+            'user_id',
+            'type',
+            'key',
+            'date_created',
+            // 'date_expires',
+            // 'date_used',
 
-							<?= GridView::widget([
-								'dataProvider' => $dataProvider,
-								'filterModel' => $searchModel,
-								'columns' => [
-									['class' => 'yii\grid\SerialColumn'],
-
-									'id',
-									'user_id',
-									'type',
-									'key',
-									'date_created',
-									// 'date_expires',
-									// 'date_used',
-
-									['class' => 'yii\grid\ActionColumn'],
-								],
-							]); ?>
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</section>
+							['class' => 'yii\grid\ActionColumn'],
+						],
+					]); ?>
+							</div>
+		  </div>
+		</div>
+	  </section>

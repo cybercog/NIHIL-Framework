@@ -12,6 +12,9 @@ use Yii;
  * @property integer $user_id
  * @property string $timestamp
  * @property string $vote
+ *
+ * @property SupportTicketReplies $reply
+ * @property AcUsers $user
  */
 class ForumReplyVote extends \yii\db\ActiveRecord
 {
@@ -48,5 +51,21 @@ class ForumReplyVote extends \yii\db\ActiveRecord
             'timestamp' => 'Timestamp',
             'vote' => 'Vote',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getReply()
+    {
+        return $this->hasOne(SupportTicketReplies::className(), ['id' => 'reply_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUser()
+    {
+        return $this->hasOne(AcUsers::className(), ['id' => 'user_id']);
     }
 }
