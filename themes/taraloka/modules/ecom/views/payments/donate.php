@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = 'Donate';
 							<div class="row">
 								<div class="col-sm-12">
 									<h1>Donate</h1>
+									<div class="alert alert-warning" role="alert">The form is currently in test mode.  All transactions will not be processed.</div>
 								</div>
 							</div>
 							<?php $form = ActiveForm::begin([

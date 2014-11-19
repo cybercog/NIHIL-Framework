@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = 'Shipping Method';
 
 						<div class="ecom-orders-index">
 							<h1>Shipping Method</h1>
+							<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 							<p>Step 2: Select a shipping method.</p>
 						</div>
 						

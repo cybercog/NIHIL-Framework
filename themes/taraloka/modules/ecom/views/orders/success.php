@@ -36,6 +36,7 @@ $this->params['breadcrumbs'][] = 'Success';
 
 						<div class="ecom-orders-index">
 							<h1>Checkout Success</h1>
+							<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 							<p>Bingo.  We are good to go.</p>
 						</div>
 

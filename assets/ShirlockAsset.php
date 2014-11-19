@@ -18,16 +18,16 @@ class ShirlockAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-		//'css/bootstrap/bootstrap.min.css',
+		'css/bootstrap/bootstrap.min.css',
 		'css/font-awesome/font-awesome.min.css',
         'css/shirlock.css',
     ];
     public $js = [
-		//'js/jquery/jquery-1.11.1.min.js',
-		//'js/bootstrap/bootstrap.min.js',
+		'js/jquery/jquery-1.11.1.min.js',
+		'js/bootstrap/bootstrap.min.js',
     ];
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+        //'yii\web\YiiAsset',
+        //'yii\bootstrap\BootstrapAsset',
     ];
 }

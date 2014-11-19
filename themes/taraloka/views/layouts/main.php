@@ -281,7 +281,7 @@ TaralokaAsset::register($this);
 				
 					<!-- START: FOOTER COPYRIGHT -->
 					<div class="col-sm-6">
-						<p>Copyright 214 &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.</p>
+						<p>Copyright 214 &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.  <a href="/pages/privacy" style="margin:0 10px">Privacy</a>  <a href="/pages/terms" style="margin:0 5px">Terms</a></p>
 					</div>
 					<!-- END: FOOTER COPYRIGHT -->
 					

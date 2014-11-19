@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = 'Shop';
 							<div class="row">
 								<div clss="col-xs-12">
 									<h1>Shop</h1>
+									<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 								</div>
 							</div>
 							<div class="row">

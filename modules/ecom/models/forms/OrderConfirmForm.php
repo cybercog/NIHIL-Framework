@@ -6,6 +6,9 @@ use Yii;
 use yii\base\Model;
 
 use app\modules\ecom\models\Payment;
+use app\modules\ecom\models\Product;
+use app\modules\ecom\models\Attribute;
+use app\modules\ecom\models\ProductAttribute;
 use app\modules\ecom\models\Invoice;
 use app\modules\ecom\models\Order;
 use app\modules\ecom\models\Customer;
@@ -76,7 +79,7 @@ class OrderConfirmForm extends Model {
 			return FALSE;
 		}
 		
-		die('Through');
+		//die('Through');
 		
 		if(!$this->emailReceipt($data)) {
 			return FALSE;
@@ -88,12 +91,15 @@ class OrderConfirmForm extends Model {
 	public function createOrder($data)
 	{
 		//die(print_r($data));
-	
-		$order = new Order;
+		if(!$order = Order::find()->where(['invoice_id' => $data['invoice']->id])->one()) {
+			$order = new Order;
+		}
 		
+		$order->order_number = 'O-' . date('YmdHis');
 		$order->customer_id = $data['invoice']->customer_id;
 		$order->shipping_id = $data['invoice']->shipping_id;
-		$order->shipping_method_id = \Yii::$app->cart->getShippingMethod();
+		//$order->shipping_method_id = \Yii::$app->cart->getShippingMethod();
+		$order->shipping_method_id = 1;
 		$order->invoice_id = $data['invoice']->id;
 		$order->order_status_id = 1; // New
 		$order->date_created = date('Y-m-d H:i:s');
@@ -102,18 +108,31 @@ class OrderConfirmForm extends Model {
 		
 		foreach($data['products'] as $paid => $pa) {
 			
-			die(print_r($pa));
+			//die(print_r($pa['quantity']));
+			$prodAtt = ProductAttribute::find()->where(['id' => $paid])->one();
+			$p = Product::find()->where(['id' => $prodAtt->product_id])->one();
+			$a = Attribute::find()->where(['id' => $prodAtt->attribute_id])->one();
 			
-			$p = Product::find()->where(['id' => $pa->product_id])->one();
-			$a = Attribute::find()->where(['id' => $pa->attribute_id])->one();
+			if(!$order->addLineItem($paid, $pa['quantity'], $p->name . ' - ' . $a->name)) {
+				//die("Could not add line item to order.");
+				return FALSE;
+			}
 			
-			if(!$order->addLineItem($paid, $qty, $p->name . ' - ' . $a->name)) {
+			$paStock = $prodAtt->stock - $pa['quantity'];
+			$prodAtt->stock = $paStock;
+			
+			if(!$prodAtt->save()) {
 				return FALSE;
 			}
 			
 		}
 		
-		if(!$order->update()) {
+		//die(print_r($order));
+		
+		if(!$order->save()) {
+			//die(print_r($order->getErrors()));
+			die(print_r($order));
+			die("Could not save order");
 			return FALSE;
 		}
 		

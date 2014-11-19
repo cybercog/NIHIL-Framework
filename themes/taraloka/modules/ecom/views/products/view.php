@@ -36,6 +36,8 @@ $this->params['breadcrumbs'][] = $product->name;
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
+					
+					<div class="alert alert-warning" role="alert" style="margin-top:15px">The shop is currently in test mode.  All transactions will not be processed.</div>
 
 						<div class="ecom-products-view">
 							

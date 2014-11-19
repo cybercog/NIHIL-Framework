@@ -93,9 +93,9 @@ a:hover{
 	height: auto !important;
 	height: 100%;
 	/* Negative indent footer by its height */
-	margin: 0 auto -357.5px;
+	margin: 0 auto -367.5px;
 	/* Pad bottom by footer height */
-	padding: 0 0 357.5px 0;
+	padding: 0 0 367.5px 0;
 	overflow:hidden;
 }
 
@@ -116,6 +116,9 @@ a:hover{
 	font-size:18px;
 }
 
+#site-header .dropdown-menu>li {
+	text-align:left;
+}
 
 
 
@@ -297,7 +300,7 @@ color: #333;
  
  
 #site-footer {
-	height: 357.5px; /* Needs to match margin and padding of #site-wrapper */
+	height: 367.5px; /* Needs to match margin and padding of #site-wrapper */
 	color:#FFF;
 	border-top:5px solid #ec008c;
 	font-size:16px;

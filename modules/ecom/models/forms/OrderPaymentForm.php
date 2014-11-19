@@ -321,7 +321,7 @@ class OrderPaymentForm extends Model
 			$invoice->invoice_status_id = 4;
 			$invoice->date_created = $payment->date_created;
 			$invoice->date_due = date('Y-m-d H:i:s', strtotime($payment->date_created) + (30 * 24 * 60 * 60));
-			$invoice->subtotal = $payment->amount;
+			$invoice->subtotal = \Yii::$app->cart->getSubtotal();
 			$invoice->shipping = \Yii::$app->cart->getShipping();
 			$invoice->credit = 0.00;
 			$invoice->tax = \Yii::$app->cart->getTax();

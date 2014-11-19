@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = 'Checkout';
 							<div class="row">
 								<div class="col-sm-12">
 									<h1>Shipping Address</h1>
+									<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 									<p>First we need your shipping address.</p>
 								</div>
 							</div>

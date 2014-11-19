@@ -289,6 +289,9 @@ class OrdersController extends Controller
 			}
 			
 		}elseif($step == 'success'){
+			if(!$token = \Yii::$app->cart->getConfirmToken()) {
+				return $this->redirect(['/shop']);
+			}
 			\Yii::$app->cart->clear();
 			return $this->render('success');
 			

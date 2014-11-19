@@ -13,6 +13,7 @@ use app\modules\ecom\models\OrderItem;
  * @property string $order_number
  * @property integer $customer_id
  * @property integer $shipping_id
+ * @property integer $shipping_method_id
  * @property integer $invoice_id
  * @property integer $order_status_id
  * @property string $date_created
@@ -44,9 +45,9 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['order_number', 'details'], 'string'],
-            [['customer_id', 'shipping_id', 'invoice_id', 'order_status_id', 'number_items'], 'integer'],
-            [['date_created', 'date_processed', 'date_shipped'], 'safe'],
+            [['order_number'], 'string'],
+            [['customer_id', 'shipping_id', 'shipping_method_id', 'invoice_id', 'order_status_id', 'number_items'], 'integer'],
+            [['date_created', 'date_processed', 'date_shipped', 'details'], 'safe'],
             [['ip_address'], 'string', 'max' => 16]
         ];
     }
@@ -61,6 +62,7 @@ class Order extends \yii\db\ActiveRecord
             'order_number' => 'Order Number',
             'customer_id' => 'Customer ID',
             'shipping_id' => 'Shipping ID',
+			'shipping_method_id' => 'Shipping Method ID',
             'invoice_id' => 'Invoice ID',
             'order_status_id' => 'Order Status ID',
             'date_created' => 'Date Created',
@@ -109,7 +111,8 @@ class Order extends \yii\db\ActiveRecord
      */
     public function getInvoice()
     {
-        return $this->hasOneInvoice::className(), ['id' => 'invoice_id']);
+        //return $this->hasOneInvoice::className(), ['id' => 'invoice_id']);
+		return $this->hasOne(Invoice::className(), ['id' => 'invoice_id']);
     }
 	
 	public function addLineItem($paid, $qty, $description, $details = NULL)
