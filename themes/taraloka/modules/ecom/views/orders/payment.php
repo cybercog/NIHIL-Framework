@@ -6,6 +6,7 @@ use yii\widgets\ActiveForm;
 
 use app\modules\ecom\components\CartWidget;
 use app\modules\core\widgets\MailingListWidget;
+use app\modules\pda\widgets\SubscribeWidget;
 
 /* @var $this yii\web\View */
 
@@ -43,7 +44,6 @@ $this->params['breadcrumbs'][] = 'Payment';
 							<div class="row">
 								<div class="col-sm-12">
 									<h1>Payment</h1>
-									<div class="alert alert-warning" role="alert">The form is currently in test mode.  All transactions will not be processed.</div>
 								</div>
 							</div>
 							<?php $form = ActiveForm::begin([
@@ -107,7 +107,7 @@ $this->params['breadcrumbs'][] = 'Payment';
 								</div>
 							</div>
 							
-							<a href="/checkout/shipping" class="btn btn-lg btn-success pull-left">back</a>
+							<a href="/checkout/donation" class="btn btn-lg btn-success pull-left">back</a>
 							<?= Html::submitButton('continue', ['class' => 'btn btn-success btn-lg pull-right']) ?>
 
 							<?php ActiveForm::end(); ?>
@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = 'Payment';
 					</div>
 					<div class="col-sm-3">
 						
-						<?= MailingListWidget::widget(); ?>
+						&nbsp;
 					
 					</div>
 				</div>

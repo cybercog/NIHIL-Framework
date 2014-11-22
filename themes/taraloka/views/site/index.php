@@ -4,9 +4,9 @@
  */
 $this->title = Yii::$app->params['siteMeta']['title'] . ' | Home';
 $this->registerMetaTag(['description' => 'The Taraloka Foundation is a registered 501(c)3 organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.']);
-$this->registerMetaTag(['keywords' => 'uclemmer.com, uriah, clemmer, nihil, nihil corporation, tutorials, blog, books']);
+$this->registerMetaTag(['keywords' => 'taraloka, sikkim, india, foundation, nihil']);
 
-$this->registerMetaTag(['og:title' => 'Taraloka Foundation']);
+$this->registerMetaTag(['og:title' => 'The Taraloka Foundation']);
 $this->registerMetaTag(['og:image' => 'http://www.taraloka.org/img/favicon/512x512.png']);
 $this->registerMetaTag(['og:url' => 'http://www.taraloka.org']);
 $this->registerMetaTag(['og:site_name' => 'taraloka.org']);

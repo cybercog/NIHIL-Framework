@@ -18,7 +18,7 @@ TaralokaAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?= $this->registerMetaTag(['author' => 'Uriah M. Clemmer IV']); ?>
 	<?= Html::csrfMetaTags() ?>
-	<link rel="icon" type="image/png" href="<?php echo \Yii::$app->homeUrl; ?>img/favicon/favicon_32x32.png">
+	<link rel="icon" type="image/png" href="<?php echo \Yii::$app->homeUrl; ?>favicon/favicon_32x32.png">
 		
     <title><?= Html::encode($this->title) ?></title>
 	
@@ -63,7 +63,7 @@ TaralokaAsset::register($this);
 								
 						<?php 
 							if(Yii::$app->user->isGuest) {
-								echo '<a href="' . Yii::$app->homeUrl . 'register" class="btn btn-mystic">register</a>
+								echo '<a href="' . Yii::$app->homeUrl . 'signup" class="btn btn-mystic">signup</a>
 									<a href="' . Yii::$app->homeUrl . 'login" class="btn btn-mystic">login</a>';
 							}else{
 								echo '<!-- Single button -->
@@ -72,8 +72,8 @@ TaralokaAsset::register($this);
 									welcome ' . Yii::$app->user->identity->username . ' <span class="caret"></span>
 								  </a>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a href="/account/overview"><i class="fa fa-home"></i> overview</a></li>
-									<li><a href="/account/settings"><i class="fa fa-gear"></i> settings</a></li>
+									<li><a href="/dashboard"><i class="fa fa-home"></i> overview</a></li>
+									<li><a href="/settings"><i class="fa fa-gear"></i> settings</a></li>
 									<li><a href="/logout"><i class="fa fa-sign-out"></i> logout</a></li>
 								  </ul>
 								</div>';
@@ -84,7 +84,7 @@ TaralokaAsset::register($this);
 							<div class="col-sm-12 text-right">
 								
 								<!-- START: HEADER LOGO -->
-								<nav class="navbar navbar-default" role="navigation" style="margin-top:51.4px;"><!-- 65.4 -->
+								<nav class="navbar navbar-default" id="navbar-main" role="navigation"><!-- 65.4 -->
 									<div class="container-fluid">
 										<!-- Brand and toggle get grouped for better mobile display -->
 										<div class="navbar-header">
@@ -99,10 +99,10 @@ TaralokaAsset::register($this);
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 											<ul class="nav navbar-nav">
-												<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/mission">Mission</a></li>
-												<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/about">About</a></li>
-												<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/newsletters">Newsletters</a></li>
-												<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/partners">Partners</a></li>
+												<li><a href="<?php echo Yii::$app->homeUrl; ?>mission">Mission</a></li>
+												<li><a href="<?php echo Yii::$app->homeUrl; ?>about">About</a></li>
+												<li><a href="<?php echo Yii::$app->homeUrl; ?>newsletters">Newsletters</a></li>
+												<li><a href="<?php echo Yii::$app->homeUrl; ?>partners">Partners</a></li>
 												<li><a href="<?php echo Yii::$app->homeUrl; ?>shop">Shop</a></li>
 												<li><a href="<?php echo Yii::$app->homeUrl; ?>contact">Contact</a></li>
 												<li><a class="btn btn-default" id="navbar-btn" href="<?php echo Yii::$app->homeUrl; ?>donate">donate</a></li>
@@ -154,7 +154,7 @@ TaralokaAsset::register($this);
 						<div class="row">
 							<div class="col-sm-12">
 								<p><strong class="font-green">The Taraloka Foundation</strong> is a registered 501(c)3 non-profit organization creating opportunities for Himalayan girls by providing education, healthcare, and a safe refuge.</p>
-								<p>A donation of $160 per month can pay the salary of our cook - providing wonderful meals for the girls, pay the salary of our house mother, or sponsor all of the needs of one of our girls for one month.  A dollar goes a long way, so please make a donation today!</p>
+								<p>A donation of $160 per month can pay the salary of one of our employees or sponsor all of the needs of one of our girls for one month.  A dollar goes a long way, so please make a donation today!</p>
 							</div>
 						</div>
 						
@@ -168,10 +168,10 @@ TaralokaAsset::register($this);
 							<div class="col-sm-12 text-center">
 								
 								<ul class="list-unstyled" id="footer-menu">
-									<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/mission">mission</a></li>
-									<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/about">about</a></li>
-									<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/newsletters">newseltters</a></li>
-									<li><a href="<?php echo Yii::$app->homeUrl; ?>pages/partners">partners</a></li>
+									<li><a href="<?php echo Yii::$app->homeUrl; ?>mission">mission</a></li>
+									<li><a href="<?php echo Yii::$app->homeUrl; ?>about">about</a></li>
+									<li><a href="<?php echo Yii::$app->homeUrl; ?>newsletters">newsletters</a></li>
+									<li><a href="<?php echo Yii::$app->homeUrl; ?>partners">partners</a></li>
 									<li><a href="<?php echo Yii::$app->homeUrl; ?>shop">shop</a></li>
 									<li><a href="<?php echo Yii::$app->homeUrl; ?>contact">contact</a></li>
 									<li><a href="<?php echo Yii::$app->homeUrl; ?>donate" class="btn btn-default">donate</a></li>
@@ -263,11 +263,11 @@ TaralokaAsset::register($this);
 								</address>
 								
 								<ul class="list-inline">
-									<li><a href="https://www.facebook.com/TaralokaFoundation"><i class="fa fa-2x fa-facebook"></i></a></li>
-									<li><a href="#"><i class="fa fa-2x fa-twitter"></i></a></li>
-									<li><a href="#"><i class="fa fa-2x fa-google-plus"></i></a></li>
-									<li><a href="#"><i class="fa fa-2x fa-youtube"></i></a></li>
-									<li><a href="mailto:contact@taraloka.org"><i class="fa fa-2x fa-envelope"></i></a></li>
+									<li><a href="https://www.facebook.com/TaralokaFoundation" target="_blank"><i class="fa fa-2x fa-facebook"></i></a></li>
+									<!--<li><a href="#" target="_blank"><i class="fa fa-2x fa-twitter"></i></a></li>-->
+									<li><a href="https://plus.google.com/100164349293155842593" rel="publisher" target="_blank"><i class="fa fa-2x fa-google-plus"></i></a></li>
+									<!--<li><a href="#" target="_blank"><i class="fa fa-2x fa-youtube"></i></a></li>-->
+									<li><a href="mailto:contact@taraloka.org" target="_blank"><i class="fa fa-2x fa-envelope"></i></a></li>
 								</ul>
 							</div>
 						</div>
@@ -280,13 +280,13 @@ TaralokaAsset::register($this);
 				<div class="row" id="footer-legal">
 				
 					<!-- START: FOOTER COPYRIGHT -->
-					<div class="col-sm-6">
-						<p>Copyright 214 &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.  <a href="/pages/privacy" style="margin:0 10px">Privacy</a>  <a href="/pages/terms" style="margin:0 5px">Terms</a></p>
+					<div class="col-sm-8">
+						<p>Copyright <?php echo date("Y"); ?> &copy; <strong class="font-green">The Taraloka Foundation</strong>.  All rights reserved.  <a href="/legal/privacy-policy" style="margin:0 10px">Privacy</a>  <!--<a href="/pages/terms" style="margin:0 5px">Terms</a>--></p>
 					</div>
 					<!-- END: FOOTER COPYRIGHT -->
 					
 					<!-- START: FOOTER POWERED -->
-					<div class="col-sm-6 text-right">
+					<div class="col-sm-4" id="footer-powered">
 						<p>Powered by <a href="http://www.nihil.co" target="_blank">NIHIL</a></p>
 					</div>
 					<!-- END: FOOTER POWERED -->
@@ -310,7 +310,7 @@ TaralokaAsset::register($this);
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-2228318-23', 'auto');
+    ga('create', '<?php echo \Yii::$app->params['googleUACode']; ?>', 'auto');
     ga('send', 'pageview');
 
   </script>

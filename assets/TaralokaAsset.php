@@ -20,11 +20,17 @@ class TaralokaAsset extends AssetBundle
     public $css = [
 		'css/bootstrap/bootstrap.min.css',
 		'css/font-awesome/font-awesome.min.css',
+		//'css/skeuocard/skeuocard.min.css',
         'css/taraloka.css',
     ];
+	public $cssOptions = [
+		'media' => 'screen,print',
+	];
     public $js = [
-		'js/jquery/jquery-1.11.1.min.js',
+		//'js/jquery/jquery-1.11.1.min.js',
+		'js/jquery/jquery-2.1.1.min.js',
 		'js/bootstrap/bootstrap.min.js',
+		//'js/skeuocard/skeuocard.min.js',
     ];
     public $depends = [
         //'yii\web\YiiAsset',

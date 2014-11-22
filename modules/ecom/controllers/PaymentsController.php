@@ -123,6 +123,26 @@ class PaymentsController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	/**
+     * Displays a single Payment model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDonate()
+    {
+        return $this->render('donate');
+    }
+	
+	/**
+     * Displays a single Payment model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionConfirm()
+    {
+        return $this->render('confirm');
+    }
 
     /**
      * Finds the Payment model based on its primary key value.

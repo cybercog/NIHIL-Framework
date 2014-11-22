@@ -22,7 +22,7 @@ NihilAsset::register($this);
     <?php $this->head() ?>
 	
 	<script>
-		window.setTimeout(function() { $(".alert-flash").alert('close'); }, 50000);
+		window.setTimeout(function() { $(".alert-flash").alert('close'); }, 5000);
 	</script>
 	
 	<style>

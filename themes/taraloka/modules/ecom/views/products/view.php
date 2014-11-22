@@ -5,6 +5,7 @@ use yii\widgets\Breadcrumbs;
 use yii\widgets\ActiveForm;
 use app\modules\ecom\components\CartWidget;
 use app\modules\core\widgets\MailingListWidget;
+use app\modules\pda\widgets\SubscribeWidget;
 
 /* @var $this yii\web\View */
 
@@ -36,8 +37,6 @@ $this->params['breadcrumbs'][] = $product->name;
 			<div class="container">
 				<div class="row">
 					<div class="col-md-9">
-					
-					<div class="alert alert-warning" role="alert" style="margin-top:15px">The shop is currently in test mode.  All transactions will not be processed.</div>
 
 						<div class="ecom-products-view">
 							
@@ -69,7 +68,7 @@ $this->params['breadcrumbs'][] = $product->name;
 											<h3 class="product-view-id">Product Id: <?php echo str_pad($product->id, 5, '0', STR_PAD_LEFT); ?></h3>
 										</div>
 										<div class="col-sm-4 text-right">
-											<h3 class="product-view-stock">IN STOCK</h3>
+											<h3 class="product-view-stock"><?php if($model->inStock($product->id)) { echo 'IN STOCK';} else { echo 'OUT OF STOCK'; } ?></h3>
 										</div>
 									</div>
 									<div class="row">
@@ -77,9 +76,13 @@ $this->params['breadcrumbs'][] = $product->name;
 											<p class="product-view-description"><?php echo $product->description; ?></p>
 										</div>
 									</div>
-									<?php $form = ActiveForm::begin([
-										'id' => 'ecom-addtocart-form',
-									]); ?>
+									<?php 
+									    if($model->inStock($product->id)) {
+									
+									        $form = ActiveForm::begin([
+										    'id' => 'ecom-addtocart-form',
+									        ]); 
+									?>
 									<div class="row">
 										<div class="col-sm-2">
 											<?= $form->field($model, 'qty') ?>
@@ -91,7 +94,10 @@ $this->params['breadcrumbs'][] = $product->name;
 											<?= Html::submitButton('add to cart', ['class' => 'btn btn-lg btn-success btn-block']) ?>
 										</div>
 									</div>
-									<?php ActiveForm::end(); ?>
+									<?php 
+									        ActiveForm::end(); 
+									    }
+									?>
 								</div>
 								
 							</div>
@@ -104,7 +110,7 @@ $this->params['breadcrumbs'][] = $product->name;
 					
 						<?= CartWidget::widget(); ?>
 						
-						<?= MailingListWidget::widget(); ?>
+						<?= SubscribeWidget::widget(); ?>
 					
 					</div>
 				</div>

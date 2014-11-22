@@ -42,7 +42,6 @@ $this->params['breadcrumbs'][] = 'Confirm';
 							<div class="row">
 								<div class="col-sm-12">
 									<h1>Checkout Confirm</h1>
-									<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 									<p>Does everything look correct?</p>
 								</div>
 							</div>

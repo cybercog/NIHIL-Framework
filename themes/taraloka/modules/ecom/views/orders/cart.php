@@ -41,7 +41,6 @@ $this->params['breadcrumbs'][] = 'Cart';
 							<div class="row">
 								<div class="col-sm-12">
 									<h1>Cart</h1>
-									<div class="alert alert-warning" role="alert">The shop is currently in test mode.  All transactions will not be processed.</div>
 								</div>
 							</div>
 							
@@ -72,7 +71,7 @@ $this->params['breadcrumbs'][] = 'Cart';
 											?>
 											<tr>
 												<td class="text-right"><?php echo $item['quantity']; ?></td>
-												<td><?php echo $product->name . ' - ' . $attribute->name; ?></td>
+												<td><?php echo $product->name;  ?><?php if($attribute->id != 12) { echo ' - ' . $attribute->name;  } ?></td>
 												<td class="text-right">$<?php echo number_format(($product->price + $item['productAttribute']->additional_price),2); ?></td>
 												<td class="text-right">$<?php echo number_format($item['quantity']*($product->price + $item['productAttribute']->additional_price),2); ?></td>
 												<td><a href="/cart/remove/<?php echo $key; ?>" title="Remove"><i class="fa fa-times"></i></a></td>
